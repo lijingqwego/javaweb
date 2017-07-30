@@ -45,6 +45,10 @@ public class UserController {
 		return mv;
 	}
 
+	/**
+	 * 调转到登录界面
+	 * @return
+	 */
 	@RequestMapping("/userlogin")
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView();

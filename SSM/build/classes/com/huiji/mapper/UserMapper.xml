@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huiji.mapper.UserMapper">
+	<!-- 分页查询 -->
+	<select id="findUserListByPage" parameterType="userinfoPage" resultType="userinfoPage">
+		select * from (select rownum rn,userinfo.* from userinfo) t where t.rn between #{start} and #{end}
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findUserList" parameterType="pageBean" resultType="user">
+		select * from (select rownum rn,userinfo.* from userinfo) t 
+		where t.rn between #{pageSize}*(#{currPage}-1)+1 and #{pageSize}*#{currPage}
+	</select>
+	
+	<!-- 获取记录总数 -->
+	<select id="getUserCount" resultType="int">
+		select count(*) from userinfo
+	</select>
+	
+	<!-- 用户登录 -->
+	<select id="login" parameterType="user" resultType="user">
+		select id,username,password,userlevel from userinfo 
+		 <where>
+		 	<if test="username !=null and username != ''">
+		 		and username=#{username}
+		 	</if>
+		 	<if test="password !=null and password != ''">
+		 		and password=#{password}
+		 	</if>
+		 </where>
+	</select>
+	
+</mapper>

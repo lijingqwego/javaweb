@@ -1,0 +1,21 @@
+package com.huiji.mapper;
+
+import java.util.List;
+
+import com.huiji.po.Orders;
+import com.huiji.po.User;
+
+public interface OrdersMapper {
+	//查询所有订单信息
+	List<Orders> findOrdersList();
+	
+	//查询订单信息，同时查出用户信息
+	List<Orders> findOrdersAndUserList();
+	
+	//查找订单明细，同时关联用户信息
+	List<Orders> findOrderDetailAndUserList();
+	
+	//查询用户购买的商品
+	List<User> findUserBuyItems();
+	
+}

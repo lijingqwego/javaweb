@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huiji.mapper.OrdersMapper">
+	<select id="findOrdersList" resultType="orders">
+		select * from orders
+	</select>
+	
+	<select id="getOrderCount" resultType="java.lang.Integer">
+		select count(*) from orders
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findOrderList" parameterType="pageBean" resultType="orders">
+		select * from (select rownum rn,orders.* from orders) t 
+		where t.rn between #{pageSize}*(#{currPage}-1)+1 and #{pageSize}*#{currPage}
+	</select>
+	
+	<select id="findOrderListByOrder" parameterType="long" resultType="orders">
+		select * from orders where id=#{id}
+	</select>
+	
+	<resultMap type="orders" id="orderUserMap">
+		<id column="id" property="id"/>
+		<result column="user_id" property="user_id"/>
+		<result column="s_number" property="s_number"/>
+		<result column="createtime" property="createtime"/>
+		<result column="note" property="note"/>
+		
+		<association property="user" javaType="user">
+			<id column="ids" property="id"/>
+			<result column="username" property="username"/>
+			<result column="sex" property="sex"/>
+			<result column="address" property="address"/>
+			<result column="birthday" property="birthday"/>
+		</association>
+	</resultMap>
+	<!-- 查找订单，同是查找对应的用户信息 -->
+	<select id="findOrdersAndUserList" resultMap="orderUserMap">
+		select o.*,u.id ids,u.username,u.sex,u.address,u.birthday 
+		from orders o,userinfo u where o.user_id=u.id
+	</select>
+	
+	<resultMap type="orders" id="orderdetailUserMap" extends="orderUserMap">
+		<collection property="orderdetails" ofType="orderdetail">
+			<id column="ids" property="id"/>
+			<result column="orders_id" property="orders_id"/>
+			<result column="items_id" property="items_id"/>
+	      	<result column="items_num" property="items_num"/>
+		</collection>	
+	</resultMap>
+	
+	<!-- 查找订单明细，同是查找用户信息 -->
+	<select id="findOrderDetailAndUserList" resultMap="orderdetailUserMap">
+		select o.*,u.id,u.username,u.sex,u.address,u.birthday,d.id,d.orders_id,d.items_id 
+	   from orders o,userinfo u,orderdetail d where o.user_id=u.id and o.id=d.orders_id
+	</select>
+	
+	<resultMap type="user" id="userItemsMap">
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="birthday" property="birthday"/>
+		<result column="sex" property="sex"/>
+		<result column="address" property="address"/>
+		<!-- 用户和订单   一对多 -->
+		<collection property="orders" ofType="orders">
+			<id column="oids" property="id"/>
+			<result column="user_id" property="user_id"/>
+			<result column="s_number" property="s_number"/>
+			<result column="createtime" property="createtime"/>
+			<result column="note" property="note"/>
+			<!-- 订单和订单明细   一对多 -->
+			<collection property="orderdetails" ofType="orderdetail">
+				<result column="orders_id" property="orders_id"/>
+				<result column="items_id" property="items_id"/>
+				<result column="items_num" property="items_num"/>
+				<!-- 订单明细和商品   一对一 -->
+				<association property="items1" javaType="items">
+					<id column="iid" property="id"/>
+					<result column="name" property="name"/>
+					<result column="price" property="price"/>
+					<result column="detail" property="detail"/>
+				</association>
+			</collection>
+		</collection>
+	</resultMap>
+	
+	<!-- 查询用户购买的商品 -->
+	<select id="findUserBuyItems" resultMap="userItemsMap">
+		select u.*,
+		o.id oids,o.user_id,o.s_number,o.createtime,o.note,
+		d.orders_id,d.items_id,d.items_num,
+		i.id iid,i.name,i.price,i.detail 
+		from userinfo u,orders o,orderdetail d,items i where 
+		u.id=o.user_id and o.id=d.orders_id and d.items_id=i.id
+	</select>
+	
+	<!-- 获取订单id -->
+	<select id="getOrderId" resultType="java.lang.Long">
+			select to_char(sysdate,'yyyymmdd')||seq_order_id.nextval from dual
+	</select>
+	
+	<!-- 用户购买商品，插入订单和订单明细表 -->
+	<insert id="buyItems" parameterType="orders">
+		insert into orders
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null and id != ''">
+				id,
+			</if>
+			<if test="user_id != null and user_id != ''">
+				user_id,
+			</if>
+			<if test="s_number != null and s_number != ''">
+				s_number,
+			</if>
+			<if test="createtime != null and createtime != ''">
+				createtime,
+			</if>
+			<if test="note != null and note != ''">
+				note,
+			</if>
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="id != null and id != ''">
+				#{id},
+			</if>
+			<if test="user_id != null and user_id != ''">
+				#{user_id},
+			</if>
+			<if test="s_number != null and s_number != ''">
+				#{s_number},
+			</if>
+			<if test="createtime != null and createtime != ''">
+				#{createtime},
+			</if>
+			<if test="note != null and note != ''">
+				#{note},
+			</if>
+		</trim>
+	</insert>
+	
+	<!-- 插入订单后，添加订单明细 -->
+	<insert id="addOrderDetail" parameterType="orderdetail">
+		insert into orderdetail 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				id,
+			<if test="orders_id != null and orders_id != ''">
+				orders_id,
+			</if>
+			<if test="items_id != null and items_id != ''">
+				items_id,
+			</if>
+			<if test="items_num != null and items_num != ''">
+				items_num,
+			</if>
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+				seq_orderdetail_id.nextval,
+			<if test="orders_id != null and orders_id != ''">
+				#{orders_id},
+			</if>
+			<if test="items_id != null and items_id != ''">
+				#{items_id},
+			</if>
+			<if test="items_num != null and items_num != ''">
+				#{items_num},
+			</if>
+		</trim>
+	</insert>
+		
+		
+</mapper>

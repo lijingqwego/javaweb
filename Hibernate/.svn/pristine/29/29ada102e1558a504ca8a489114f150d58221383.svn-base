@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- Java实体类和数据库中的表进行映射 -->
+	<class name="com.huiji.po.Employee" table="emp">
+		<!-- id值 -->
+		<id name="id" column="id" type="int">
+			<generator class="sequence">
+			<param name="sequence">emp_id_seq</param>
+		</generator>
+		</id>
+		<!-- 员工姓名 -->
+		<property name="ename" type="string" length="10">
+		<column name="ename"/>
+		</property>
+		<!-- 职位 -->
+		<property name="job" type="string" length="10">
+		<column name="job"/>
+		</property>
+		<!-- 薪资 -->
+		<property name="sal" type="int">
+		<column name="sal"/>
+		</property>
+	</class>
+</hibernate-mapping>
+ 

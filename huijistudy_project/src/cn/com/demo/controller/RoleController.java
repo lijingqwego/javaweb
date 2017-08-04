@@ -1,7 +1,5 @@
 package cn.com.demo.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -10,19 +8,28 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.demo.po.Role;
 import cn.com.demo.service.RoleService;
+import cn.com.demo.utils.PageBeanVO;
 @RequestMapping("/role")
 @Controller
 public class RoleController {
 	@Resource
 	private RoleService roleService;
 	@RequestMapping("/roleList")
-	public ModelAndView roleList(){
+	public ModelAndView roleList(int currPage,String roleid,String rolename){
 		
-		List<Role> list = roleService.findRoleList();
+		PageBeanVO pageBean = roleService.findRoleListByPage(currPage, roleid, rolename);
 		
 		ModelAndView mv=new ModelAndView();
 		
-		mv.addObject("roleList", list);
+		mv.addObject("roleList", pageBean.getList());
+		
+		mv.addObject("currPage", currPage);
+		
+		mv.addObject("totalPage", pageBean.getTotalPage());
+		
+		mv.addObject("roleid", roleid);
+		
+		mv.addObject("rolename", rolename);
 		
 		mv.setViewName("role.rolelist");
 		
@@ -33,7 +40,7 @@ public class RoleController {
 	@RequestMapping("/delRole")
 	public String delRole(String roleid){
 		roleService.delRoleById(roleid);
-		return "redirect:/role/roleList.action";
+		return "redirect:/role/roleList.action?currPage=1";
 	}
 	
 	@RequestMapping("/findRole")
@@ -56,6 +63,31 @@ public class RoleController {
 		
 		roleService.updRole(role);
 			
-		return "redirect:/role/roleList.action";
+		return "redirect:/role/roleList.action?currPage=1";
+	}
+	
+	@RequestMapping("/addRole")
+	public ModelAndView addRole(){
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("role.addRole");
+		
+		return mv;
+	}
+	
+	@RequestMapping("/commAddRole")
+	public String commAddRole(Role role){
+		
+		roleService.addRole(role);
+		
+		return "redirect:/role/roleList.action?currPage=1";
+	}
+	@RequestMapping("/delMoreRole")
+	public String delMoreRole(String[] delitems){
+		for(String roleid:delitems){
+			roleService.delRoleById(roleid);
+		}
+		return "redirect:/role/roleList.action?currPage=1";
 	}
 }

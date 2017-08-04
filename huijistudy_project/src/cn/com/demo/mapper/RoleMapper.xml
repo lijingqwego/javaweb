@@ -6,6 +6,34 @@
   	select * from p_um_role
   </select>
   
+  <!-- 获取所有角色的总数 -->
+  <select id="getRoleCount" parameterType="cn.com.demo.utils.PageBeanVO" resultType="Integer">
+  	select count(*) from p_um_role
+  	<where>
+  		<if test="roleid != null and roleid != ''">
+			and roleid=#{roleid}
+		</if>
+		<if test="rolename != null and rolename != ''">
+			and rolename like '%${rolename}%'
+		</if>
+  	</where>
+  </select>
+  
+  <!-- 分页条件查询角色 -->
+  <select id="findRoleListByPage" parameterType="cn.com.demo.utils.PageBeanVO" resultType="role">
+  	select t.* from(select rownum rn,r.* from p_um_role r 
+	<where>
+		<if test="roleid != null and roleid != ''">
+			and roleid=#{roleid}
+		</if>
+		<if test="rolename != null and rolename != ''">
+			and rolename like '%${rolename}%'
+		</if>
+	</where>
+	) t
+  	where t.rn between #{pageSize}*(#{currPage}-1)+1 and #{pageSize}*#{currPage}
+  </select>
+  
   <delete id="delRoleById" parameterType="java.lang.String">
   	delete from p_um_role where roleid=#{_parameter}
   </delete>
@@ -47,4 +75,68 @@
   	</set>
   	where roleid=#{roleid}
   </update>
+  
+  
+  <!-- 添加角色 -->
+  <insert id="addRole" parameterType="role">
+  	insert into p_um_role
+  	<trim prefix="(" suffix=")" suffixOverrides=",">
+  		<if test="roleid != null and roleid !=''">
+  			roleid,
+  		</if>
+  		<if test="rolename != null and rolename !=''">
+  			rolename,
+  		</if>
+  		<if test="descn != null and descn !=''">
+  			descn,
+  		</if>
+  		<if test="code != null and code !=''">
+  			code,
+  		</if>
+  		<if test="flaginfo != null and flaginfo !=''">
+  			flaginfo,
+  		</if>
+  		<if test="sort != null and sort !=''">
+  			sort,
+  		</if>
+  		<if test="enabled != null and enabled !=''">
+  			enabled,
+  		</if>
+  		<if test="create_time != null and create_time !=''">
+  			create_time,
+  		</if>
+  		<if test="update_time != null and update_time !=''">
+  			update_time,
+  		</if>
+  	</trim>
+  	<trim prefix=" values(" suffix=")" suffixOverrides=",">
+  		<if test="roleid != null and roleid !=''">
+  			#{roleid},
+  		</if>
+  		<if test="rolename != null and rolename !=''">
+  			#{rolename},
+  		</if>
+  		<if test="descn != null and descn !=''">
+  			#{descn},
+  		</if>
+  		<if test="code != null and code !=''">
+  			#{code},
+  		</if>
+  		<if test="flaginfo != null and flaginfo !=''">
+  			#{flaginfo},
+  		</if>
+  		<if test="sort != null and sort !=''">
+  			#{sort},
+  		</if>
+  		<if test="enabled != null and enabled !=''">
+  			#{enabled},
+  		</if>
+  		<if test="create_time != null and create_time !=''">
+  			#{create_time},
+  		</if>
+  		<if test="update_time != null and update_time !=''">
+  			#{update_time},
+  		</if>
+  	</trim>
+  </insert>
 </mapper>

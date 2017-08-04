@@ -5,6 +5,10 @@ public class PageBeanVO extends PageBean{
 	private String userid;
 	
 	private String username;
+	
+	private String roleid;
+	
+	private String rolename;
 
 	public String getUserid() {
 		return userid;
@@ -21,6 +25,23 @@ public class PageBeanVO extends PageBean{
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+	public String getRoleid() {
+		return roleid;
+	}
+
+	public void setRoleid(String roleid) {
+		this.roleid = roleid;
+	}
+
+	public String getRolename() {
+		return rolename;
+	}
+
+	public void setRolename(String rolename) {
+		this.rolename = rolename;
+	}
+	
 	
 	
 }

@@ -15,7 +15,7 @@
     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span> <span class="label label-important">3</span></a>
       <ul>
         <li><a href="${pageContext.request.contextPath }/user/userList.action?currPage=1">用户列表</a></li>
-        <li><a href="${pageContext.request.contextPath }/role/roleList.action">角色列表</a></li>
+        <li><a href="${pageContext.request.contextPath }/role/roleList.action?currPage=1">角色列表</a></li>
         <li><a href="${pageContext.request.contextPath }/author/authorList.action">权限列表</a></li>
         <li><a href="#">资源列表</a></li>
       </ul>

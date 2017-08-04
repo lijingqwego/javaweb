@@ -37,6 +37,11 @@
             <put-attribute name="body" value="/jsp/authority/role/updrole.jsp" />
          </definition>
          
+          <!-- 添加角色-->
+         <definition name="role.addRole" extends="base.definition">
+            <put-attribute name="body" value="/jsp/authority/role/addrole.jsp" />
+         </definition>
+         
           <!-- 关联用户角色-->
          <definition name="user.userofrole" extends="base.definition">
             <put-attribute name="body" value="/jsp/authority/user/userofrole.jsp" />

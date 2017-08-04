@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import cn.com.demo.mapper.RoleAuthorityMapper;
 import cn.com.demo.mapper.RoleMapper;
 import cn.com.demo.po.Role;
+import cn.com.demo.utils.PageBeanVO;
 
 @Service
 public class RoleService {
@@ -52,5 +53,34 @@ public class RoleService {
 	 */
 	public void updRole(Role role) {
 		roleMapper.updRole(role);
+	}
+	
+	/**
+	 * 分页查询角色
+	 * @param currPage
+	 * @param roleid
+	 * @param rolename
+	 * @return
+	 */
+	public PageBeanVO findRoleListByPage(int currPage,String roleid,String rolename){
+		PageBeanVO vo = new PageBeanVO();
+		vo.setPageSize(3);
+		vo.setCurrPage(currPage);
+		vo.setRoleid(roleid);
+		vo.setRolename(rolename);
+		int roleCount = roleMapper.getRoleCount(vo);
+		int totalPage=(int) Math.ceil(roleCount*1.0/3);
+		vo.setTotalPage(totalPage);
+		List<Role> list = roleMapper.findRoleListByPage(vo);
+		vo.setList(list);
+		return vo;
+	}
+
+	/**
+	 * 添加角色
+	 * @param role
+	 */
+	public void addRole(Role role) {
+		roleMapper.addRole(role);
 	}
 }

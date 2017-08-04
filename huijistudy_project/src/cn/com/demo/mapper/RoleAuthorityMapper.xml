@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="cn.com.demo.mapper.RoleAuthorityMapper">
+
+	<!-- 查找角色的所有权限 -->
+	<select id="findRoleOfAuthorByRoleId" resultType="roleOfAuthority">
+		select a.* ,nvl((select roleid from p_um_role_authority um
+		where um.roleid =#{_parameter} and um.authorityid = a.authorityid
+		),-1) isauthor from p_um_authority a
+	</select>
+
+	<!-- 根据roleid删除权限 -->
+	<select id="delRoleOfAuthorByRoleId">
+		delete from p_um_role_authority where roleid=#{_parameter}
+	</select>
+
+	<!-- 添加角色权限 -->
+	<insert id="addRoleOfAuthor" parameterType="roleAuthority">
+		insert into p_um_role_authority
+		<foreach collection="list" item="item" index="index"
+			separator="union all">
+			select
+			#{item.roleid} roleid ,
+			#{item.authorityid} authorityid ,
+			1
+			from dual
+		</foreach>
+	</insert>
+</mapper>

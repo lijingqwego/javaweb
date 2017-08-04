@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.demo.mapper.UserRoleMapper" >
+	<!-- 根据id查找用户的角色 -->
+  <select id="findUserOfRoleListByUserId" parameterType="java.lang.String" resultType="userOfRole">
+  	select r.* ,nvl((select roleid from p_um_user_role um
+	where um.userid =#{userid}  and um.roleid = r.roleid
+	),-1) isrole from p_um_role r
+  </select>
+  
+  <!-- 根据id删除用户关联角色 -->
+	<select id="delUserOfRoleByUserId">
+	delete from p_um_user_role where userid=#{_parameter}	
+	</select>
+	
+	<!-- 添加用户角色 -->
+	<insert id="addUserOfRole" parameterType="role">
+  	insert into p_um_user_role
+  	<foreach collection="list" item="item" index="index" separator="union all">
+  		select 
+  			#{item.userid} userid ,
+  			#{item.roleid} roleid ,
+  			1
+  		from dual 
+  	</foreach>
+  </insert>
+</mapper>

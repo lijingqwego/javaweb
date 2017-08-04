@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.demo.mapper.UserMapper">
+
+	<!-- 根据条件查询用户表的总数量 -->
+	<select id="getUserCount" parameterType="cn.com.demo.utils.PageBeanVO" resultType="Integer">
+		select count(*) from p_um_user
+		<where>
+			<if test="userid != null and userid != ''">
+				and userid=#{userid}
+			</if>
+			<if test="username != null and username != ''">
+				and username like '%${username}%'
+			</if>
+		</where>
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="findUserListByPage" parameterType="cn.com.demo.utils.PageBeanVO" resultType="user">
+		select * from (select rownum rn,p_um_user.* from p_um_user
+		<where>
+			<if test="userid != null and userid != ''">
+				and userid=#{userid}
+			</if>
+			<if test="username != null and username != ''">
+				and username like '%${username}%'
+			</if>
+		</where>
+		) t
+		where t.rn between #{pageSize}*(#{currPage}-1)+1 and #{pageSize}*#{currPage}
+	</select>
+	
+ <!-- 根据id查找用户 -->
+  <select id="findUserById" parameterType="java.lang.String" resultType="user">
+    select * from p_um_user where userid=#{_parameter}
+  </select>
+  <!-- 根据id删除用户 -->
+  <delete id="delUserByUserid" parameterType="java.lang.String">
+    delete from p_um_user where userid =#{_parameter}
+  </delete>
+  <!-- 插入用户 -->
+  <insert id="addUser" parameterType="user">
+    insert into p_um_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null and userid != ''">
+        userid,
+      </if>
+      <if test="loginid != null and loginid != ''">
+        loginid,
+      </if>
+      <if test="username != null and username != ''">
+        username,
+      </if>
+      <if test="password != null and password != ''">
+        password,
+      </if>
+      <if test="usertype != null and usertype != ''">
+        usertype,
+      </if>
+      <if test="userflag != null and userflag != ''">
+        userflag,
+      </if>
+      <if test="logincount != null and logincount != ''">
+        logincount,
+      </if>
+      <if test="enabled != null and enabled != ''">
+        enabled,
+      </if>
+      <if test="loginlasttime != null and loginlasttime != ''">
+        loginlasttime,
+      </if>
+      <if test="issys != null and issys != ''">
+        issys,
+      </if>
+      <if test="create_time != null and create_time != ''">
+        create_time,
+      </if>
+      <if test="update_time != null and update_time != ''">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null and userid != ''">
+        #{userid},
+      </if>
+      <if test="loginid != null and loginid != ''">
+        #{loginid},
+      </if>
+      <if test="username != null and username != ''">
+        #{username},
+      </if>
+      <if test="password != null and password != ''">
+        #{password},
+      </if>
+      <if test="usertype != null and usertype != ''">
+        #{usertype},
+      </if>
+      <if test="userflag != null and userflag != ''">
+        #{userflag},
+      </if>
+      <if test="logincount != null and logincount != ''">
+        #{logincount},
+      </if>
+      <if test="enabled != null and enabled != ''">
+        #{enabled},
+      </if>
+      <if test="loginlasttime != null and loginlasttime != ''">
+        #{loginlasttime},
+      </if>
+      <if test="issys != null and issys != ''">
+        #{issys},
+      </if>
+      <if test="createtime != null and createtime != ''">
+        #{createtime},
+      </if>
+      <if test="updatetime != null and update_time != ''">
+        #{updatetime},
+      </if>
+    </trim>
+  </insert>
+ <!-- 更新用户 -->
+  <update id="updUser" parameterType="user">
+    update p_um_user
+    <set>
+      <if test="userid != null and userid != ''">
+        userid=#{userid},
+      </if>
+      <if test="loginid != null and loginid != ''">
+        loginid=#{loginid},
+      </if>
+      <if test="username != null and username != ''">
+        username=#{username},
+      </if>
+      <if test="password != null and password != ''">
+        password=#{password},
+      </if>
+      <if test="usertype != null and usertype != ''">
+        usertype=#{usertype},
+      </if>
+      <if test="userflag != null and userflag != ''">
+        userflag=#{userflag},
+      </if>
+      <if test="logincount != null and logincount != ''">
+        logincount=#{logincount},
+      </if>
+      <if test="enabled != null and enabled != ''">
+        enabled=#{enabled},
+      </if>
+      <if test="loginlasttime != null and loginlasttime != ''">
+        loginlasttime=#{loginlasttime},
+      </if>
+      <if test="issys != null and issys != ''">
+        issys=#{issys},
+      </if>
+      <if test="create_time != null and create_time != ''">
+        create_time=#{create_time},
+      </if>
+      <if test="update_time != null and update_time != ''">
+        update_time=#{update_time},
+      </if>
+    </set>
+    where userid = #{userid}
+  </update>
+</mapper>

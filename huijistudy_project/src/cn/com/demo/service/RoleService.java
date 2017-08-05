@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import cn.com.demo.mapper.RoleAuthorityMapper;
 import cn.com.demo.mapper.RoleMapper;
+import cn.com.demo.mapper.UserRoleMapper;
 import cn.com.demo.po.Role;
 import cn.com.demo.utils.PageBeanVO;
 
@@ -18,6 +19,8 @@ public class RoleService {
 	
 	@Resource
 	RoleAuthorityMapper roleAuthorityMapper;
+	@Resource
+	UserRoleMapper userRoleMapper;
 	/**
 	 * 查询角色列表
 	 * @return
@@ -33,7 +36,11 @@ public class RoleService {
 	 * @param roleid
 	 */
 	public void delRoleById(String roleid) {
+		//删除用户和角色关联
+		userRoleMapper.delUserOfRoleByRoleId(roleid);
+		//删除角色和权限关联
 		roleAuthorityMapper.delRoleOfAuthorByRoleId(roleid);
+		//删除角色
 		roleMapper.delRoleById(roleid);
 	}
 

@@ -21,17 +21,20 @@ public class AuthorityResourceController {
 	private AuthorityResourceService authorityResourceService;
 	@RequestMapping("/authorofres")
 	public ModelAndView authorResList(String authorityid){
+		//System.out.println("=======authorofres====authorityid==============="+authorityid);
 		List<AuthorityOfResources> list = authorityResourceService.findAuthorityOfResourcesById(authorityid);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("authorOfResList", list);
+		mv.addObject("authorityid", authorityid);
 		mv.setViewName("author.authorofres");
 		return mv;
 	}
 	
 	@RequestMapping("/updAuthorOfRes")
 	public String updAuthorOfRes(String authorityid,HttpServletRequest req){
+		//System.out.println("========updAuthorOfRes===authorityid============"+authorityid);
 		//先删除权限的资源
-		authorityResourceService.delRoleOfAuthorByAuthorityId(authorityid);
+		authorityResourceService.delAuthorOfResByAuthorityId(authorityid);
 		//插入权限关联的资源
 		String[] idArr=req.getParameterValues("checked");
 		List<AuthorityResources> authResList=new ArrayList<>();

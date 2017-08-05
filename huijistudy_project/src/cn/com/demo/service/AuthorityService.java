@@ -7,13 +7,21 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import cn.com.demo.mapper.AuthorityMapper;
+import cn.com.demo.mapper.AuthorityResourceMapper;
+import cn.com.demo.mapper.RoleAuthorityMapper;
 import cn.com.demo.po.Authority;
+import cn.com.demo.po.AuthorityResources;
+import cn.com.demo.po.RoleAuthority;
 import cn.com.demo.utils.PageBeanVO;
 
 @Service
 public class AuthorityService {
 	@Resource
 	AuthorityMapper authorityMapper;
+	@Resource
+	RoleAuthorityMapper roleAuthorityMapper;
+	@Resource
+	AuthorityResourceMapper authorityResourceMapper;
 	
 	/**
 	 * 获取权限列表
@@ -28,6 +36,11 @@ public class AuthorityService {
 	 * @param authorityid
 	 */
 	public void delAuthorById(String authorityid) {
+		//删除角色和权限关联表
+		roleAuthorityMapper.delRoleOfAuthorByAuthorityId(authorityid);
+		//删除权限和资源关联表
+		authorityResourceMapper.delAuthorOfResByAuthorityId(authorityid);
+		//删除权限表
 		authorityMapper.delAuthorById(authorityid);
 	}
 

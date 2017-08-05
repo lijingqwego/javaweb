@@ -12,6 +12,11 @@
 	<select id="delUserOfRoleByUserId">
 	delete from p_um_user_role where userid=#{_parameter}	
 	</select>
+  
+  <!-- 根据id删除用户关联角色 -->
+	<select id="delUserOfRoleByRoleId">
+	delete from p_um_user_role where roleid=#{_parameter}	
+	</select>
 	
 	<!-- 添加用户角色 -->
 	<insert id="addUserOfRole" parameterType="role">

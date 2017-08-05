@@ -6,9 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import cn.com.demo.mapper.AuthorityMapper;
 import cn.com.demo.mapper.AuthorityResourceMapper;
-import cn.com.demo.mapper.RoleAuthorityMapper;
 import cn.com.demo.po.AuthorityOfResources;
 import cn.com.demo.po.AuthorityResources;
 
@@ -16,10 +14,6 @@ import cn.com.demo.po.AuthorityResources;
 public class AuthorityResourceService {
 	@Resource
 	private AuthorityResourceMapper authorityOfResourceMapper;
-	@Resource
-	private RoleAuthorityMapper roleAuthorityMapper;
-	@Resource
-	private AuthorityMapper authorityMapper;
 	/**
 	 * 根据authorityid查询所有资源
 	 * @param authorityid
@@ -42,7 +36,7 @@ public class AuthorityResourceService {
 	 * 根据authorityid删除该权限所有的资源
 	 * @param authorityid
 	 */
-	public void delRoleOfAuthorByAuthorityId(String authorityid){
+	public void delAuthorOfResByAuthorityId(String authorityid){
 		//1.先删除该权限关联的表
 		authorityOfResourceMapper.delAuthorOfResByAuthorityId(authorityid);
 	}

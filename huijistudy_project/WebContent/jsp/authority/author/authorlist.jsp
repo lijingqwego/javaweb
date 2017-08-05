@@ -99,7 +99,7 @@ function last(){
                   	<a href="${pageContext.request.contextPath}/author/delAuthor.action?authorityid=${author.authorityid}" class="btn btn-danger">删除</a>
                   </td>
                   <td>
-                  	<a href="${pageContext.request.contextPath}/author/authorResList.action?authorityid=${author.authorityid}" class="btn btn-success">关联资源</a>
+                  	<a href="${pageContext.request.contextPath}/author/authorofres.action?authorityid=${author.authorityid}" class="btn btn-success">关联资源</a>
                   </td>
                 </tr>
                </c:forEach>

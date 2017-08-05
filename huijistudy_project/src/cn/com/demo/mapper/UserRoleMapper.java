@@ -29,4 +29,10 @@ public interface UserRoleMapper {
 	 * @param userRoleList
 	 */
 	void addUserOfRole(List<UserRole> userRoleList);
+
+	/**
+	 * 根据角色id删除用户关联角色
+	 * @param roleid
+	 */
+	void delUserOfRoleByRoleId(String roleid);
 }

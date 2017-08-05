@@ -2,6 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.com.demo.mapper.AuthorityMapper">
 
+	<!-- 统计数量 -->
+	<select id="getAuthorCount" parameterType="cn.com.demo.utils.PageBeanVO" resultType="Integer">
+		select count(*) from p_um_authority
+		<where>
+			<if test="authorityid != null and authorityid != ''">
+				and authorityid=#{authorityid}
+			</if>
+			<if test="authorityname != null and authorityname != ''">
+				and authorityname like '%${authorityname}%'
+			</if>
+		</where>
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="findAuthorListByPage" parameterType="cn.com.demo.utils.PageBeanVO" resultType="authority">
+		select t.* from (select rownum rn,a.* from p_um_authority a
+		<where>
+			<if test="authorityid != null and authorityid != ''">
+				and authorityid=#{authorityid}
+			</if>
+			<if test="authorityname != null and authorityname != ''">
+				and authorityname like '%${authorityname}%'
+			</if>
+		</where>
+		) t
+		where t.rn between #{pageSize}*(#{currPage}-1)+1 and #{pageSize}*#{currPage}
+	</select>
+
 	<select id="findAuthorityList" resultType="authority">
 		select * from p_um_authority
 	</select>

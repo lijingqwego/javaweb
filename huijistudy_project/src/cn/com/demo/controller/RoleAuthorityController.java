@@ -47,6 +47,6 @@ public class RoleAuthorityController {
 			roleAuthorityService.addRoleOfAuthor(roleAuthorList);
 		}
 		
-		return "redirect:/role/roleList.action";
+		return "redirect:/role/roleList.action?currPage=1";
 	}
 }

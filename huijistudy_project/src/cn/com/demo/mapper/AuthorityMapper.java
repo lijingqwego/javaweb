@@ -3,6 +3,7 @@ package cn.com.demo.mapper;
 import java.util.List;
 
 import cn.com.demo.po.Authority;
+import cn.com.demo.utils.PageBeanVO;
 
 public interface AuthorityMapper {
     
@@ -17,4 +18,8 @@ public interface AuthorityMapper {
 	String getAuthorId();
 
 	void addAuthor(Authority author);
+	
+	int getAuthorCount(PageBeanVO pageBean);
+	
+	List<Authority> findAuthorListByPage(PageBeanVO pageBean);
 }

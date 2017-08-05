@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import cn.com.demo.mapper.AuthorityMapper;
 import cn.com.demo.po.Authority;
+import cn.com.demo.utils.PageBeanVO;
 
 @Service
 public class AuthorityService {
@@ -61,5 +62,26 @@ public class AuthorityService {
 	 */
 	public void addAuthor(Authority author) {
 		authorityMapper.addAuthor(author);
+	}
+	
+	/**
+	 * ∑÷“≥≤È—Ø
+	 * @param currPage
+	 * @param authorityid
+	 * @param authorityname
+	 * @return
+	 */
+	public PageBeanVO findAuthorListByPage(int currPage,String authorityid,String authorityname){
+		PageBeanVO page = new PageBeanVO();
+		page.setCurrPage(currPage);
+		page.setPageSize(3);
+		page.setAuthorityid(authorityid);
+		page.setAuthorityname(authorityname);
+		int count = authorityMapper.getAuthorCount(page);
+		int totalPage=(int) Math.ceil(count*1.0/3);
+		page.setTotalPage(totalPage);
+		List<Authority> list = authorityMapper.findAuthorListByPage(page);
+		page.setList(list);
+		return page;
 	}
 }

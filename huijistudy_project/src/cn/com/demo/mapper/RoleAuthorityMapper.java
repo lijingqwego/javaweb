@@ -19,6 +19,11 @@ public interface RoleAuthorityMapper {
 	 * @param roleid
 	 */
 	void delRoleOfAuthorByRoleId(String roleid);
+	/**
+	 * 跟据authorityid删除角色的权限
+	 * @param authorityid
+	 */
+	void delRoleOfAuthorByAuthorityId(String authorityid);
 
 	/**
 	 * 添加角色的权限

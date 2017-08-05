@@ -14,6 +14,11 @@
 	<select id="delRoleOfAuthorByRoleId">
 		delete from p_um_role_authority where roleid=#{_parameter}
 	</select>
+	
+	<!-- 根据authorityid删除权限 -->
+	<select id="delRoleOfAuthorByAuthorityId">
+		delete from p_um_role_authority where authorityid=#{_parameter}
+	</select>
 
 	<!-- 添加角色权限 -->
 	<insert id="addRoleOfAuthor" parameterType="roleAuthority">

@@ -39,10 +39,10 @@ public class UserRoleController {
 		List<UserRole> userRoleList=new ArrayList<>();
 		if(idArr!=null){
 			for(String roleid : idArr){
-					UserRole userRole=new UserRole();
-					userRole.setRoleid(roleid);
-					userRole.setUserid(userid);
-					userRoleList.add(userRole);
+				UserRole userRole=new UserRole();
+				userRole.setRoleid(roleid);
+				userRole.setUserid(userid);
+				userRoleList.add(userRole);
 			}
 			userRoleService.addUserOfRole(userRoleList);
 		}

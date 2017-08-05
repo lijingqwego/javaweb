@@ -1,7 +1,5 @@
 package cn.com.demo.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -10,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.demo.po.Authority;
 import cn.com.demo.service.AuthorityService;
+import cn.com.demo.utils.PageBeanVO;
 
 @RequestMapping("/author")
 @Controller
@@ -19,10 +18,14 @@ public class AuthorityController {
 	private AuthorityService authorityService;
 	
 	@RequestMapping("/authorList")
-	public ModelAndView authorList(){
-		List<Authority> list = authorityService.findAuthorityList();
+	public ModelAndView authorList(int currPage,String authorityid,String authorityname){
+		PageBeanVO page = authorityService.findAuthorListByPage(currPage, authorityid, authorityname);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("authorList", list);
+		mv.addObject("authorList", page.getList());
+		mv.addObject("currPage", currPage);
+		mv.addObject("totalPage", page.getTotalPage());
+		mv.addObject("authorityid", authorityid);
+		mv.addObject("authorityname", authorityname);
 		mv.setViewName("author.authorlist");
 		return mv;
 	}
@@ -30,7 +33,7 @@ public class AuthorityController {
 	@RequestMapping("/delAuthor")
 	public String delAuthor(String authorityid){
 		authorityService.delAuthorById(authorityid);
-		return "redirect:/author/authorList.action";
+		return "redirect:/author/authorList.action?currPage=1";
 	}
 	
 	@RequestMapping("/findAuthor")
@@ -53,7 +56,7 @@ public class AuthorityController {
 		
 		authorityService.updAuthor(author);
 		
-		return "redirect:/author/authorList.action";
+		return "redirect:/author/authorList.action?currPage=1";
 	}
 	
 	@RequestMapping("/getAuthorId")
@@ -68,6 +71,16 @@ public class AuthorityController {
 	@RequestMapping("/commAddAuthor")
 	public String commAddAuthor(Authority author){
 		authorityService.addAuthor(author);
-		return "redirect:/author/authorList.action";
+		return "redirect:/author/authorList.action?currPage=1";
 	}
+	
+	@RequestMapping("/delMoreAuthor")
+	public String delMoreAuthor(String[] delitems){
+		for(String authorityid:delitems){
+			authorityService.delAuthorById(authorityid);
+		}
+		return "redirect:/author/authorList.action?currPage=1";
+	}
+	
+	
 }

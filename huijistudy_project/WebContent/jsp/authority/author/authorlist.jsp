@@ -4,13 +4,49 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.js" ></script>
 <script type="text/javascript">
 $(function(){
+	/*批量删除*/
+	$("#del_model").click(function(){
+		if(confirm("确定要删除所选项目？")){
+			var checkedList=new Array();
+			$("input[name='subChk']:checked").each(function(){
+				checkedList.push($(this).val());
+			});
+		}
+		//alert(checkedList);
+		$.ajax({
+			type:"POST",
+			url:"${pageContext.request.contextPath}/author/delMoreAuthor.action",
+			data:{'delitems':checkedList.toString()},
+			success:function(result){
+				$("[name='subChk']:checkbox").attr("checked",false);
+				window.location.reload();
+			}
+		})
+	});
 	/*添加权限*/
 	$("#add_model").click(function(){
 		window.location.href="${pageContext.request.contextPath}/author/getAuthorId.action";
 	});
 });
 </script>
-
+<script type="text/javascript">
+function first(){
+	var url="${pageContext.request.contextPath }/author/authorList.action?currPage=1&authorityid="+$("#authorityid").val()+"&authorityname="+$("#authorityname").val();
+	window.location.href=url;
+};
+function previous(){
+	var url="${pageContext.request.contextPath }/author/authorList.action?currPage=${currPage-1}&authorityid="+$("#authorityid").val()+"&authorityname="+$("#authorityname").val();
+	window.location.href=url;
+};
+function next(){
+	var url="${pageContext.request.contextPath }/author/authorList.action?currPage=${currPage+1}&authorityid="+$("#authorityid").val()+"&authorityname="+$("#authorityname").val();
+	window.location.href=url;
+};
+function last(){
+	var url="${pageContext.request.contextPath }/author/authorList.action?currPage=${totalPage}&authorityid="+$("#authorityid").val()+"&authorityname="+$("#authorityname").val();
+	window.location.href=url;
+};
+</script>
 <div id="content">
   <div id="content-header">
     <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Student pages</a> <a href="#" class="current">Info</a> </div>
@@ -38,6 +74,7 @@ $(function(){
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
+                  <th><input type="checkbox"/></th>
                   <th>权限ID</th>
                   <th>权限名称</th>
                   <th>权限说明</th>
@@ -49,6 +86,7 @@ $(function(){
               <tbody>
                <c:forEach items="${authorList}" var="author">
                 <tr class="odd gradeX"  align="center">
+                  <td><input type="checkbox" name="subChk" value="${author.authorityid}" /></td>
                   <td>${author.authorityid}</td>
                   <td>${author.authorityname}</td>
                   <td>${author.descn}</td>
@@ -61,7 +99,7 @@ $(function(){
                   	<a href="${pageContext.request.contextPath}/author/delAuthor.action?authorityid=${author.authorityid}" class="btn btn-danger">删除</a>
                   </td>
                   <td>
-                  	<a href="${pageContext.request.contextPath}/author/authorOfResource.action?authorityid=${author.authorityid}" class="btn btn-success">关联资源</a>
+                  	<a href="${pageContext.request.contextPath}/author/authorResList.action?authorityid=${author.authorityid}" class="btn btn-success">关联资源</a>
                   </td>
                 </tr>
                </c:forEach>
@@ -70,6 +108,31 @@ $(function(){
           </div>
         </div>
         <!-- end -->
+        <p align="center">
+		<c:choose>
+			<c:when test="${currPage!=1 }">
+				<a onclick="javascript:first()">首页</a>
+				&nbsp;&nbsp;
+				<a onclick="javascript:previous()" >上一页</a>
+			</c:when>
+			<c:otherwise>
+			首页&nbsp;&nbsp;
+			上一页&nbsp;&nbsp;
+			</c:otherwise>
+		</c:choose>
+		第 &nbsp;<c:out value="${currPage}"></c:out>&nbsp;页&nbsp;
+		<c:choose>
+			<c:when test="${currPage!=totalPage}">
+				<a onclick="javascript:next()">下一页</a>
+				&nbsp;&nbsp;
+				<a onclick="javascript:last()" >尾页</a>
+			</c:when>
+			<c:otherwise>
+			下一页&nbsp;&nbsp;
+			尾页&nbsp;&nbsp;
+			</c:otherwise>
+		</c:choose>
+		</p>
       </div>
     </div>
   </div>

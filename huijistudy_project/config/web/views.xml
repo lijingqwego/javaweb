@@ -66,6 +66,11 @@
          <definition name="role.roleofauthor" extends="base.definition">
             <put-attribute name="body" value="/jsp/authority/role/roleofauthor.jsp" />
          </definition>
+         
+          <!-- 权限关联资源-->
+         <definition name="author.authorofres" extends="base.definition">
+            <put-attribute name="body" value="/jsp/authority/author/authorofres.jsp" />
+         </definition>
              
          
        

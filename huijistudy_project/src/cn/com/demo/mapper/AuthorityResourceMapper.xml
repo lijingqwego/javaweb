@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.demo.mapper.AuthorityResourceMapper">
+
+	<!-- 根据authorityid查询所有资源 -->
+	<select id="findAuthorityOfResourcesById" parameterType="java.lang.String" resultType="authorityOfResources">
+		select res.* ,nvl((select resource_id from p_um_authority_resource um
+		where um.authorityid=#{_parameter} and um.resource_id = res.resource_id
+		),-1) isres from p_um_resources res
+	</select>
+	
+	<!-- 根据authorityid删除资源 -->
+	<select id="delAuthorOfResByAuthorityId">
+		delete from p_um_authority_resource where authorityid=#{_parameter}
+	</select>
+	
+	<!-- 添加权限资源 -->
+	<insert id="addAuthorOfResource" parameterType="authorityResources">
+		insert into p_um_authority_resource
+		<foreach collection="list" item="item" index="index"
+			separator="union all">
+			select
+			#{item.authorityid} authorityid ,
+			#{item.resource_id} resource_id ,
+			1
+			from dual
+		</foreach>
+	</insert>
+	
+</mapper>

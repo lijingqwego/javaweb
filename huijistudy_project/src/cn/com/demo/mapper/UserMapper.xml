@@ -161,4 +161,10 @@
     </set>
     where userid = #{userid}
   </update>
+  
+  	<!-- 用户登录 -->
+	<select id="loginCheckUser" parameterType="java.lang.String" resultType="user">
+		select * from p_um_user where username=#{username} and password=#{password}
+	</select>
+	
 </mapper>

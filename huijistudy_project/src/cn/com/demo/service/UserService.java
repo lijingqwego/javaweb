@@ -66,5 +66,9 @@ public class UserService {
 		vo.setList(list);
 		return vo;
 	}
+
+	public User login(String username, String password) {
+		return userMapper.loginCheckUser(username,password);
+	}
 		
 }

@@ -57,6 +57,11 @@
             <put-attribute name="body" value="/jsp/authority/author/updauthor.jsp" />
          </definition>
          
+         <!-- 添加权限 -->
+         <definition name="authro.addAuthor" extends="base.definition">
+            <put-attribute name="body" value="/jsp/authority/author/addauthor.jsp" />
+         </definition>
+         
           <!-- 角色关联权限-->
          <definition name="role.roleofauthor" extends="base.definition">
             <put-attribute name="body" value="/jsp/authority/role/roleofauthor.jsp" />

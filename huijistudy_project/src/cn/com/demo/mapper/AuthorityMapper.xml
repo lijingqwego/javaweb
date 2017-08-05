@@ -54,4 +54,83 @@
 		</set>
 		where authorityid=#{authorityid}
 	</update>
+	
+	<select id="getAuthorId" resultType="java.lang.String">
+		select to_char(sysdate,'yyyymmdd')||seq_author_id.nextval from dual
+	</select>
+	
+	<!-- 添加权限 -->
+	<insert id="addAuthor" parameterType="authority">
+		insert into p_um_authority
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="authorityid != null and authorityid != ''">
+				authorityid,
+			</if>
+			<if test="authorityname != null and authorityname != ''">
+				authorityname,
+			</if>
+			<if test="descn != null and descn != ''">
+				descn,
+			</if>
+			<if test="function != null and function != ''">
+				function,
+			</if>
+			<if test="code != null and code != ''">
+				code,
+			</if>
+			<if test="functionname != null and functionname != ''">
+				functionname,
+			</if>
+			<if test="enabled != null and enabled != ''">
+				enabled,
+			</if>
+			<if test="issys != null and issys != ''">
+				issys,
+			</if>
+			<if test="flaginfo != null and flaginfo != ''">
+				flaginfo,
+			</if>
+			<if test="create_time != null and create_time != ''">
+				create_time,
+			</if>
+			<if test="update_time != null and update_time != ''">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix=" values(" suffix=")" suffixOverrides=",">
+			<if test="authorityid != null and authorityid != ''">
+				#{authorityid},
+			</if>
+			<if test="authorityname != null and authorityname != ''">
+				#{authorityname},
+			</if>
+			<if test="descn != null and descn != ''">
+				#{descn},
+			</if>
+			<if test="function != null and function != ''">
+				#{function},
+			</if>
+			<if test="code != null and code != ''">
+				#{code},
+			</if>
+			<if test="functionname != null and functionname != ''">
+				#{functionname},
+			</if>
+			<if test="enabled != null and enabled != ''">
+				#{enabled},
+			</if>
+			<if test="issys != null and issys != ''">
+				#{issys},
+			</if>
+			<if test="flaginfo != null and flaginfo != ''">
+				#{flaginfo},
+			</if>
+			<if test="create_time != null and create_time != ''">
+				#{create_time},
+			</if>
+			<if test="update_time != null and update_time != ''">
+				#{update_time},
+			</if>
+		</trim>
+	</insert>
 </mapper>

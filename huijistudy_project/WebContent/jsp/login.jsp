@@ -19,7 +19,7 @@
         <div id="loginbox">            
             <form id="loginform" class="form-vertical" action="${pageContext.request.contextPath }/loginUser.action" method="post"  >
 				 <div class="control-group normal_text"> 
-				  <div id="message" >Enter username and password to continue... </div>
+				  <div id="message" >输入用户名和密码继续... </div>
 				  </div>
                 <div class="control-group">
                     <div class="controls">
@@ -38,7 +38,6 @@
                 <div class="form-actions">
                     <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover">Lost password?</a></span>
                     <span class="pull-right"><a href="#" class="btn btn-success"  id="to-login"> Login</a></span>
-                  
                 </div>
             </form>
             <form id="recoverform" action="#" class="form-vertical">

@@ -46,4 +46,20 @@ public class AuthorityService {
 	public void updAuthor(Authority author) {
 		authorityMapper.updAuthor(author);
 	}
+
+	/**
+	 * 获取一个自增长的权限ID
+	 * @return
+	 */
+	public String getAuthorId() {
+		return authorityMapper.getAuthorId();
+	}
+
+	/**
+	 * 添加权限
+	 * @param author
+	 */
+	public void addAuthor(Authority author) {
+		authorityMapper.addAuthor(author);
+	}
 }

@@ -13,4 +13,8 @@ public interface AuthorityMapper {
 	Authority findAuthorById(String authorityid);
 
 	void updAuthor(Authority author);
+
+	String getAuthorId();
+
+	void addAuthor(Authority author);
 }

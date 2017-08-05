@@ -55,5 +55,19 @@ public class AuthorityController {
 		
 		return "redirect:/author/authorList.action";
 	}
-
+	
+	@RequestMapping("/getAuthorId")
+	public ModelAndView getAuthorId(){
+		String id=authorityService.getAuthorId();
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("authorityid", id);
+		mv.setViewName("authro.addAuthor");
+		return mv;
+	}
+	
+	@RequestMapping("/commAddAuthor")
+	public String commAddAuthor(Authority author){
+		authorityService.addAuthor(author);
+		return "redirect:/author/authorList.action";
+	}
 }

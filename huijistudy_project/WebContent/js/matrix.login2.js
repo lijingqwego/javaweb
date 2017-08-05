@@ -1,17 +1,8 @@
 $(function(){
-   
-	
-	$('#to-login1').click(function(){
-		alert("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-	});
-	
 	$('#to-login').click(function(){	
 	var username=$("input[name='username']").val();
 	var password=$("input[name='password']").val();
 	var user={username:username,password:password};
-		/*alert(username);
-		alert(password);
-	alert("登录");*/
 		$.ajax({
 			type:"post",
 			url:"/huijistudy_project/loginCheckUser.action",
@@ -23,12 +14,10 @@ $(function(){
 					$("#loginform").submit(); 
 				}else{
 					//把登录异常信息动态填充到DIV中
-					   $("#message").html("<p id='label2'> UserName and PassWord input error, please try again...</p> ");
+					   $("#message").html("<p id='label2'> 用户名或密码输入错误, 请重新输入...</p> ");
 					   $("#message").css({color:"red"});
 				}
-				
 			}
-			
 		});
 	});
     

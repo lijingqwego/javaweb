@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.demo.mapper.ResourcesMapper" >
+	
+	<!-- 分页查询 -->
+	<select id="findResourceListByPage" parameterType="cn.com.demo.utils.PageBeanVO" resultType="resources">
+		select t.* from (select rownum rn,r.* from p_um_p_um_resources r
+		<where>
+			<if test="resource_id != null and resource_id != ''">
+				and resource_id=#{resource_id}
+			</if>
+			<if test="resource_name != null and resource_name != ''">
+				and resource_name=#{resource_name}
+			</if>
+		</where>
+		) t
+		where t.rn between #{pageSize}*(#{currPage}-1)+1 and #{pageSize}*#{currPage}
+	</select>
+	
+	
+</mapper>

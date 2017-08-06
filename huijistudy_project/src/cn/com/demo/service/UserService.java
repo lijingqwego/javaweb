@@ -24,7 +24,9 @@ public class UserService {
 	 * @param userid
 	 */
 	public void delUserById(String userid) {
+		//删除用户和角色关联
 		userRoleMapper.delUserOfRoleByUserId(userid);
+		//删除用户
 		userMapper.delUserByUserid(userid);
 	}
 

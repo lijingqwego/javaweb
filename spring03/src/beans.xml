@@ -1,0 +1,11 @@
+<beans>
+	<bean id="userDAO" class="cn.com.demo.dao.impl.UserInfoDAOImpl"></bean>
+
+	<!-- property 的name属性的值，需要和service类中的属性名称保持一致   
+		因为要通过set方法，将这个对象注入进去
+	 -->
+	<bean id="userService" class="cn.com.demo.service.UserInfoService">
+		<property name="userDAO" ref="userDAO" />
+	</bean>
+
+</beans>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.js" ></script>
 <script type="text/javascript">
 $(function(){
@@ -78,8 +79,14 @@ function last(){
                   <th>权限ID</th>
                   <th>权限名称</th>
                   <th>权限说明</th>
+                  <th>权限功能</th>
                   <th>权限编码</th>
+                  <th>操作名称</th>
+                  <th>是否禁用</th>
+                  <th>是否是超级权限</th>
                   <th>标志信息</th>
+                  <th>创建时间</th>
+                  <th>修改时间</th>
                   <th colspan="3">操作</th>
                 </tr>
               </thead>
@@ -90,8 +97,18 @@ function last(){
                   <td>${author.authorityid}</td>
                   <td>${author.authorityname}</td>
                   <td>${author.descn}</td>
+                  <td>${author.function}</td>
                   <td>${author.code}</td>
+                  <td>${author.functionname}</td>
+                  <td>${author.enabled==1 ? "正常" : "禁用"}</td>
+                  <td>${author.issys==1 ? "是" : "非"}</td>
                   <td>${author.flaginfo}</td>
+                  <td>
+                  	<fmt:formatDate value="${user.loginlasttime}" pattern="yyyy-MM-dd HH:mm:ss"/> 
+                  </td>
+                  <td>
+                  	<fmt:formatDate value="${user.create_time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
+                  </td>
                   <td>
                   	<a href="${pageContext.request.contextPath}/author/findAuthor.action?authorityid=${author.authorityid}" class="btn btn-warning">修改</a>
                   </td>

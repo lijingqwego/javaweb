@@ -45,9 +45,6 @@
   <update id="updRole" parameterType="role">
   	update p_um_role
   	<set>
-  		<if test="roleid != null and roleid !=''">
-  			roleid=#{roleid},
-  		</if>
   		<if test="rolename != null and rolename !=''">
   			rolename=#{rolename},
   		</if>
@@ -63,15 +60,8 @@
   		<if test="sort != null and sort !=''">
   			sort=#{sort},
   		</if>
-  		<if test="enabled != null and enabled !=''">
   			enabled=#{enabled},
-  		</if>
-  		<if test="create_time != null and create_time !=''">
-  			create_time=#{create_time},
-  		</if>
-  		<if test="update_time != null and update_time !=''">
-  			update_time=#{update_time},
-  		</if>
+  			update_time=sysdate
   	</set>
   	where roleid=#{roleid}
   </update>
@@ -99,15 +89,9 @@
   		<if test="sort != null and sort !=''">
   			sort,
   		</if>
-  		<if test="enabled != null and enabled !=''">
   			enabled,
-  		</if>
-  		<if test="create_time != null and create_time !=''">
   			create_time,
-  		</if>
-  		<if test="update_time != null and update_time !=''">
   			update_time,
-  		</if>
   	</trim>
   	<trim prefix=" values(" suffix=")" suffixOverrides=",">
   		<if test="roleid != null and roleid !=''">
@@ -128,15 +112,9 @@
   		<if test="sort != null and sort !=''">
   			#{sort},
   		</if>
-  		<if test="enabled != null and enabled !=''">
   			#{enabled},
-  		</if>
-  		<if test="create_time != null and create_time !=''">
-  			#{create_time},
-  		</if>
-  		<if test="update_time != null and update_time !=''">
-  			#{update_time},
-  		</if>
+  			sysdate,
+  			sysdate
   	</trim>
   </insert>
 </mapper>

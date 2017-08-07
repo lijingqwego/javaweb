@@ -2,20 +2,114 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.com.demo.mapper.ResourcesMapper" >
 	
-	<!-- 分页查询 -->
-	<select id="findResourceListByPage" parameterType="cn.com.demo.utils.PageBeanVO" resultType="resources">
-		select t.* from (select rownum rn,r.* from p_um_p_um_resources r
-		<where>
-			<if test="resource_id != null and resource_id != ''">
-				and resource_id=#{resource_id}
-			</if>
-			<if test="resource_name != null and resource_name != ''">
-				and resource_name=#{resource_name}
-			</if>
-		</where>
-		) t
-		where t.rn between #{pageSize}*(#{currPage}-1)+1 and #{pageSize}*#{currPage}
+	<!-- 查询 -->
+	<select id="findResourceList" resultType="resources">
+		select * from p_um_resources
 	</select>
 	
+	<!-- 添加一个资源id -->
+	<select id="getResourceId" resultType="java.lang.String">
+		select to_char(max(to_number(resource_id))+1) from p_um_resources
+	</select>
 	
+	<!-- 添加 -->
+	<insert id="addResource" parameterType="resources">
+		insert into p_um_resources
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="resource_id != null and resource_id != ''">
+				resource_id,
+			</if>
+			<if test="resource_name != null and resource_name != ''">
+				resource_name,
+			</if>
+			<if test="resource_type != null and resource_type != ''">
+				resource_type,
+			</if>
+			<if test="priority != null and priority != ''">
+				priority,
+			</if>
+			<if test="resource_url != null and resource_url != ''">
+				resource_url,
+			</if>
+			<if test="resource_dec != null and resource_dec != ''">
+				resource_dec,
+			</if>
+			<if test="enabled != null and enabled != ''">
+				enabled,
+			</if>
+			<if test="create_time != null and create_time != ''">
+				create_time,
+			</if><if test="update_time != null and update_time != ''">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix=" values(" suffix=")" suffixOverrides=",">
+			<if test="resource_id != null and resource_id != ''">
+				#{resource_id},
+			</if>
+			<if test="resource_name != null and resource_name != ''">
+				#{resource_name},
+			</if>
+			<if test="resource_type != null and resource_type != ''">
+				#{resource_type},
+			</if>
+			<if test="priority != null and priority != ''">
+				#{priority},
+			</if>
+			<if test="resource_url != null and resource_url != ''">
+				#{resource_url},
+			</if>
+			<if test="resource_dec != null and resource_dec != ''">
+				#{resource_dec},
+			</if>
+			<if test="enabled != null and enabled != ''">
+				#{enabled},
+			</if>
+			<if test="create_time != null and create_time != ''">
+				#{create_time},
+			</if><if test="update_time != null and update_time != ''">
+				#{update_time},
+			</if>
+		</trim>
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updResource" parameterType="resources">
+		update p_um_resources
+		<set>
+			<if test="resource_name != null and resource_name != ''">
+				resource_name=#{resource_name},
+			</if>
+			<if test="resource_type != null and resource_type != ''">
+				resource_type=#{resource_type},
+			</if>
+			<if test="priority != null and priority != ''">
+				priority=#{priority},
+			</if>
+			<if test="resource_url != null and resource_url != ''">
+				resource_url=#{resource_url},
+			</if>
+			<if test="resource_dec != null and resource_dec != ''">
+				resource_dec=#{resource_dec},
+			</if>
+			<if test="enabled != null and enabled != ''">
+				enabled=#{enabled},
+			</if>
+			<if test="create_time != null and create_time != ''">
+				create_time=#{create_time},
+			</if><if test="update_time != null and update_time != ''">
+				update_time=#{update_time},
+			</if>
+		</set>
+		where resource_id=#{resource_id}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="delResource" parameterType="java.lang.String">
+		delete from p_um_resources where resource_id=#{_parameter}
+	</delete>
+	
+	<select id="findResourceById" parameterType="java.lang.String" resultType="resources">
+		select * from p_um_resources where resource_id=#{_parameter}
+	</select>
 </mapper>

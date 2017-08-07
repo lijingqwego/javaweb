@@ -99,7 +99,8 @@ public class UserController {
 	
 	@RequestMapping("/updUser")
 	public String updUser(User user){
-		
+		Integer userflag = user.getUserflag();
+		System.out.println("--------------------"+userflag);
 		userService.updUser(user);
 		
 		return "redirect:/user/userList.action?currPage=1";

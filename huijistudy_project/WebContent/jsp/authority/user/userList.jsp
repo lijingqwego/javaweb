@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -73,10 +74,14 @@ function last(){
                   <th>编号</th>
                   <th>账号</th>
                   <th>用户名</th>
-                  <th>密码</th>
                   <th>用户类型</th>
+                  <th>是否是超级用户</th>
+                  <th>是否禁用</th>
                   <th>是否有效</th>
                   <th>登录次数</th>
+                  <th>登录时间</th>
+                  <th>创建时间</th>
+                  <th>修改时间</th>
                   <th colspan="3">操作</th>
                 </tr>
               </thead>
@@ -87,10 +92,20 @@ function last(){
                   <td>${user.userid}</td>
                   <td>${user.loginid}</td>
                   <td>${user.username}</td>
-                  <td>${user.password}</td>
                   <td>${user.usertype}</td>
-                  <td>${user.userflag}</td>
+                  <td>${user.issys==1 ? "是":"非"}</td>
+                  <td>${user.enabled==1 ? "正常":"禁用"}</td>
+                  <td>${user.userflag==1 ? "有效":"无效"}</td>
                   <td>${user.logincount}</td>
+                  <td>
+                  	<fmt:formatDate value="${user.loginlasttime}" pattern="yyyy-MM-dd HH:mm:ss"/> 
+                  </td>
+                  <td>
+                  	<fmt:formatDate value="${user.create_time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
+                  </td>
+                  <td>
+                  	<fmt:formatDate value="${user.update_time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
+                  </td>
                   <td>
                   	<a href="${pageContext.request.contextPath}/user/findUser.action?userid=${user.userid}" class="btn btn-warning">修改</a>
                   </td>

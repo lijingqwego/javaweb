@@ -46,9 +46,6 @@
 	<update id="updAuthor" parameterType="authority">
 		update p_um_authority
 		<set>
-			<if test="authorityid != null and authorityid != ''">
-				authorityid=#{authorityid},
-			</if>
 			<if test="authorityname != null and authorityname != ''">
 				authorityname=#{authorityname},
 			</if>
@@ -64,21 +61,12 @@
 			<if test="functionname != null and functionname != ''">
 				functionname=#{functionname},
 			</if>
-			<if test="enabled != null and enabled != ''">
 				enabled=#{enabled},
-			</if>
-			<if test="issys != null and issys != ''">
 				issys=#{issys},
-			</if>
 			<if test="flaginfo != null and flaginfo != ''">
 				flaginfo=#{flaginfo},
 			</if>
-			<if test="create_time != null and create_time != ''">
-				create_time =#{create_time },
-			</if>
-			<if test="update_time != null and update_time != ''">
-				update_time=#{update_time},
-			</if>
+				update_time=sysdate
 		</set>
 		where authorityid=#{authorityid}
 	</update>
@@ -109,21 +97,13 @@
 			<if test="functionname != null and functionname != ''">
 				functionname,
 			</if>
-			<if test="enabled != null and enabled != ''">
 				enabled,
-			</if>
-			<if test="issys != null and issys != ''">
 				issys,
-			</if>
 			<if test="flaginfo != null and flaginfo != ''">
 				flaginfo,
 			</if>
-			<if test="create_time != null and create_time != ''">
 				create_time,
-			</if>
-			<if test="update_time != null and update_time != ''">
 				update_time,
-			</if>
 		</trim>
 		<trim prefix=" values(" suffix=")" suffixOverrides=",">
 			<if test="authorityid != null and authorityid != ''">
@@ -144,21 +124,13 @@
 			<if test="functionname != null and functionname != ''">
 				#{functionname},
 			</if>
-			<if test="enabled != null and enabled != ''">
 				#{enabled},
-			</if>
-			<if test="issys != null and issys != ''">
 				#{issys},
-			</if>
 			<if test="flaginfo != null and flaginfo != ''">
 				#{flaginfo},
 			</if>
-			<if test="create_time != null and create_time != ''">
-				#{create_time},
-			</if>
-			<if test="update_time != null and update_time != ''">
-				#{update_time},
-			</if>
+				sysdate,
+				sysdate
 		</trim>
 	</insert>
 </mapper>

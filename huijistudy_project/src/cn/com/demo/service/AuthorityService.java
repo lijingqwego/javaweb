@@ -10,8 +10,6 @@ import cn.com.demo.mapper.AuthorityMapper;
 import cn.com.demo.mapper.AuthorityResourceMapper;
 import cn.com.demo.mapper.RoleAuthorityMapper;
 import cn.com.demo.po.Authority;
-import cn.com.demo.po.AuthorityResources;
-import cn.com.demo.po.RoleAuthority;
 import cn.com.demo.utils.PageBeanVO;
 
 @Service

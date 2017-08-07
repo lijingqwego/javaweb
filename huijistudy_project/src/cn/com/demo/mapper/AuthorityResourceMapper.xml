@@ -14,6 +14,11 @@
 		delete from p_um_authority_resource where authorityid=#{_parameter}
 	</select>
 	
+	<!-- 根据resource_id删除资源 -->
+	<select id="delAuthorOfResByResourceId">
+		delete from p_um_authority_resource where resource_id=#{_parameter}
+	</select>
+	
 	<!-- 添加权限资源 -->
 	<insert id="addAuthorOfResource" parameterType="authorityResources">
 		insert into p_um_authority_resource

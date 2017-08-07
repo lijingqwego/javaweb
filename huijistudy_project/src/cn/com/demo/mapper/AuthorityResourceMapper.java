@@ -24,4 +24,10 @@ public interface AuthorityResourceMapper {
 	 * @param list
 	 */
 	void addAuthorOfResource(List<AuthorityResources> list);
+
+	/**
+	 * 根据资源id删除权限关联资源
+	 * @param resource_id
+	 */
+	void delAuthorOfResByResourceId(String resource_id);
 }

@@ -66,6 +66,13 @@ $(function(){
 						<input type="text" name="flaginfo" class="span11"  />
 					</div>
 				</div>
+				<div class="control-group">
+					<label class="control-label">是否禁用 :</label>
+					<div class="controls">
+	                  <input type="radio" value="1" name="enabled" class="span11" checked="checked"/>正常
+	                  <input type="radio" value="0" name="enabled" class="span11" />禁用
+					</div>
+				</div>
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">提交</button>
 					<input type="button" class="btn btn-success" onclick = "window.history.back(-1);" value="返回">

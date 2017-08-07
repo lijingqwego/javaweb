@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.com.demo.po.Authority;
 import cn.com.demo.service.AuthorityService;
 import cn.com.demo.utils.PageBeanVO;
+import cn.com.demo.utils.StringUtils;
 
 @RequestMapping("/author")
 @Controller
@@ -38,22 +39,18 @@ public class AuthorityController {
 	
 	@RequestMapping("/findAuthor")
 	public ModelAndView findAuthor(String authorityid){
-		
 		Authority author = authorityService.findAuthorById(authorityid);
-		
 		ModelAndView mv=new ModelAndView();
-		
 		mv.addObject("author", author);
-		
 		mv.setViewName("author.updauthor");
-		
 		return mv;
 	}
 	
 	
 	@RequestMapping("/updAuthor")
-	public String updAuthor(Authority author){
-		
+	public String updAuthor(Authority author,String[] function){
+		String f = StringUtils.appendStr(function);
+		author.setFunction(f);
 		authorityService.updAuthor(author);
 		
 		return "redirect:/author/authorList.action?currPage=1";
@@ -69,7 +66,9 @@ public class AuthorityController {
 	}
 	
 	@RequestMapping("/commAddAuthor")
-	public String commAddAuthor(Authority author){
+	public String commAddAuthor(Authority author,String[] function){
+		String f = StringUtils.appendStr(function);
+		author.setFunction(f);
 		authorityService.addAuthor(author);
 		return "redirect:/author/authorList.action?currPage=1";
 	}

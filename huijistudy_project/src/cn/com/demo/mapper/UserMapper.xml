@@ -14,7 +14,7 @@
 			</if>
 		</where>
 	</select>
-
+	
 	<!-- 分页查询 -->
 	<select id="findUserListByPage" parameterType="cn.com.demo.utils.PageBeanVO" resultType="user">
 		select * from (select rownum rn,p_um_user.* from p_um_user
@@ -57,27 +57,11 @@
       <if test="usertype != null and usertype != ''">
         usertype,
       </if>
-      <if test="userflag != null and userflag != ''">
         userflag,
-      </if>
-      <if test="logincount != null and logincount != ''">
-        logincount,
-      </if>
-      <if test="enabled != null and enabled != ''">
         enabled,
-      </if>
-      <if test="loginlasttime != null and loginlasttime != ''">
-        loginlasttime,
-      </if>
-      <if test="issys != null and issys != ''">
         issys,
-      </if>
-      <if test="create_time != null and create_time != ''">
         create_time,
-      </if>
-      <if test="update_time != null and update_time != ''">
-        update_time,
-      </if>
+        update_time
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userid != null and userid != ''">
@@ -95,27 +79,11 @@
       <if test="usertype != null and usertype != ''">
         #{usertype},
       </if>
-      <if test="userflag != null and userflag != ''">
         #{userflag},
-      </if>
-      <if test="logincount != null and logincount != ''">
-        #{logincount},
-      </if>
-      <if test="enabled != null and enabled != ''">
         #{enabled},
-      </if>
-      <if test="loginlasttime != null and loginlasttime != ''">
-        #{loginlasttime},
-      </if>
-      <if test="issys != null and issys != ''">
         #{issys},
-      </if>
-      <if test="create_time != null and create_time != ''">
-        #{create_time},
-      </if>
-      <if test="update_time != null and update_time != ''">
-        #{update_time},
-      </if>
+        sysdate,
+        sysdate
     </trim>
   </insert>
  <!-- 更新用户 -->
@@ -137,27 +105,10 @@
       <if test="usertype != null and usertype != ''">
         usertype=#{usertype},
       </if>
-      <if test="userflag != null and userflag != ''">
-        userflag=#{userflag},
-      </if>
-      <if test="logincount != null and logincount != ''">
-        logincount=#{logincount},
-      </if>
-      <if test="enabled != null and enabled != ''">
-        enabled=#{enabled},
-      </if>
-      <if test="loginlasttime != null and loginlasttime != ''">
-        loginlasttime=#{loginlasttime},
-      </if>
-      <if test="issys != null and issys != ''">
         issys=#{issys},
-      </if>
-      <if test="create_time != null and create_time != ''">
-        create_time=#{create_time},
-      </if>
-      <if test="update_time != null and update_time != ''">
-        update_time=#{update_time},
-      </if>
+        enabled=#{enabled},
+        userflag=#{userflag},
+        update_time=sysdate
     </set>
     where userid = #{userid}
   </update>
@@ -166,5 +117,13 @@
 	<select id="loginCheckUser" parameterType="java.lang.String" resultType="user">
 		select * from p_um_user where username=#{username} and password=#{password}
 	</select>
+	
+	<!-- 登录成功之后，添加登录时间和次数+1 -->
+	<update id="updLoginInfo" parameterType="java.lang.String">
+		update p_um_user set 
+		logincount=nvl((select logincount from p_um_user where username=#{_parameter}),0)+1,
+		loginlasttime=sysdate 
+		where username=#{_parameter}
+	</update>
 	
 </mapper>

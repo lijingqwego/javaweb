@@ -34,6 +34,7 @@ public class LoginController {
 	public  ModelAndView loginUser(String username ,String password){
 		System.out.println(username);
 		System.out.println(password);
+		userService.updLoginInfo(username);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("base.definition");
 		return mv ; 

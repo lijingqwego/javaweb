@@ -46,7 +46,7 @@
 				<div class="control-group">
 					<label class="control-label">密码 :</label>
 					<div class="controls">
-						<input type="text" name="password"  class="span11"  />
+						<input type="password" name="password"  class="span11"  />
 					</div>
 				</div>
 				<div class="control-group">
@@ -56,16 +56,25 @@
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label">是否有效 :</label>
+					<label class="control-label">是否是超级用户 :</label>
 					<div class="controls">
-						<input type="text" name="userflag" class="span11"  />
+	                  <input type="radio" value="1" name="issys" class="span11" checked="checked"/>是
+	                  <input type="radio" value="0" name="issys" class="span11"/>非
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label">登录次数 :</label>
+					<label class="control-label">是否禁用 :</label>
 					<div class="controls">
-						<input type="text" name="logincount" class="span11"  />
+	                  <input type="radio" value="1" name="enabled" class="span11" checked="checked"/>正常
+	                  <input type="radio" value="0" name="enabled" class="span11" />禁用
 					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">是否有效 :</label>
+					<div class="controls">
+	                  <input type="radio" value="1" name="userflag" class="span11" checked="checked" />有效
+	                  <input type="radio" value="0" name="userflag" class="span11" />无效
+              		</div>
 				</div>
 				<div class="form-actions">
 					<button type="submit" class="btn btn-success">提交</button>

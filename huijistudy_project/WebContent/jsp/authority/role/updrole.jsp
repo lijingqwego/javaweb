@@ -26,6 +26,12 @@
 		<div class="widget-content nopadding">
 			<form action="${pageContext.request.contextPath }/role/updRole.action" method="post" class="form-horizontal">
 				<div class="control-group">
+					<label class="control-label">角色ID :</label>
+					<div class="controls">
+						<input type="text" readonly="readonly" name="roleid" value="${role.roleid }" class="span11"  />
+					</div>
+				</div>
+				<div class="control-group">
 					<label class="control-label">角色名 :</label>
 					<div class="controls">
 						<input type="text" name="rolename" value="${role.rolename }" class="span11"  />
@@ -46,8 +52,14 @@
 				<div class="control-group">
 					<label class="control-label">标志信息 :</label>
 					<div class="controls">
-						<input type="hidden" name="roleid" value="${role.roleid }">
 						<input type="text" name="flaginfo" value="${role.flaginfo }" class="span11"  />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">是否禁用 :</label>
+					<div class="controls">
+	                  <input type="radio" value="1" name="enabled" class="span11" ${role.enabled==1 ? "checked='checked'" : "" }/>正常
+	                  <input type="radio" value="0" name="enabled" class="span11" ${role.enabled==0 ? "checked='checked'" : ""}/>禁用
 					</div>
 				</div>
 				<div class="form-actions">

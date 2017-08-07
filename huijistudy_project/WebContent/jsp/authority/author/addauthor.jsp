@@ -47,9 +47,39 @@
 					</div>
 				</div>
 				<div class="control-group">
+					<label class="control-label">权限功能 :</label>
+					<div class="controls">
+	                  <input type="checkbox" value="1" name="function" class="span11" />增加
+	                  <input type="checkbox" value="2" name="function" class="span11"/>删除
+	                  <input type="checkbox" value="3" name="function" class="span11" />修改
+	                  <input type="checkbox" value="4" name="function" class="span11"/>查看
+	                  <input type="checkbox" value="5" name="function" class="span11" />授权
+					</div>
+				</div>
+				<div class="control-group">
 					<label class="control-label">权限编码 :</label>
 					<div class="controls">
 						<input type="text" name="code" class="span11"  />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">权限操作名称 :</label>
+					<div class="controls">
+						<input type="text" name="functionname" class="span11"  />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">是否禁用 :</label>
+					<div class="controls">
+	                  <input type="radio" value="1" name="enabled" class="span11" checked="checked"/>正常
+	                  <input type="radio" value="0" name="enabled" class="span11" />禁用
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">是否是超级用户 :</label>
+					<div class="controls">
+	                  <input type="radio" value="1" name="issys" class="span11" checked="checked"/>是
+	                  <input type="radio" value="0" name="issys" class="span11"/>非
 					</div>
 				</div>
 				<div class="control-group">

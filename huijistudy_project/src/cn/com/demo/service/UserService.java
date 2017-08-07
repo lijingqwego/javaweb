@@ -55,6 +55,13 @@ public class UserService {
 		userMapper.addUser(user);
 	}
 	
+	/**
+	 * 分页和搜索查询用户列表
+	 * @param currPage
+	 * @param userid
+	 * @param username
+	 * @return
+	 */
 	public PageBeanVO findUserListByPage(int currPage,String userid,String username){
 		PageBeanVO vo = new PageBeanVO();
 		vo.setPageSize(3);
@@ -69,8 +76,22 @@ public class UserService {
 		return vo;
 	}
 
+	/**
+	 * 用户登录（将输入登用户名和密码进行匹对，如果可以查到数据就说明等成功，否则登录失败）
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	public User login(String username, String password) {
 		return userMapper.loginCheckUser(username,password);
+	}
+	
+	/**
+	 * 用户登录成功后修改登录时间和登录次数
+	 * @param username
+	 */
+	public void updLoginInfo(String username){
+		userMapper.updLoginInfo(username);
 	}
 		
 }

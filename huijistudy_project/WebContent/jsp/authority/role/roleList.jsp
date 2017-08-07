@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -79,6 +80,9 @@ function last(){
                   <th>角色说明</th>
                   <th>角色编码</th>
                   <th>标志信息</th>
+                  <th>是否禁用</th>
+                  <th>创建时间</th>
+                  <th>修改时间</th>
                   <th colspan="3">操作</th>
                 </tr>
               </thead>
@@ -91,6 +95,13 @@ function last(){
                   <td>${role.descn}</td>
                   <td>${role.code}</td>
                   <td>${role.flaginfo}</td>
+                  <td>${role.enabled==1 ? "正常" : "禁用"}</td>
+                  <td>
+                  	<fmt:formatDate value="${role.create_time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
+                  </td>
+                  <td>
+                  	<fmt:formatDate value="${role.update_time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
+                  </td>
                   <td>
                   	<a href="${pageContext.request.contextPath}/role/findRole.action?roleid=${role.roleid}" class="btn btn-warning">修改</a>
                   </td>

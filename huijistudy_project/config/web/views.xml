@@ -71,10 +71,22 @@
          <definition name="author.authorofres" extends="base.definition">
             <put-attribute name="body" value="/jsp/authority/author/authorofres.jsp" />
          </definition>
-             
          
-       
-      
+          <!-- 资源表-->
+         <definition name="resource.resourcelist" extends="base.definition">
+            <put-attribute name="body" value="/jsp/authority/resource/resourcelist.jsp" />
+         </definition>
+         
+          <!-- 添加资源-->
+         <definition name="resource.addResource" extends="base.definition">
+            <put-attribute name="body" value="/jsp/authority/resource/addresource.jsp" />
+         </definition>
+         
+          <!-- 修改资源-->
+         <definition name="resource.updResource" extends="base.definition">
+            <put-attribute name="body" value="/jsp/authority/resource/updresource.jsp" />
+         </definition>
+             
           <!-- 退出登录-->
     <definition name="base.logout" template="/jsp/login.jsp">
      </definition>

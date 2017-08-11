@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import cn.com.demo.po.Authority;
 import cn.com.demo.po.User;
+import cn.com.demo.po.UserCustom;
 import cn.com.demo.utils.PageBeanVO;
 
 public interface UserMapper {
@@ -24,5 +26,9 @@ public interface UserMapper {
 	User loginCheckUser(@Param("username")String username, @Param("password")String password);
 	
 	void updLoginInfo(String username);
+	
+	UserCustom findUserByUsername(String username);
+	
+	List<Authority> findAuthorListByUserId(String userid);
 
 }

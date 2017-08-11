@@ -30,7 +30,7 @@ public class LoginController {
 		}
 		return "fail";
 	}
-	@RequestMapping("/loginUser")
+	@RequestMapping(value="/login")
 	public  ModelAndView loginUser(String username ,String password){
 		System.out.println(username);
 		System.out.println(password);
@@ -38,5 +38,12 @@ public class LoginController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("base.definition");
 		return mv ; 
+	}
+	
+	@RequestMapping(value="/enterLayout")
+	public ModelAndView enterLayout(){
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("base.definition");
+		return mv ;
 	}
 }

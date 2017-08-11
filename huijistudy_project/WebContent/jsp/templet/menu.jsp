@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+ <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <div id="sidebar">
   <ul>
     <li><a href="#"><i class="icon icon-home"></i> <span>我的订单</span></a> </li>
@@ -14,10 +15,18 @@
     
     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span> <span class="label label-important">3</span></a>
       <ul>
+        <sec:authorize access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_MESSAGE','ROLE_EXAM')">
         <li><a href="${pageContext.request.contextPath }/user/userList.action?currPage=1">用户列表</a></li>
+        </sec:authorize>
+        <sec:authorize access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_MESSAGE')">
         <li><a href="${pageContext.request.contextPath }/role/roleList.action?currPage=1">角色列表</a></li>
+        </sec:authorize>
+        <sec:authorize access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_MESSAGE')">
         <li><a href="${pageContext.request.contextPath }/author/authorList.action?currPage=1">权限列表</a></li>
+        </sec:authorize>
+        <sec:authorize access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_MESSAGE')">
         <li><a href="${pageContext.request.contextPath }/resource/resourceList.action">资源列表</a></li>
+      	</sec:authorize>
       </ul>
     </li>
    

@@ -2,9 +2,9 @@ package cn.com.demo.po;
 
 import java.util.Date;
 
-public class User {
-	
-    private String userid;
+public class User{
+		
+	private String userid;
     private String loginid; 
     private String username; 
     private String password; 

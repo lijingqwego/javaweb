@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.com.demo.mapper.UserMapper">
+	<!-- 根据用户名获取用户 -->
+	<select id="findUserByUsername" parameterType="java.lang.String" resultType="userCustom">
+		select userid,username,password from p_um_user where username=#{_parameter}
+	</select>
+
+	<select id="findAuthorListByUserId" parameterType="java.lang.String" resultType="authority">
+		select a.authorityid,a.authorityname,a.code from p_um_user u,p_um_role r,p_um_user_role ur,p_um_role_authority ra,p_um_authority a
+		where u.userid=ur.userid and r.roleid=ur.roleid and r.roleid=ra.roleid and ra.authorityid=a.authorityid
+		and u.userid=#{_parameter}
+	</select>
 
 	<!-- 根据条件查询用户表的总数量 -->
 	<select id="getUserCount" parameterType="cn.com.demo.utils.PageBeanVO" resultType="Integer">

@@ -15,8 +15,8 @@ public class AuthorityServiceTest {
 
 	@Test
 	public void test() {
-		AuthorityResourceService as = factory.getBean(AuthorityResourceService.class);
-		as.delAuthorOfResByAuthorityId("10003");
+		AuthorUserService as = factory.getBean(AuthorUserService.class);
+		
 	}
 
 }

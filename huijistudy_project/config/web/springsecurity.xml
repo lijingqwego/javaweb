@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security.xsd">
+           
+           <!-- 1.配置哪些不需要经过spring安全的页面     使用http标签  -->
+           <http pattern="/jsp/login.jsp" security="none"></http>
+           
+           <!-- 设置 auto-config 自动配置过滤器    --> 
+           <http auto-config="true" use-expressions="true">
+           <form-login login-page="/jsp/login.jsp" login-processing-url="/loginUser.action" username-parameter="username" password-parameter="password" authentication-failure-url="/jsp/login.jsp" 
+           default-target-url="/enterLayout.action"
+           />
+           
+           <!-- 设置有没有权限访问的页面，也就是403页面 -->
+           <access-denied-handler error-page="/jsp/error403.jsp" />
+           
+           <!-- 系统管理 ROLE_SYSTEM 权限管理 ROLE_AUTHORITY 信息管理   ROLE_MESSAGE   考试管理  ROLE_EXAM -->
+           <!-- 定义角色和页面之间的关系，也就是说哪些页面可以访问，如果没有访问权限，提示403 -->
+           <intercept-url  pattern="menu.jsp" access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_MESSAGE','ROLE_EXAM')"/>
+           
+           </http>
+           
+          <!-- 认证管理， 获取用户具有的角色，需要自己编写service来实现，service需要实现UserDetailsService这个接口 -->
+          <authentication-manager>
+          	<authentication-provider user-service-ref="authorUserService"></authentication-provider>
+          </authentication-manager>
+          
+</beans:beans>

@@ -5,10 +5,11 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.huiji.po.Items;
+import com.huiji.po.PageBean;
 import com.huiji.service.ItemsService;
 
 @Controller
@@ -16,18 +17,29 @@ import com.huiji.service.ItemsService;
 public class ItemsController {
 	@Resource
 	private ItemsService itemsService;
+	
+	private int pageSize=3;
 
 	/**
 	 * 显示所有商品列表，显示页面
 	 * @return
 	 */
 	@RequestMapping("/itemslist")
-	public ModelAndView itemsList(){
-		List<Items> itemsList = itemsService.findItemsListAll();
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("itemsList", itemsList);
-		modelAndView.setViewName("items/itemslist");
-		return modelAndView;
+	public String itemsList(int currPage,Model model){
+		// 总条数
+		int userCount = itemsService.getItemsCount();
+		// 总页数
+		int pageCount = (int) Math.ceil(userCount * 1.0 / pageSize);
+		PageBean pageBean = new PageBean();
+		pageBean.setCurrPage(currPage);
+		pageBean.setPageSize(pageSize);
+
+		List<Items> list = itemsService.findItemsList(pageBean);
+		model.addAttribute("itemsList", list);
+		model.addAttribute("currPage", currPage);
+		model.addAttribute("pageCount", pageCount);
+				
+		return "items.itemslist";
 	}
 	
 	/**
@@ -36,12 +48,10 @@ public class ItemsController {
 	 * @return
 	 */
 	@RequestMapping("/finditems")
-	public ModelAndView findItems(Long id){
+	public String findItems(Long id,Model model){
 		Items items = itemsService.findItemsById(id);
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("items", items);
-		modelAndView.setViewName("items/itemsupd");
-		return modelAndView;
+		model.addAttribute("items", items);
+		return "items.itemsupd";
 	}
 	
 	/**
@@ -60,10 +70,8 @@ public class ItemsController {
 	 * @return
 	 */
 	@RequestMapping("/additems")
-	public ModelAndView addItems(){
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("items/itemsadd");
-		return modelAndView;
+	public String addItems(){
+		return "items.itemsadd";
 	}
 	
 	/**

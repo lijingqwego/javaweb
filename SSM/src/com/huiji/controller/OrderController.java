@@ -6,8 +6,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.huiji.po.Cart;
 import com.huiji.po.Orders;
@@ -23,7 +23,7 @@ public class OrderController {
 	private OrdersService ordersService;
 	
 	@RequestMapping("/orderlist")
-	public ModelAndView orderList(Long id,int currPage,String createtime){
+	public String orderList(Long id,int currPage,String createtime,Model model){
 		// 总条数
 		int orderCount = ordersService.getOrderCount(id);
 		// 总页数
@@ -35,13 +35,12 @@ public class OrderController {
 		pageBean.setPageSize(pageSize);
 
 		List<Orders> list = ordersService.findOrderList(pageBean);
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("id", id);
-		mv.addObject("currPage", currPage);
-		mv.addObject("pageCount", pageCount);
-		mv.addObject("orderList", list);
-		mv.setViewName("order/orderlist");
-		return mv;
+		
+		model.addAttribute("id", id);
+		model.addAttribute("currPage", currPage);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("orderList", list);
+		return "order.orderlist";
 	}
 	
 	@RequestMapping("/commorder")
@@ -54,17 +53,15 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/searchorder")
-	public ModelAndView searchOrder(Long id){
+	public String searchOrder(Long id,Model model){
 		List<Orders> list = ordersService.findOrderListByOrder(id);
-		ModelAndView mv=new ModelAndView();
-		mv.addObject("orderList", list);
-		mv.setViewName("order/orderlist");
-		return mv;
+		model.addAttribute("orderList", list);
+		return "order.orderlist";
 	}
 	
 	
 	@RequestMapping("/detaillist")
-	public ModelAndView orderDetailList(Long orders_id,int currPage){
+	public String orderDetailList(Long orders_id,int currPage,Model model){
 		// 总条数
 		int userCount = (int) ordersService.getOrderDetailCount();
 		// 总页数
@@ -75,12 +72,10 @@ public class OrderController {
 		pageBean.setPageSize(pageSize);
 
 		List<Orders> list = ordersService.findOrderDetailList(pageBean);
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("currPage", currPage);
-		mv.addObject("pageCount", pageCount);
-		mv.addObject("detailList", list);
-		mv.setViewName("order/detaillist");
-		return mv;
+		model.addAttribute("currPage", currPage);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("detailList", list);
+		return "order.detaillist";
 	}
 	
 	/**
@@ -89,7 +84,7 @@ public class OrderController {
 	 * @return
 	 */
 	@RequestMapping("/useritemslist")
-	public ModelAndView userItemsList(int currPage){
+	public String userItemsList(int currPage,Model model){
 		// 总条数
 		int userCount = (int) ordersService.findUserBuyItemsCount();
 		// 总页数
@@ -100,11 +95,9 @@ public class OrderController {
 		pageBean.setPageSize(pageSize);
 
 		List<User> list = ordersService.findUserBuyItems(pageBean);
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("currPage", currPage);
-		mv.addObject("pageCount", pageCount);
-		mv.addObject("useritemsList", list);
-		mv.setViewName("order/useritemslist");
-		return mv;
+		model.addAttribute("currPage", currPage);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("useritemsList", list);
+		return "order.useritemslist";
 	}
 }

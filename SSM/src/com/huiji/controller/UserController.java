@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.huiji.po.PageBean;
 import com.huiji.po.User;
@@ -26,7 +26,7 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping("/userlist")
-	public ModelAndView userList(int currPage) {
+	public String userList(int currPage,Model model) {
 		// 总条数
 		int userCount = userService.getUserCount();
 		// 总页数
@@ -37,12 +37,10 @@ public class UserController {
 		pageBean.setPageSize(pageSize);
 
 		List<User> list = userService.findUserList(pageBean);
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("userList", list);
-		mv.addObject("currPage", currPage);
-		mv.addObject("pageCount", pageCount);
-		mv.setViewName("user/userlist");
-		return mv;
+		model.addAttribute("userList", list);
+		model.addAttribute("currPage", currPage);
+		model.addAttribute("pageCount", pageCount);
+		return "user.userlist";
 	}
 
 	/**
@@ -50,10 +48,8 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/userlogin")
-	public ModelAndView login() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("user/login");
-		return mv;
+	public String login() {
+		return "user.login";
 	}
 
 	@RequestMapping("/checkaccount")
@@ -94,7 +90,7 @@ public class UserController {
 			User login = userService.login(user);
 			if (login.getUsername().equals(username) && login.getPassword().equals(password)) {
 				session.setAttribute("user", login);
-				return "redirect:/user/userlist.action?currPage=1";
+				return "base.definition";
 			}
 			out.println("用户名或密码错误！请重新输入！");
 			out.flush();
@@ -102,7 +98,7 @@ public class UserController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return "user.login";
 	}
 
 }

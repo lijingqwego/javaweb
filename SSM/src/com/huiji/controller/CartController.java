@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.huiji.po.Cart;
 import com.huiji.po.CartItem;
@@ -18,10 +17,8 @@ public class CartController {
 	private ItemsService itemsService;
 		
 	@RequestMapping("/cartlist")
-	public ModelAndView cartList(){
-		ModelAndView mv=new ModelAndView();
-		mv.setViewName("cart/cartlist");
-		return mv;
+	public String cartList(){
+		return "cart.cartlist";
 	}
 	
 	@RequestMapping("/addcart")
@@ -38,7 +35,7 @@ public class CartController {
 		cartItem.setTotalPrice(items.getPrice()*count);
 		cart.addCart(cartItem);
 		session.setAttribute("cart", cart);
-		return "redirect:/items/itemslist.action";
+		return "cart.cartlist";
 	}
 	
 	@RequestMapping("/delcart")

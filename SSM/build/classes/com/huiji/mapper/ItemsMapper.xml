@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from items where id=#{id}
 	</select>
 	
-	<select id="findItemsList" parameterType="items" resultType="items">
+	<!-- <select id="findItemsList" parameterType="items" resultType="items">
 		select * from items 
 		<where>
 			<if test="id != null and id != ''">
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and createtime=#{createtime}
 			</if>
 		</where>
-	</select>
+	</select> -->
 	
 	<select id="findItemsListAll" resultType="items">
 		select * from items 
@@ -96,4 +96,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="delItems" parameterType="Long">
 		delete from items where id=#{id}
 	</delete>
+	
+	
+	<!-- 商品分页查询 -->
+	<select id="findItemsList" parameterType="pageBean" resultType="items">
+		select * from (select rownum rn,items.* from items) t 
+		where t.rn between #{pageSize}*(#{currPage}-1)+1 and #{pageSize}*#{currPage}
+	</select>
+	
+	<!-- 获取所有商品总数 -->
+	<select id="getItemsCount" resultType="Integer">
+		select count(*) from items
+	</select>
 </mapper>

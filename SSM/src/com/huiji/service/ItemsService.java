@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.huiji.mapper.ItemsMapper;
 import com.huiji.po.Items;
+import com.huiji.po.PageBean;
 @Service
 public class ItemsService {
 	@Resource
@@ -36,6 +37,14 @@ public class ItemsService {
 	
 	public void delItems(Long id){
 		itemsMapper.delItems(id);
+	}
+
+	public int getItemsCount() {
+		return itemsMapper.getItemsCount();
+	}
+
+	public List<Items> findItemsList(PageBean pageBean) {
+		return itemsMapper.findItemsList(pageBean);
 	}
 	
 }

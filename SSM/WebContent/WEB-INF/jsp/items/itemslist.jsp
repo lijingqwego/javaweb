@@ -41,5 +41,31 @@
 			<td colspan="6" align="center"><a href="${pageContext.request.contextPath}/items/additems.action">添加商品</a></td>
 		</tr>
 	</table>
+	
+	<p align="center">
+		<c:choose>
+			<c:when test="${currPage!=1 }">
+				<a href="${pageContext.request.contextPath }/items/itemslist.action?currPage=1">首页</a>
+				&nbsp;&nbsp;
+				<a href="${pageContext.request.contextPath }/items/itemslist.action?currPage=${currPage-1}">上一页</a>
+			</c:when>
+			<c:otherwise>
+			首页&nbsp;&nbsp;
+			上一页&nbsp;&nbsp;
+			</c:otherwise>
+		</c:choose>
+		第 &nbsp;<c:out value="${currPage}"></c:out>&nbsp;页&nbsp;
+		<c:choose>
+			<c:when test="${currPage!=pageCount}">
+				<a href="${pageContext.request.contextPath }/items/itemslist.action?currPage=${currPage+1}">下一页</a>
+				&nbsp;&nbsp;
+				<a href="${pageContext.request.contextPath }/items/itemslist.action?currPage=${pageCount}">尾页</a>
+			</c:when>
+			<c:otherwise>
+			下一页&nbsp;&nbsp;
+			尾页&nbsp;&nbsp;
+			</c:otherwise>
+		</c:choose>
+	</p>
 </body>
 </html>

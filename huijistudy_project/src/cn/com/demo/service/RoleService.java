@@ -90,4 +90,8 @@ public class RoleService {
 	public void addRole(Role role) {
 		roleMapper.addRole(role);
 	}
+
+	public void roleEnable(Role role) {
+		roleMapper.roleEnable(role);
+	}
 }

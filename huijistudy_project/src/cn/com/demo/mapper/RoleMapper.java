@@ -33,6 +33,12 @@ public interface RoleMapper {
 	 * @param role
 	 */
 	void addRole(Role role);
+
+	/**
+	 * ½ûÓÃ/Õý³£
+	 * @param role
+	 */
+	void roleEnable(Role role);
 	
     
 }

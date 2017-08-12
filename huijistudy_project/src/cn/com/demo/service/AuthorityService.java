@@ -95,4 +95,8 @@ public class AuthorityService {
 		page.setList(list);
 		return page;
 	}
+
+	public void authorEnable(Authority authority) {
+		authorityMapper.authorEnable(authority);
+	}
 }

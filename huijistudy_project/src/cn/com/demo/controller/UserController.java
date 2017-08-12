@@ -96,13 +96,26 @@ public class UserController {
 		return mv;
 	}
 	
-	
 	@RequestMapping("/updUser")
 	public String updUser(User user){
-		Integer userflag = user.getUserflag();
-		System.out.println("--------------------"+userflag);
+//		Integer userflag = user.getUserflag();
+//		System.out.println("--------------------"+userflag);
 		userService.updUser(user);
 		
 		return "redirect:/user/userList.action?currPage=1";
+	}
+	
+	/**
+	 * ½ûÓÃ/Õı³£
+	 * @param userid
+	 * @return
+	 */
+	@RequestMapping("/userEnable")
+	public String userEnable(String currPage,String userid,Integer enabled){
+		User user = new User();
+		user.setUserid(userid);
+		user.setEnabled(enabled);
+		userService.userEnable(user);
+		return "redirect:/user/userList.action?currPage="+currPage;
 	}
 }

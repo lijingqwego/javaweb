@@ -21,15 +21,15 @@ public class AuthorUserService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println("=======================username==========="+username);
+//		System.out.println("=======================username==========="+username);
 		//根据username获取User
 		UserCustom userCustom = userMapper.findUserByUsername(username);
 		//取出userid
 		String userid = userCustom.getUserid();
-		System.out.println("=======================userid================="+userid);
+//		System.out.println("=======================userid================="+userid);
 		//获取用户的权限
 		List<Authority> authorList = userMapper.findAuthorListByUserId(userid);
-		System.out.println("======================code==============="+authorList.get(0).getCode());
+//		System.out.println("======================code==============="+authorList.get(0).getCode());
 		//添加用户权限
 		userCustom.setAuthorityList(authorList);
 		

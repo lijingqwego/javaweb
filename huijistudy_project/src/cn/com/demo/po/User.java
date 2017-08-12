@@ -89,4 +89,12 @@ public class User{
 	public void setUpdate_time(Date update_time) {
 		this.update_time = update_time;
 	}
+	@Override
+	public String toString() {
+		return "User [userid=" + userid + ", loginid=" + loginid + ", username=" + username + ", password=" + password
+				+ ", usertype=" + usertype + ", userflag=" + userflag + ", logincount=" + logincount + ", enabled="
+				+ enabled + ", loginlasttime=" + loginlasttime + ", issys=" + issys + ", create_time=" + create_time
+				+ ", update_time=" + update_time + "]";
+	}
+	
 }

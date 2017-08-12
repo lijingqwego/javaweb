@@ -100,9 +100,6 @@
   <update id="updUser" parameterType="user">
     update p_um_user
     <set>
-      <if test="userid != null and userid != ''">
-        userid=#{userid},
-      </if>
       <if test="loginid != null and loginid != ''">
         loginid=#{loginid},
       </if>
@@ -134,6 +131,11 @@
 		logincount=nvl((select logincount from p_um_user where username=#{_parameter}),0)+1,
 		loginlasttime=sysdate 
 		where username=#{_parameter}
+	</update>
+	
+	<!-- 禁用 /正常-->
+	<update id="userEnable" parameterType="user">
+		update p_um_user set enabled=#{enabled} where userid=#{userid}
 	</update>
 	
 </mapper>

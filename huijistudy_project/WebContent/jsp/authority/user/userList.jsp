@@ -47,6 +47,8 @@ function last(){
 	window.location.href=url;
 };
 </script>
+<style>
+</style>
 <div id="content">
   <div id="content-header">
     <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Student pages</a> <a href="#" class="current">Info</a> </div>
@@ -82,13 +84,13 @@ function last(){
                   <th>登录时间</th>
                   <th>创建时间</th>
                   <th>修改时间</th>
-                  <th colspan="3">操作</th>
+                  <th>操作</th>
                 </tr>
               </thead>
               <tbody>
                <c:forEach items="${userList }" var="user">
                 <tr class="odd gradeX">
-                  <td><input type="checkbox" name="subChk" value="${user.userid}" /></td>
+                  <td><input id="subChk" type="checkbox" name="subChk" value="${user.userid}" /></td>
                   <td>${user.userid}</td>
                   <td>${user.loginid}</td>
                   <td>${user.username}</td>
@@ -107,13 +109,20 @@ function last(){
                   	<fmt:formatDate value="${user.update_time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
                   </td>
                   <td>
-                  	<a href="${pageContext.request.contextPath}/user/findUser.action?userid=${user.userid}" class="btn btn-warning">修改</a>
-                  </td>
-                  <td>
-                  	<a href="${pageContext.request.contextPath}/user/delUser.action?userid=${user.userid}" class="btn btn-danger">删除</a>
-                  </td>
-                  <td>
-                  	<a href="${pageContext.request.contextPath}/user/userOfRole.action?userid=${user.userid}" class="btn btn-success">关联角色</a>
+                  	<c:choose>
+                  	<c:when test="${user.enabled==1 }">
+                  		<a class="badge badge-info" href="${pageContext.request.contextPath}/user/findUser.action?userid=${user.userid}" >修改</a>
+	                  	<a class="badge badge-warning" href="${pageContext.request.contextPath}/user/delUser.action?userid=${user.userid}">删除</a>
+	                  	<a class="badge badge-success" href="${pageContext.request.contextPath}/user/userOfRole.action?userid=${user.userid}" >关联角色</a>
+                  		<a class="badge badge-important" href="${pageContext.request.contextPath}/user/userEnable.action?currPage=${currPage}&userid=${user.userid}&enabled=0">禁用</a>
+                  	</c:when>
+                  	<c:otherwise>
+                  		<a class="badge" >修改</a>
+                  		<a class="badge">删除</a>
+                  		<a class="badge">关联角色</a>
+                  		<a href="${pageContext.request.contextPath}/user/userEnable.action?currPage=${currPage}&userid=${user.userid}&enabled=1" class="badge">正常</a>
+                  	</c:otherwise>
+                  	</c:choose>
                   </td>
                 </tr>
                </c:forEach>
@@ -126,25 +135,25 @@ function last(){
         <p align="center">
 		<c:choose>
 			<c:when test="${currPage!=1 }">
-				<a onclick="javascript:first()">首页</a>
+				<a class="btn btn-info" onclick="javascript:first()">首页</a>
 				&nbsp;&nbsp;
-				<a onclick="javascript:previous()" >上一页</a>
+				<a class="btn btn-info" onclick="javascript:previous()" >上一页</a>
 			</c:when>
 			<c:otherwise>
-			首页&nbsp;&nbsp;
-			上一页&nbsp;&nbsp;
+			<a class="btn btn-info" >首页</a>&nbsp;&nbsp;
+			<a class="btn btn-info" >上一页</a>&nbsp;&nbsp;
 			</c:otherwise>
 		</c:choose>
 		第 &nbsp;<c:out value="${currPage}"></c:out>&nbsp;页&nbsp;
 		<c:choose>
 			<c:when test="${currPage!=totalPage}">
-				<a onclick="javascript:next()">下一页</a>
+				<a class="btn btn-info" onclick="javascript:next()">下一页</a>
 				&nbsp;&nbsp;
-				<a onclick="javascript:last()" >尾页</a>
+				<a class="btn btn-info" onclick="javascript:last()" >尾页</a>
 			</c:when>
 			<c:otherwise>
-			下一页&nbsp;&nbsp;
-			尾页&nbsp;&nbsp;
+				<a class="btn btn-info" >下一页</a>&nbsp;&nbsp;
+				<a class="btn btn-info" >尾页</a>&nbsp;&nbsp;
 			</c:otherwise>
 		</c:choose>
 		</p>

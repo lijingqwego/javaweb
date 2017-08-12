@@ -15,7 +15,7 @@ public class LoginController {
 	
 	@Resource
 	private UserService userService;
-
+	
 	@RequestMapping("/loginCheckUser")
 	public @ResponseBody String loginCheckUser(String username ,String password){
 		System.out.println(username);
@@ -36,6 +36,7 @@ public class LoginController {
 		System.out.println(password);
 		userService.updLoginInfo(username);
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("username", username);
 		mv.setViewName("base.definition");
 		return mv ; 
 	}

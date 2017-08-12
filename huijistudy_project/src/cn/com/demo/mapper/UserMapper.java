@@ -17,7 +17,7 @@ public interface UserMapper {
 
     User findUserById(String userid);
 
-    int updUser(User user);
+    void updUser(User user);
     
     int getUserCount(PageBeanVO pageBean);
     
@@ -30,5 +30,7 @@ public interface UserMapper {
 	UserCustom findUserByUsername(String username);
 	
 	List<Authority> findAuthorListByUserId(String userid);
+
+	void userEnable(User user);
 
 }

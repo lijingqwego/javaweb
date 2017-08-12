@@ -133,4 +133,8 @@
 				sysdate
 		</trim>
 	</insert>
+	
+	<update id="authorEnable" parameterType="authority">
+		update p_um_authority set enabled=#{enabled} where authorityid=#{authorityid}
+	</update>
 </mapper>

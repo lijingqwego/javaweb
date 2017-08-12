@@ -81,5 +81,18 @@ public class AuthorityController {
 		return "redirect:/author/authorList.action?currPage=1";
 	}
 	
+	/**
+	 * ½ûÓÃ/Õý³£
+	 * @param authorityid
+	 * @return
+	 */
+	@RequestMapping("/authorEnable")
+	public String authorEnable(String currPage,String authorityid,Integer enabled){
+		Authority authority = new Authority();
+		authority.setAuthorityid(authorityid);
+		authority.setEnabled(enabled);
+		authorityService.authorEnable(authority);
+		return "redirect:/author/authorList.action?currPage="+currPage;
+	}
 	
 }

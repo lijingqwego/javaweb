@@ -28,6 +28,7 @@
 				<div class="control-group">
 					<label class="control-label">账号 :</label>
 					<div class="controls">
+						<input type="hidden" name="userid" value="${user.userid }">
 						<input type="text" name="loginid" value="${user.loginid }" class="span11"  />
 					</div>
 				</div>

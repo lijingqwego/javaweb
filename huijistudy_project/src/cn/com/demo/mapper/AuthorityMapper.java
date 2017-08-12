@@ -22,4 +22,6 @@ public interface AuthorityMapper {
 	int getAuthorCount(PageBeanVO pageBean);
 	
 	List<Authority> findAuthorListByPage(PageBeanVO pageBean);
+
+	void authorEnable(Authority authority);
 }

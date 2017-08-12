@@ -70,4 +70,18 @@ public class ResourceController {
 		resourceService.updResource(resource);
 		return "redirect:/resource/resourceList.action";
 	}
+	
+	/**
+	 * ½ûÓÃ/Õý³£
+	 * @param resource_id
+	 * @return
+	 */
+	@RequestMapping("/resourceEnable")
+	public String resourceEnable(String currPage,String resource_id,Integer enabled){
+		Resources resource = new Resources();
+		resource.setResource_id(resource_id);
+		resource.setEnabled(enabled);
+		resourceService.resourceEnable(resource);
+		return "redirect:/resource/resourceList.action";
+	}
 }

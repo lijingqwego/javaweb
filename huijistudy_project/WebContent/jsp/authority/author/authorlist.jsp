@@ -87,7 +87,7 @@ function last(){
                   <th>标志信息</th>
                   <th>创建时间</th>
                   <th>修改时间</th>
-                  <th colspan="3">操作</th>
+                  <th>操作</th>
                 </tr>
               </thead>
               <tbody>
@@ -104,19 +104,27 @@ function last(){
                   <td>${author.issys==1 ? "是" : "非"}</td>
                   <td>${author.flaginfo}</td>
                   <td>
-                  	<fmt:formatDate value="${user.loginlasttime}" pattern="yyyy-MM-dd HH:mm:ss"/> 
+                  	<fmt:formatDate value="${author.create_time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
                   </td>
                   <td>
-                  	<fmt:formatDate value="${user.create_time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
+                  	<fmt:formatDate value="${author.update_time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
                   </td>
                   <td>
-                  	<a href="${pageContext.request.contextPath}/author/findAuthor.action?authorityid=${author.authorityid}" class="btn btn-warning">修改</a>
-                  </td>
-                  <td>
-                  	<a href="${pageContext.request.contextPath}/author/delAuthor.action?authorityid=${author.authorityid}" class="btn btn-danger">删除</a>
-                  </td>
-                  <td>
-                  	<a href="${pageContext.request.contextPath}/author/authorofres.action?authorityid=${author.authorityid}" class="btn btn-success">关联资源</a>
+                  
+                  <c:choose>
+                  	<c:when test="${author.enabled==1 }">
+                  		<a class="badge badge-info" href="${pageContext.request.contextPath}/author/findAuthor.action?authorityid=${author.authorityid}" >修改</a>
+	                  	<a class="badge badge-warning" href="${pageContext.request.contextPath}/author/delAuthor.action?authorityid=${author.authorityid}">删除</a>
+	                  	<a class="badge badge-success" href="${pageContext.request.contextPath}/author/authorofres.action?authorityid=${author.authorityid}" >关联角色</a>
+                  		<a class="badge badge-important" href="${pageContext.request.contextPath}/author/authorEnable.action?currPage=${currPage}&authorityid=${author.authorityid}&enabled=0">禁用</a>
+                  	</c:when>
+                  	<c:otherwise>
+                  		<a class="badge" >修改</a>
+                  		<a class="badge">删除</a>
+                  		<a class="badge">关联权限</a>
+                  		<a class="badge" href="${pageContext.request.contextPath}/author/authorEnable.action?currPage=${currPage}&authorityid=${author.authorityid}&enabled=1" >正常</a>
+                  	</c:otherwise>
+                  </c:choose>
                   </td>
                 </tr>
                </c:forEach>
@@ -128,25 +136,25 @@ function last(){
         <p align="center">
 		<c:choose>
 			<c:when test="${currPage!=1 }">
-				<a onclick="javascript:first()">首页</a>
+				<a class="btn btn-info" onclick="javascript:first()">首页</a>
 				&nbsp;&nbsp;
-				<a onclick="javascript:previous()" >上一页</a>
+				<a class="btn btn-info" onclick="javascript:previous()" >上一页</a>
 			</c:when>
 			<c:otherwise>
-			首页&nbsp;&nbsp;
-			上一页&nbsp;&nbsp;
+			<a class="btn btn-info" href="#" >首页</a>&nbsp;&nbsp;
+			<a class="btn btn-info" href="#" >上一页</a>&nbsp;&nbsp;
 			</c:otherwise>
 		</c:choose>
 		第 &nbsp;<c:out value="${currPage}"></c:out>&nbsp;页&nbsp;
 		<c:choose>
 			<c:when test="${currPage!=totalPage}">
-				<a onclick="javascript:next()">下一页</a>
+				<a class="btn btn-info" onclick="javascript:next()">下一页</a>
 				&nbsp;&nbsp;
-				<a onclick="javascript:last()" >尾页</a>
+				<a class="btn btn-info" onclick="javascript:last()" >尾页</a>
 			</c:when>
 			<c:otherwise>
-			下一页&nbsp;&nbsp;
-			尾页&nbsp;&nbsp;
+			<a class="btn btn-info" href="#" >下一页</a>&nbsp;&nbsp;
+			<a class="btn btn-info" href="#" >尾页</a>&nbsp;&nbsp;
 			</c:otherwise>
 		</c:choose>
 		</p>

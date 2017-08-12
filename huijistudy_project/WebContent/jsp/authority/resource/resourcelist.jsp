@@ -35,7 +35,7 @@ $(function(){
                   <th>资源类型</th>
                   <th>优先级</th>
                   <th>资源说明</th>
-                  <th colspan="2">操作</th>
+                  <th>操作</th>
                 </tr>
               </thead>
               <tbody>
@@ -47,10 +47,18 @@ $(function(){
                   <td>${resource.priority}</td>
                   <td>${resource.resource_dec}</td>
                   <td>
-                  	<a href="${pageContext.request.contextPath}/resource/findResource.action?resource_id=${resource.resource_id}" class="btn btn-warning">修改</a>
-                  </td>
-                  <td>
-                  	<a href="${pageContext.request.contextPath}/resource/delResource.action?resource_id=${resource.resource_id}" class="btn btn-danger">删除</a>
+                  <c:choose>
+                  	<c:when test="${resource.enabled==1 }">
+                  		<a class="badge badge-info" href="${pageContext.request.contextPath}/resource/findResource.action?resource_id=${resource.resource_id}" >修改</a>
+	                  	<a class="badge badge-warning" href="${pageContext.request.contextPath}/resource/delResource.action?resource_id=${resource.resource_id}">删除</a>
+                  		<a class="badge badge-important" href="${pageContext.request.contextPath}/resource/resourceEnable.action?&resource_id=${resource.resource_id}&enabled=0">禁用</a>
+                  	</c:when>
+                  	<c:otherwise>
+                  		<a class="badge" >修改</a>
+                  		<a class="badge">删除</a>
+                  		<a class="badge" href="${pageContext.request.contextPath}/resource/resourceEnable.action?&resource_id=${resource.resource_id}&enabled=1" >正常</a>
+                  	</c:otherwise>
+                  </c:choose>
                   </td>
                 </tr>
                </c:forEach>

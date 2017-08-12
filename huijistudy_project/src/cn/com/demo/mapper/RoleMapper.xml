@@ -117,4 +117,9 @@
   			sysdate
   	</trim>
   </insert>
+  
+  <!-- 禁用 -->
+  <update id="roleEnable" parameterType="role">
+  	update p_um_role set enabled=#{enabled} where roleid=#{roleid}
+  </update>
 </mapper>

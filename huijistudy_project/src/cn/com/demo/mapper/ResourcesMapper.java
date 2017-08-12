@@ -20,4 +20,6 @@ public interface ResourcesMapper {
 	String getResourceId();
 
 	Resources findResourceById(String resource_id);
+
+	void resourceEnable(Resources resource);
 }

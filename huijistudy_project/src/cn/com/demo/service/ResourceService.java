@@ -70,6 +70,10 @@ public class ResourceService {
 	public void updResource(Resources resource) {
 		resourcesMapper.updResource(resource);
 	}
+
+	public void resourceEnable(Resources resource) {
+		resourcesMapper.resourceEnable(resource);
+	}
 	
 	
 }

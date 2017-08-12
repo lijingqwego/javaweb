@@ -90,4 +90,19 @@ public class RoleController {
 		}
 		return "redirect:/role/roleList.action?currPage=1";
 	}
+	
+	
+	/**
+	 * ½ûÓÃ/Õý³£
+	 * @param roleid
+	 * @return
+	 */
+	@RequestMapping("/roleEnable")
+	public String roleEnable(String currPage,String roleid,Integer enabled){
+		Role role = new Role();
+		role.setRoleid(roleid);
+		role.setEnabled(enabled);
+		roleService.roleEnable(role);
+		return "redirect:/role/roleList.action?currPage="+currPage;
+	}
 }

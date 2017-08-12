@@ -41,9 +41,10 @@ public class UserService {
 
 	/**
 	 * 修改用户信息
-	 * @param user
+	 * @param user-
 	 */
 	public void updUser(User user) {
+		System.out.println("===========user==========="+user);
 		userMapper.updUser(user);
 	}
 
@@ -92,6 +93,14 @@ public class UserService {
 	 */
 	public void updLoginInfo(String username){
 		userMapper.updLoginInfo(username);
+	}
+
+	/**
+	 * 禁用
+	 * @param userid
+	 */
+	public void userEnable(User user) {
+		userMapper.userEnable(user);
 	}
 		
 }

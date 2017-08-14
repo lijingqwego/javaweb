@@ -18,13 +18,13 @@
         <sec:authorize access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_MESSAGE','ROLE_EXAM')">
         <li><a href="${pageContext.request.contextPath }/user/userList.action?currPage=1">用户列表</a></li>
         </sec:authorize>
-        <sec:authorize access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_MESSAGE')">
+        <sec:authorize access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_MESSAGE','ROLE_EXAM')">
         <li><a href="${pageContext.request.contextPath }/role/roleList.action?currPage=1">角色列表</a></li>
         </sec:authorize>
-        <sec:authorize access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_MESSAGE')">
+        <sec:authorize access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_MESSAGE','ROLE_EXAM')">
         <li><a href="${pageContext.request.contextPath }/author/authorList.action?currPage=1">权限列表</a></li>
         </sec:authorize>
-        <sec:authorize access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_MESSAGE')">
+        <sec:authorize access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_MESSAGE','ROLE_EXAM')">
         <li><a href="${pageContext.request.contextPath }/resource/resourceList.action">资源列表</a></li>
       	</sec:authorize>
       </ul>

@@ -71,12 +71,6 @@ $(function(){
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label">操作名称 :</label>
-					<div class="controls">
-						<input type="text" name="functionname" value="${author.functionname}" class="span11"  />
-					</div>
-				</div>
-				<div class="control-group">
 					<label class="control-label">是否禁用 :</label>
 					<div class="controls">
 	                  <input type="radio" value="1" name="enabled" class="span11" ${author.enabled==1 ? "checked='checked'" : "" }/>正常

@@ -49,8 +49,10 @@ public class AuthorityController {
 	
 	@RequestMapping("/updAuthor")
 	public String updAuthor(Authority author,String[] function){
-		String f = StringUtils.appendStr(function);
-		author.setFunction(f);
+		String fun = StringUtils.appendStr(function);
+		String funName=StringUtils.appendName(function);
+		author.setFunction(fun);
+		author.setFunctionname(funName);
 		authorityService.updAuthor(author);
 		
 		return "redirect:/author/authorList.action?currPage=1";
@@ -67,8 +69,10 @@ public class AuthorityController {
 	
 	@RequestMapping("/commAddAuthor")
 	public String commAddAuthor(Authority author,String[] function){
-		String f = StringUtils.appendStr(function);
-		author.setFunction(f);
+		String fun = StringUtils.appendStr(function);
+		String funName=StringUtils.appendName(function);
+		author.setFunction(fun);
+		author.setFunctionname(funName);
 		authorityService.addAuthor(author);
 		return "redirect:/author/authorList.action?currPage=1";
 	}

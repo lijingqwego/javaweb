@@ -7,13 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户信息列表</title>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/css/bootstrap.css">
 </head>
 <body>
-	<div class="container" align="center">
+	<div>
 		<h1>显示所有用户信息</h1>
-		<table class="table table-hover table-bordered">
+		<table width="90%" border="1">
 			<tr>
 				<td>编号</td>
 				<td>姓名</td>

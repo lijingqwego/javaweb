@@ -1,4 +1,4 @@
 ﻿<%@ page language="java" pageEncoding="UTF-8"%>
 <div>
-   <h2>脚Footer</h2>
+   <h5 align="center">Copyright ©1990-2017 SINA Corporation, All Rights Reserved</h5>
 </div>

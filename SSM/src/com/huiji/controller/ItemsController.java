@@ -62,7 +62,7 @@ public class ItemsController {
 	@RequestMapping("/itemsupd")
 	public String updItems(Items items){
 		itemsService.updItemsById(items);
-		return "redirect:itemslist.action";
+		return "redirect:itemslist.action?currPage=1";
 	}
 	
 	/**
@@ -82,7 +82,7 @@ public class ItemsController {
 	@RequestMapping("/commitems")
 	public String commItems(Items items){
 		itemsService.addItems(items);
-		return "redirect:itemslist.action";
+		return "redirect:itemslist.action?currPage=1";
 	}
 	
 	/**
@@ -93,6 +93,6 @@ public class ItemsController {
 	@RequestMapping("/delitems")
 	public String delItems(Long id){
 		itemsService.delItems(id);
-		return "redirect:itemslist.action";
+		return "redirect:itemslist.action?currPage=1";
 	}
 }

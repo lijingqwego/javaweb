@@ -83,18 +83,22 @@ public class UserController {
 	@RequestMapping("/checklogin")
 	public String checkLogin(String username, String password, HttpServletResponse resp,HttpSession session) {
 		try {
-			PrintWriter out = resp.getWriter();
+			
 			User user = new User();
 			user.setUsername(username);
 			user.setPassword(password);
+			
 			User login = userService.login(user);
 			if (login.getUsername().equals(username) && login.getPassword().equals(password)) {
 				session.setAttribute("user", login);
 				return "base.definition";
+			}else{
+				PrintWriter out = resp.getWriter();
+				out.println("用户名或密码错误！请重新输入！");
+				out.flush();
+				out.close();
 			}
-			out.println("用户名或密码错误！请重新输入！");
-			out.flush();
-			out.close();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

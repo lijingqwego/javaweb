@@ -21,17 +21,18 @@ public class UserRoleController {
 	private UserRoleService userRoleService;
 	
 	@RequestMapping("/userOfRole")
-	public ModelAndView userOfRoleList(String userid){
+	public ModelAndView userOfRoleList(String userid,int currPage){
 		List<UserOfRole> list=userRoleService.findUserOfRoleListByUserId(userid);
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("userid", userid);
+		mv.addObject("currPage", currPage);
 		mv.addObject("userOfRoleList", list);
 		mv.setViewName("user.userofrole");
 		return mv;
 	}
 	
 	@RequestMapping("/updUserOfRole")
-	public String updUserOfRole(String userid,HttpServletRequest req){
+	public String updUserOfRole(String userid,int currPage,HttpServletRequest req){
 		//先删除用户的角色
 		userRoleService.delUserOfRoleByUserId(userid);
 		//插入用户关联的角色
@@ -47,7 +48,7 @@ public class UserRoleController {
 			userRoleService.addUserOfRole(userRoleList);
 		}
 		
-		return "redirect:/user/userList.action?currPage=1";
+		return "redirect:/user/userList.action?currPage="+currPage;
 	}
 	
 }

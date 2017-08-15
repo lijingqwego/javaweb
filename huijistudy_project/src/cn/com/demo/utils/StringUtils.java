@@ -2,7 +2,7 @@ package cn.com.demo.utils;
 
 public class StringUtils {
 		
-	public static String appendStr(String[] strArr){
+	public static String appendCode(String[] strArr){
 		String str="";
 		if(strArr!=null){
 			for(String s:strArr){

@@ -111,9 +111,9 @@ function last(){
                   <td>
                   	<c:choose>
                   	<c:when test="${user.enabled==1 }">
-                  		<a class="badge badge-info" href="${pageContext.request.contextPath}/user/findUser.action?userid=${user.userid}" >修改</a>
+                  		<a class="badge badge-info" href="${pageContext.request.contextPath}/user/findUser.action?userid=${user.userid}&currPage=${currPage}" >修改</a>
 	                  	<a class="badge badge-warning" href="${pageContext.request.contextPath}/user/delUser.action?userid=${user.userid}">删除</a>
-	                  	<a class="badge badge-success" href="${pageContext.request.contextPath}/user/userOfRole.action?userid=${user.userid}" >关联角色</a>
+	                  	<a class="badge badge-success" href="${pageContext.request.contextPath}/user/userOfRole.action?userid=${user.userid}&currPage=${currPage}" >关联角色</a>
                   		<a class="badge badge-important" href="${pageContext.request.contextPath}/user/userEnable.action?currPage=${currPage}&userid=${user.userid}&enabled=0">禁用</a>
                   	</c:when>
                   	<c:otherwise>

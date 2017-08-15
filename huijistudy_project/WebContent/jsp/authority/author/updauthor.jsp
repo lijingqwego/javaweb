@@ -38,6 +38,7 @@ $(function(){
 				<div class="control-group">
 					<label class="control-label">权限ID:</label>
 					<div class="controls">
+						<input type="hidden" name="currPage" value="${currPage}">
 						<input type="text" name="authorityid" value="${author.authorityid}" readonly="readonly" class="span11"  />
 					</div>
 				</div>

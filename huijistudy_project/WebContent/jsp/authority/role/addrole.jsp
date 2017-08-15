@@ -6,16 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.7.2.js"></script>
-<script type="text/javascript">
-$(function(){
-	$("#frm").submit(function(){
-		if($("#roleid").val()==''){
-			alert('角色ID不能为空');
-			return false;
-		}
-	});
-});
-</script>
 <title>添加角色信息</title>
 </head>
 <body>
@@ -39,7 +29,7 @@ $(function(){
 				<div class="control-group">
 					<label class="control-label">角色ID:</label>
 					<div class="controls">
-						<input type="text" id="roleid" name="roleid" class="span11"  />
+						<input type="text" readonly="readonly" name="roleid" value="${roleid}" class="span11"  />
 					</div>
 				</div>
 				<div class="control-group">

@@ -29,6 +29,7 @@
              	 	</c:forEach>
              	 	<br><br>
              	 	<input type="hidden" name="authorityid" value="${authorityid}">
+             	 	<input type="hidden" name="currPage" value="${currPage}">
              	 	<input type="submit" class="btn btn-success" value="授权">&nbsp;&nbsp;
              	 	<input type="button" class="btn btn-success" onclick = "window.history.back(-1);" value="返回">
                   </td>

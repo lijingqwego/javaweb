@@ -38,6 +38,14 @@ public class UserService {
 	public User findUserById(String userid) {
 		return userMapper.findUserById(userid);
 	}
+	
+	/**
+	 * 获取用户的id
+	 * @return
+	 */
+	public String getUserId(){
+		return userMapper.getUserId();
+	}
 
 	/**
 	 * 修改用户信息

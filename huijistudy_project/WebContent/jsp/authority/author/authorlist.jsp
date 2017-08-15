@@ -113,9 +113,9 @@ function last(){
                   
                   <c:choose>
                   	<c:when test="${author.enabled==1 }">
-                  		<a class="badge badge-info" href="${pageContext.request.contextPath}/author/findAuthor.action?authorityid=${author.authorityid}" >修改</a>
+                  		<a class="badge badge-info" href="${pageContext.request.contextPath}/author/findAuthor.action?authorityid=${author.authorityid}&currPage=${currPage}" >修改</a>
 	                  	<a class="badge badge-warning" href="${pageContext.request.contextPath}/author/delAuthor.action?authorityid=${author.authorityid}">删除</a>
-	                  	<a class="badge badge-success" href="${pageContext.request.contextPath}/author/authorofres.action?authorityid=${author.authorityid}" >关联资源</a>
+	                  	<a class="badge badge-success" href="${pageContext.request.contextPath}/author/authorofres.action?authorityid=${author.authorityid}&currPage=${currPage}" >关联资源</a>
                   		<a class="badge badge-important" href="${pageContext.request.contextPath}/author/authorEnable.action?currPage=${currPage}&authorityid=${author.authorityid}&enabled=0">禁用</a>
                   	</c:when>
                   	<c:otherwise>

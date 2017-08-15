@@ -28,6 +28,7 @@
 				<div class="control-group">
 					<label class="control-label">角色ID :</label>
 					<div class="controls">
+						<input type="hidden" name="currPage" value="${currPage}">
 						<input type="text" readonly="readonly" name="roleid" value="${role.roleid }" class="span11"  />
 					</div>
 				</div>

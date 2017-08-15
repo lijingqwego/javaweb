@@ -94,4 +94,13 @@ public class RoleService {
 	public void roleEnable(Role role) {
 		roleMapper.roleEnable(role);
 	}
+	
+	
+	/**
+	 * »ñÈ¡½ÇÉ«ID
+	 * @return
+	 */
+	public String getRoleId(){
+		return roleMapper.getRoleId();
+	}
 }

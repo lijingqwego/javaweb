@@ -12,6 +12,8 @@ import cn.com.demo.utils.PageBeanVO;
 public interface UserMapper {
 	
     int delUserByUserid(String userid);
+    
+    String getUserId();
 
     int addUser(User user);
 

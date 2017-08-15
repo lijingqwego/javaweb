@@ -28,7 +28,7 @@
 				<div class="control-group">
 					<label class="control-label">用户ID :</label>
 					<div class="controls">
-						<input type="text" name="userid" class="span11"  />
+						<input type="text" readonly="readonly" name="userid" value="${userid}" class="span11"  />
 					</div>
 				</div>
 				<div class="control-group">

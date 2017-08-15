@@ -20,18 +20,19 @@ public class AuthorityResourceController {
 	@Resource
 	private AuthorityResourceService authorityResourceService;
 	@RequestMapping("/authorofres")
-	public ModelAndView authorResList(String authorityid){
+	public ModelAndView authorResList(String authorityid,int currPage){
 		//System.out.println("=======authorofres====authorityid==============="+authorityid);
 		List<AuthorityOfResources> list = authorityResourceService.findAuthorityOfResourcesById(authorityid);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("authorOfResList", list);
 		mv.addObject("authorityid", authorityid);
+		mv.addObject("currPage", currPage);
 		mv.setViewName("author.authorofres");
 		return mv;
 	}
 	
 	@RequestMapping("/updAuthorOfRes")
-	public String updAuthorOfRes(String authorityid,HttpServletRequest req){
+	public String updAuthorOfRes(String authorityid,int currPage,HttpServletRequest req){
 		//System.out.println("========updAuthorOfRes===authorityid============"+authorityid);
 		//先删除权限的资源
 		authorityResourceService.delAuthorOfResByAuthorityId(authorityid);
@@ -48,6 +49,6 @@ public class AuthorityResourceController {
 			authorityResourceService.addAuthorOfResources(authResList);
 		}
 		
-		return "redirect:/author/authorList.action?currPage=1";
+		return "redirect:/author/authorList.action?currPage="+currPage;
 	}
 }

@@ -40,5 +40,11 @@ public interface RoleMapper {
 	 */
 	void roleEnable(Role role);
 	
+	/**
+	 * »ñÈ¡½ÇÉ«ID
+	 * @return
+	 */
+	String getRoleId();
+	
     
 }

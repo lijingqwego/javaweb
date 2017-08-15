@@ -105,9 +105,9 @@ function last(){
                   <td>
                   <c:choose>
                   	<c:when test="${role.enabled==1 }">
-                  		<a class="badge badge-info" href="${pageContext.request.contextPath}/role/findRole.action?roleid=${role.roleid}" >修改</a>
+                  		<a class="badge badge-info" href="${pageContext.request.contextPath}/role/findRole.action?roleid=${role.roleid}&currPage=${currPage}" >修改</a>
 	                  	<a class="badge badge-warning" href="${pageContext.request.contextPath}/role/delRole.action?roleid=${role.roleid}">删除</a>
-	                  	<a class="badge badge-success" href="${pageContext.request.contextPath}/role/roleOfAuthor.action?roleid=${role.roleid}" >关联权限</a>
+	                  	<a class="badge badge-success" href="${pageContext.request.contextPath}/role/roleOfAuthor.action?roleid=${role.roleid}&currPage=${currPage}" >关联权限</a>
                   		<a class="badge badge-important" href="${pageContext.request.contextPath}/role/roleEnable.action?currPage=${currPage}&roleid=${role.roleid}&enabled=0">禁用</a>
                   	</c:when>
                   	<c:otherwise>

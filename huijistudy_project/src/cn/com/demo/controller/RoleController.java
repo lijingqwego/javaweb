@@ -44,13 +44,15 @@ public class RoleController {
 	}
 	
 	@RequestMapping("/findRole")
-	public ModelAndView findRole(String roleid){
+	public ModelAndView findRole(String roleid,int currPage){
 		
 		Role role = roleService.findRoleById(roleid);
 		
 		ModelAndView mv=new ModelAndView();
 		
 		mv.addObject("role", role);
+		
+		mv.addObject("currPage", currPage);
 		
 		mv.setViewName("role.updRole");
 		
@@ -59,18 +61,20 @@ public class RoleController {
 	
 	
 	@RequestMapping("/updRole")
-	public String updRole(Role role){
+	public String updRole(Role role,int currPage){
 		
 		roleService.updRole(role);
 			
-		return "redirect:/role/roleList.action?currPage=1";
+		return "redirect:/role/roleList.action?currPage="+currPage;
 	}
 	
 	@RequestMapping("/addRole")
 	public ModelAndView addRole(){
 		
-		ModelAndView mv = new ModelAndView();
+		String roleid = roleService.getRoleId();
 		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("roleid", roleid);
 		mv.setViewName("role.addRole");
 		
 		return mv;

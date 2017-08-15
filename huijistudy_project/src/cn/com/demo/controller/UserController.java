@@ -62,7 +62,9 @@ public class UserController {
 	 */
 	@RequestMapping("/addUser")
 	public ModelAndView addUser(){
+		String userid = userService.getUserId();
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("userid", userid);
 		mv.setViewName("user.addUser");
 		return mv;
 	}
@@ -83,11 +85,13 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/findUser")
-	public ModelAndView findUser(String userid){
+	public ModelAndView findUser(String userid,int currPage){
 		
 		User user = userService.findUserById(userid);
 		
 		ModelAndView mv=new ModelAndView();
+		
+		mv.addObject("currPage", currPage);
 		
 		mv.addObject("user", user);
 		
@@ -97,12 +101,12 @@ public class UserController {
 	}
 	
 	@RequestMapping("/updUser")
-	public String updUser(User user){
+	public String updUser(User user,int currPage){
 //		Integer userflag = user.getUserflag();
-//		System.out.println("--------------------"+userflag);
+//		System.out.println("--------------------"+currPage);
 		userService.updUser(user);
 		
-		return "redirect:/user/userList.action?currPage=1";
+		return "redirect:/user/userList.action?currPage="+currPage;
 	}
 	
 	/**

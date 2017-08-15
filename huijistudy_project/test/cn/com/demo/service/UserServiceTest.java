@@ -27,6 +27,13 @@ public class UserServiceTest {
 	}
 
 	@Test
+	public void testGetUserId() {
+		UserService service = factory.getBean(UserService.class);
+		String userid = service.getUserId();
+		System.out.println(userid+"=============================");
+	}
+	
+	@Test
 	public void testFindUserById() {
 		fail("Not yet implemented");
 	}
@@ -38,7 +45,12 @@ public class UserServiceTest {
 
 	@Test
 	public void testAddUser() {
-		fail("Not yet implemented");
+		UserService service = factory.getBean(UserService.class);
+		User user = new User();
+		user.setLoginid("3");
+		user.setUsername("lj");
+		user.setPassword("123");
+		service.addUser(user);
 	}
 
 	@Test

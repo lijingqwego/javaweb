@@ -21,17 +21,18 @@ public class RoleAuthorityController {
 	private RoleAuthorityService roleAuthorityService; 
 	
 	@RequestMapping("/roleOfAuthor")
-	public ModelAndView userOfRoleList(String roleid){
+	public ModelAndView userOfRoleList(String roleid,int currPage){
 		List<RoleOfAuthority> list=roleAuthorityService.findRoleOfAuthorByRoleId(roleid);
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("roleid", roleid);
+		mv.addObject("currPage", currPage);
 		mv.addObject("roleOfAuthorList", list);
 		mv.setViewName("role.roleofauthor");
 		return mv;
 	}
 	
 	@RequestMapping("/updRoleOfAuthor")
-	public String updRoleOfAuthor(String roleid,HttpServletRequest req){
+	public String updRoleOfAuthor(String roleid,int currPage,HttpServletRequest req){
 		//先删除用户的角色
 		roleAuthorityService.delRoleOfAuthorByRoleId(roleid);
 		//插入用户关联的角色
@@ -47,6 +48,6 @@ public class RoleAuthorityController {
 			roleAuthorityService.addRoleOfAuthor(roleAuthorList);
 		}
 		
-		return "redirect:/role/roleList.action?currPage=1";
+		return "redirect:/role/roleList.action?currPage="+currPage;
 	}
 }

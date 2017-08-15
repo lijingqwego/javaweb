@@ -122,4 +122,9 @@
   <update id="roleEnable" parameterType="role">
   	update p_um_role set enabled=#{enabled} where roleid=#{roleid}
   </update>
+  
+  <!-- 获取角色id -->
+  <select id="getRoleId" parameterType="String" resultType="String">
+  	select to_number(max(roleid))+1 from p_um_role 
+  </select>
 </mapper>

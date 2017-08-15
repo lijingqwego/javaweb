@@ -26,10 +26,16 @@
 		<div class="widget-content nopadding">
 			<form action="${pageContext.request.contextPath }/user/updUser.action" method="post" class="form-horizontal">
 				<div class="control-group">
+					<label class="control-label">用户ID :</label>
+					<div class="controls">
+						<input type="hidden" name="currPage" value="${currPage}">
+						<input type="text" name="userid" readonly="readonly" value="${user.userid }">
+					</div>
+				</div>
+				<div class="control-group">
 					<label class="control-label">账号 :</label>
 					<div class="controls">
-						<input type="hidden" name="userid" value="${user.userid }">
-						<input type="text" name="loginid" value="${user.loginid }" class="span11"  />
+						<input type="text" name="loginid" readonly="readonly" value="${user.loginid }" class="span11"  />
 					</div>
 				</div>
 				<div class="control-group">

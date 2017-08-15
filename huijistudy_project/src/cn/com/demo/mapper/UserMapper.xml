@@ -48,6 +48,11 @@
   <delete id="delUserByUserid" parameterType="java.lang.String">
     delete from p_um_user where userid =#{_parameter}
   </delete>
+  
+  <!-- 获取用户id -->
+  <select id="getUserId" resultType="String">
+	  select to_char(sysdate,'yyyymmdd')||seq_user_id.nextval from dual
+  </select>
   <!-- 插入用户 -->
   <insert id="addUser" parameterType="user">
     insert into p_um_user

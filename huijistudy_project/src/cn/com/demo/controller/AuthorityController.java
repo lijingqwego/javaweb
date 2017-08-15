@@ -38,24 +38,25 @@ public class AuthorityController {
 	}
 	
 	@RequestMapping("/findAuthor")
-	public ModelAndView findAuthor(String authorityid){
+	public ModelAndView findAuthor(String authorityid,int currPage){
 		Authority author = authorityService.findAuthorById(authorityid);
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("author", author);
+		mv.addObject("currPage", currPage);
 		mv.setViewName("author.updauthor");
 		return mv;
 	}
 	
 	
 	@RequestMapping("/updAuthor")
-	public String updAuthor(Authority author,String[] function){
-		String fun = StringUtils.appendStr(function);
+	public String updAuthor(Authority author,int currPage,String[] function){
+		String fun = StringUtils.appendCode(function);
 		String funName=StringUtils.appendName(function);
 		author.setFunction(fun);
 		author.setFunctionname(funName);
 		authorityService.updAuthor(author);
 		
-		return "redirect:/author/authorList.action?currPage=1";
+		return "redirect:/author/authorList.action?currPage="+currPage;
 	}
 	
 	@RequestMapping("/getAuthorId")
@@ -69,7 +70,7 @@ public class AuthorityController {
 	
 	@RequestMapping("/commAddAuthor")
 	public String commAddAuthor(Authority author,String[] function){
-		String fun = StringUtils.appendStr(function);
+		String fun = StringUtils.appendCode(function);
 		String funName=StringUtils.appendName(function);
 		author.setFunction(fun);
 		author.setFunctionname(funName);

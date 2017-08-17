@@ -22,4 +22,14 @@ public class EmployeeService {
 	public List<Employee> getAll() {
 		return employeeMapper.selectByExampleWithDept(null);
 	}
+
+	public void addEmp(Employee emp) {
+		Long empId = employeeMapper.selectEmpId();
+		emp.setEmpId(empId);
+		employeeMapper.insertSelective(emp);
+	}
+
+	public void delEmp(Long empId) {
+		employeeMapper.deleteByPrimaryKey(empId);
+	}
 }

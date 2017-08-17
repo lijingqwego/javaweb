@@ -255,4 +255,8 @@
       D_ID = #{dId,jdbcType=DECIMAL}
     where EMP_ID = #{empId,jdbcType=DECIMAL}
   </update>
+  
+  <select id="selectEmpId" resultType="Long">
+  	select max(emp_id)+1 from tbl_emp
+  </select>
 </mapper>

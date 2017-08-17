@@ -1,7 +1,5 @@
 package com.huiji.test;
 
-import java.util.UUID;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -11,7 +9,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.huiji.dao.DepartmentMapper;
 import com.huiji.dao.EmployeeMapper;
-import com.huiji.po.Employee;
 
 /**
  * 测试dao层
@@ -45,12 +42,15 @@ public class MapperTest {
 		EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
 		
 		
-		for(long i=1;i<=30;i++){
-			String uid=UUID.randomUUID().toString().substring(0, 5)+i;
-			mapper.insert(new Employee(i, uid, "男", uid+"@163.com",1L));
-		}
+//		for(long i=1;i<=30;i++){
+//			String uid=UUID.randomUUID().toString().substring(0, 5)+i;
+//			mapper.insert(new Employee(i, uid, "男", uid+"@163.com",1L));
+//		}
+//		
+//		System.out.println("批量添加完成！");
 		
-		System.out.println("批量添加完成！");
+		Long id = mapper.selectEmpId();
+		System.out.println(id);
 	}
 
 }

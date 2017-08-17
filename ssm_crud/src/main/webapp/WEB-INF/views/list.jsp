@@ -14,17 +14,18 @@
 <script src="${APP_PATH}/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
+
 	<div class="container">
 		<!-- title -->
 		<div class="row">
 			<div class="col-md-12">
-				<h1>SSM-CRUD</h1>
+				<h1>员工列表信息</h1>
 			</div>
 		</div>
 		<!-- button -->
 		<div class="row">
 			<div class="col-md-4 col-md-offset-8">
-				<button class="btn btn-primary">新增</button>
+				<button class="btn btn-primary" id="emp_add">新增</button>
 				<button class="btn btn-danger">删除</button>
 			</div>
 		</div>
@@ -51,7 +52,7 @@
 							<button class="btn btn-primary btn-sm">
 							<span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑
 							</button>
-							<button class="btn btn-danger btn-sm">
+							<button class="btn btn-danger btn-sm" onclick="javascript:empdel(${emp.empId})">
 							<span class="glyphicon glyphicon-trash"></span>&nbsp;删除
 							</button>
 						</td>
@@ -98,7 +99,34 @@
 				   </ul>
 				</nav>
 			</div>
+			<!--  -->
 		</div>
+		<!-- pageinfo end  -->
+		
 	</div>
+
+	<script type="text/javascript">
+		$(function(){
+			$("#emp_add").click(function(){
+				window.location.href="${APP_PATH}/add";
+			});
+		});
+	</script>
+	
+	<script type="text/javascript">
+		function empdel(empId){
+			if(confirm("确定要删除该员工？")){
+				$.ajax({
+					type:"delete",
+					url:"${APP_PATH}/del?empId="+empId,
+					success:function(result){
+						alert(result.msg);
+						window.location.reload();
+					}
+				});
+			}
+		}
+	</script>
+
 </body>
 </html>

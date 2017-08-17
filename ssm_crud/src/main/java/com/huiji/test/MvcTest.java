@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.github.pagehelper.PageInfo;
+import com.huiji.po.Department;
 import com.huiji.po.Employee;
 
 /**
@@ -67,5 +68,18 @@ public class MvcTest {
 		for(Employee emp:list){
 			System.out.println(emp.getEmpId()+"========>"+emp.getEmpName());
 		}
+	}
+	
+	@Test
+	public void testAdd() throws Exception{
+		//模拟请求，拿到返回值
+		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/add")).andReturn();
+		//获取请求
+		MockHttpServletRequest request = result.getRequest();
+		
+		@SuppressWarnings("unchecked")
+		List<Department> depts = (List<Department>) request.getAttribute("depts");
+		
+		System.out.println(depts.get(0).getDeptName()+"==========>"+depts.get(0).getDeptId());
 	}
 }

@@ -45,7 +45,7 @@
 			<property name="basePackage" value="com.huiji.dao"></property>
 		</bean>
 		
-		<!-- 配置一个可以执行批量删除的SQLSession -->
+		<!-- 配置一个可以执行批量处理的SQLSession -->
 		<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 			<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 			<constructor-arg name="executorType" value="BATCH"></constructor-arg>

@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.huiji.po.Department;
 import com.huiji.po.Employee;
 import com.huiji.po.Msg;
+import com.huiji.service.DepartmentService;
 import com.huiji.service.EmployeeService;
 
 @Controller
@@ -20,6 +22,9 @@ public class EmployeeController {
 	
 	@Autowired
 	EmployeeService employeeService;
+	
+	@Autowired
+	DepartmentService departmentService;
 	
 	/**
 	 * 需要导入jackson包
@@ -56,5 +61,26 @@ public class EmployeeController {
 		//将PageInfo传入给页面
 		model.addAttribute("pageInfo", pageInfo);
 		return "list";
+	}
+	
+	
+	@RequestMapping("/add")
+	public String addEmp(Model model){
+		List<Department> depts = departmentService.getDept();
+		model.addAttribute("depts", depts);
+		return "add";
+	}
+	
+	@RequestMapping("/comAdd")
+	public String comAddEmp(Employee emp){
+		employeeService.addEmp(emp);
+		return "redirect:/emps";
+	}
+	
+	@RequestMapping("/del")
+	@ResponseBody
+	public Msg delEmp(@RequestParam(value="empId")Long empId){
+		employeeService.delEmp(empId);
+		return Msg.success();
 	}
 }

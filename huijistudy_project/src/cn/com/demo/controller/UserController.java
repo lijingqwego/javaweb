@@ -103,8 +103,8 @@ public class UserController {
 	
 	@RequestMapping("/updUser")
 	public String updUser(User user,int currPage){
-		System.out.println("=====currPage==========>"+currPage);
-		System.out.println(user);
+//		System.out.println("=====currPage==========>"+currPage);
+//		System.out.println(user);
 //		Integer userflag = user.getUserflag();
 //		System.out.println("--------------------"+currPage);
 		userService.updUser(user);

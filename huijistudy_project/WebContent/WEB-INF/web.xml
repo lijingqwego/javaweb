@@ -1,27 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>huijistudy_project</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
-  
-  <!--核心过滤器  -->
-  <!-- 配置springsecurity安全拦截器 -->
-  <!-- 配置spring安全的过滤器，因为所有的资源都要经过这个过滤器，所以必须配置在dispatcherservlet之前 -->
-  <filter>
-  	<filter-name>springSecurityFilterChain</filter-name>
-  	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-  </filter>
-  <filter-mapping>
-  	<filter-name>springSecurityFilterChain</filter-name>
-  	<url-pattern>/*</url-pattern>
-  </filter-mapping>
-  
+      
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
@@ -41,6 +21,21 @@
     <servlet-name>dispatcherServlet</servlet-name>
     <url-pattern>*.action</url-pattern>
   </servlet-mapping>
+  
+  
+   <!--核心过滤器  -->
+  <!-- 配置springsecurity安全拦截器 -->
+  <!-- 配置spring安全的过滤器，因为所有的资源都要经过这个过滤器，所以必须配置在dispatcherservlet之前 -->
+  <filter>
+  	<filter-name>springSecurityFilterChain</filter-name>
+  	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>springSecurityFilterChain</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  
   <filter>
     <filter-name>characterencoding</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -53,4 +48,8 @@
     <filter-name>characterencoding</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>/index.jsp</welcome-file>
+  </welcome-file-list>
 </web-app>

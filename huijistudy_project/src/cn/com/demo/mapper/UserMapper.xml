@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.com.demo.mapper.UserMapper">
 	<!-- 根据用户名获取用户 -->
-	<select id="findUserByUsername" parameterType="java.lang.String" resultType="userCustom">
-		select userid,username,password from p_um_user where username=#{_parameter}
+	<select id="findUserByLoginid" parameterType="java.lang.String" resultType="userCustom">
+		select userid,username,loginid,password from p_um_user where loginid=#{_parameter}
 	</select>
 
 	<select id="findAuthorListByUserId" parameterType="java.lang.String" resultType="authority">
@@ -124,18 +124,13 @@
     </set>
     where userid = #{userid}
   </update>
-  
-  	<!-- 用户登录 -->
-	<select id="findUserByNameAndPass" parameterType="java.lang.String" resultType="user">
-		select * from p_um_user where username=#{username} and password=#{password}
-	</select>
-	
+  	
 	<!-- 登录成功之后，添加登录时间和次数+1 -->
 	<update id="updLoginInfo" parameterType="java.lang.String">
 		update p_um_user set 
-		logincount=nvl((select logincount from p_um_user where username=#{_parameter}),0)+1,
+		logincount=nvl((select logincount from p_um_user where userid=#{_parameter}),0)+1,
 		loginlasttime=sysdate 
-		where username=#{_parameter}
+		where userid=#{_parameter}
 	</update>
 	
 	<!-- 禁用 /正常-->

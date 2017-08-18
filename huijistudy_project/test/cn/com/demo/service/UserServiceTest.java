@@ -35,9 +35,6 @@ public class UserServiceTest {
 	
 	@Test
 	public void testLoginUser() {
-		UserService service = factory.getBean(UserService.class);
-		User user = service.loginUser("Àî¾§", "21232f297a57a5a743894a0e4a801fc3");
-		System.out.println("loginUser===>"+user);
 	}
 	
 	@Test

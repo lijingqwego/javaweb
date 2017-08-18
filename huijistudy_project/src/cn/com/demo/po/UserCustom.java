@@ -13,6 +13,7 @@ public class UserCustom implements UserDetails{
 	private static final long serialVersionUID = 3129223776015843119L;
 
 	private String userid;
+	private String loginid;
     private String username; 
     private String password; 
 	
@@ -65,6 +66,14 @@ public class UserCustom implements UserDetails{
 		this.userid = userid;
 	}
 
+	public String getLoginid() {
+		return loginid;
+	}
+
+	public void setLoginid(String loginid) {
+		this.loginid = loginid;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -79,6 +88,12 @@ public class UserCustom implements UserDetails{
 
 	public void setPassword(String password) {
 		this.password = password;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return "UserCustom [userid=" + userid + ", loginid=" + loginid + ", username=" + username + ", password="
+				+ password + ", authorityList=" + authorityList + "]";
+	}
 	
 }

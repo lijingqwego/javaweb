@@ -88,8 +88,8 @@
          </definition>
              
           <!-- 退出登录-->
-    <definition name="base.logout" template="/jsp/login.jsp">
-     </definition>
+	    <definition name="base.logout" template="/jsp/login.jsp">
+	     </definition>
               
      
     <!-- ui页面案例模板 -->

@@ -21,16 +21,16 @@ public class AuthorUserService implements UserDetailsService{
 	private UserMapper userMapper;
 	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String loginid) throws UsernameNotFoundException {
 //		System.out.println("=======================username==========="+username);
 		//根据username获取User
 		try {
-			username=new String(username.getBytes("iso-8859-1"),"utf-8");
+			loginid=new String(loginid.getBytes("iso-8859-1"),"utf-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		
-		UserCustom userCustom = userMapper.findUserByUsername(username);
+		UserCustom userCustom = userMapper.findUserByLoginid(loginid);
 		//取出userid
 		String userid = userCustom.getUserid();
 //		System.out.println("=======================userid================="+userid);

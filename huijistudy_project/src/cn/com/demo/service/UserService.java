@@ -54,7 +54,7 @@ public class UserService {
 	 */
 	public void updUser(User user) {
 		//System.out.println("===========user==========="+user);
-		String md5Password = MD5Config.md5(user.getPassword());
+		String md5Password = MD5Config.md5_SystemWideSaltSource(user.getPassword(),user.getLoginid());
 		user.setPassword(md5Password);
 		userMapper.updUser(user);
 	}
@@ -64,7 +64,7 @@ public class UserService {
 	 * @param user
 	 */
 	public void addUser(User user) {
-		String md5Password = MD5Config.md5(user.getPassword());
+		String md5Password = MD5Config.md5_SystemWideSaltSource(user.getPassword(),user.getLoginid());
 		user.setPassword(md5Password);
 		userMapper.addUser(user);
 	}
@@ -88,16 +88,6 @@ public class UserService {
 		List<User> list = userMapper.findUserListByPage(vo);
 		vo.setList(list);
 		return vo;
-	}
-
-	/**
-	 * 用户登录（将输入登用户名和密码进行匹对，如果可以查到数据就说明等成功，否则登录失败）
-	 * @param username
-	 * @param password
-	 * @return
-	 */
-	public User loginUser(String username, String password) {
-		return userMapper.findUserByNameAndPass(username, password);
 	}
 	
 	/**

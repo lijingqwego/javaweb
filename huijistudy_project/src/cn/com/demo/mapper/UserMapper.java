@@ -25,11 +25,9 @@ public interface UserMapper {
     
     List<User> findUserListByPage(PageBeanVO pageBean);
 
-	User findUserByNameAndPass(@Param("username")String username, @Param("password")String password);
+	void updLoginInfo(String loginid);
 	
-	void updLoginInfo(String username);
-	
-	UserCustom findUserByUsername(String username);
+	UserCustom findUserByLoginid(String loginid);
 	
 	List<Authority> findAuthorListByUserId(String userid);
 

@@ -5,10 +5,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.js"></script>
 <script type="text/javascript">
 $(function(){
-	function loadPage(currPage){
-		var url="${pageContext.request.contextPath }/user/userList.action?currPage="+currPage+"&userid="+$("#userid").val()+"&username="+$("#username").val();
-		window.location.href=url;
-	};
 	/*批量删除*/
 	$("#del_model").click(function() { 
 		if(confirm("确定要删除所选项目？")){
@@ -35,7 +31,7 @@ $(function(){
 </script>
 <script type="text/javascript">
 function loadPage(currPage){
-	var url="http://localhost:8080"+"${pageContext.request.contextPath }/user/userList.action?currPage="+currPage+"&userid="+$("#userid").val()+"&username="+$("#username").val();
+	var url="${pageContext.request.contextPath }/user/userList.action?currPage="+currPage+"&userid="+$("#userid").val()+"&username="+$("#username").val();
 	window.location.href=url;
 };
 </script>

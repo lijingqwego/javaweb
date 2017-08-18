@@ -33,7 +33,7 @@
           <authentication-manager>
           	<authentication-provider user-service-ref="authorUserService">
           		<password-encoder ref="passwordEncoder">
-		        <!-- 用户名做为盐值 -->
+		        <!-- 登录ID做为盐值 -->
                  <salt-source user-property="loginid" />
 		    	</password-encoder>
           	</authentication-provider>

@@ -2,8 +2,6 @@ package cn.com.demo.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import cn.com.demo.po.Authority;
 import cn.com.demo.po.User;
 import cn.com.demo.po.UserCustom;

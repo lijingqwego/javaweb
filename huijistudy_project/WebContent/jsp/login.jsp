@@ -12,13 +12,12 @@
         <link href="${pageContext.request.contextPath }/font-awesome/css/font-awesome.css" rel="stylesheet" />
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 		<script src="${pageContext.request.contextPath }/js/jquery.min.js"></script>  
-        <%-- <script src="${pageContext.request.contextPath }/js/matrix.login2.js"></script>  --%>
 		
     </head>
     <body>
         <div id="loginbox">            
             <form class="form-vertical" action="${pageContext.request.contextPath }/login.action" method="post"  >
-				 <div class="control-group normal_text"> 
+				 <div class="control-group normal_text">
 				  <div id="message" >输入用户名和密码继续... </div>
 				  </div>
                 <div class="control-group">

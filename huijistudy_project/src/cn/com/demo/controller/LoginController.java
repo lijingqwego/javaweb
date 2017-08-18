@@ -41,8 +41,8 @@ public class LoginController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value="/loginOt")
-	public String loginOt(HttpSession session){
+	@RequestMapping(value="/loginOut")
+	public String loginOut(HttpSession session){
 		if(session!=null){
 			session.removeAttribute("user");
 			session.invalidate();

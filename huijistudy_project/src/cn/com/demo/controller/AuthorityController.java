@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.com.demo.po.Authority;
 import cn.com.demo.service.AuthorityService;
 import cn.com.demo.utils.PageBeanVO;
-import cn.com.demo.utils.StringUtils;
+import cn.com.demo.utils.AuthorityFunctionUtils;
 
 @RequestMapping("/author")
 @Controller
@@ -51,8 +51,8 @@ public class AuthorityController {
 	
 	@RequestMapping("/updAuthor")
 	public String updAuthor(Authority author,int currPage,String[] function){
-		String fun = StringUtils.appendCode(function);
-		String funName=StringUtils.appendName(function);
+		String fun = AuthorityFunctionUtils.appendCode(function);
+		String funName=AuthorityFunctionUtils.appendName(function);
 		author.setFunction(fun);
 		author.setFunctionname(funName);
 		authorityService.updAuthor(author);
@@ -71,8 +71,8 @@ public class AuthorityController {
 	
 	@RequestMapping("/commAddAuthor")
 	public String commAddAuthor(Authority author,String[] function){
-		String fun = StringUtils.appendCode(function);
-		String funName=StringUtils.appendName(function);
+		String fun = AuthorityFunctionUtils.appendCode(function);
+		String funName=AuthorityFunctionUtils.appendName(function);
 		author.setFunction(fun);
 		author.setFunctionname(funName);
 		authorityService.addAuthor(author);

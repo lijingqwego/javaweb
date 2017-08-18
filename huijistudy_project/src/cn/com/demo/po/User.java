@@ -5,7 +5,7 @@ import java.util.Date;
 public class User{
 		
 	private String userid;
-    private String loginid; 
+    private String loginid;
     private String username; 
     private String password; 
     private Integer usertype; 

@@ -1,6 +1,6 @@
 package cn.com.demo.utils;
 
-public class StringUtils {
+public class AuthorityFunctionUtils {
 		
 	public static String appendCode(String[] strArr){
 		String str="";

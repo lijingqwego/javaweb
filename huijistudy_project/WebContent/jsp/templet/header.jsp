@@ -30,6 +30,6 @@
     </li>
     
     <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
-    <li class=""><a title="" href="${pageContext.request.contextPath }/loginOt.action"><i class="icon icon-share-alt"></i> <span class="text">退出登录</span></a></li>
+    <li class=""><a title="" href="${pageContext.request.contextPath }/loginOut.action"><i class="icon icon-share-alt"></i> <span class="text">退出登录</span></a></li>
   </ul>
 </div>

@@ -7,7 +7,7 @@
   </listener>
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:spring/application-*.xml,classpath:web/application-*.xml,classpath:web/springsecurity.xml</param-value>
+    <param-value>classpath:spring/application-*.xml,classpath:web/spring-*.xml</param-value>
   </context-param>
   <servlet>
     <servlet-name>dispatcherServlet</servlet-name>

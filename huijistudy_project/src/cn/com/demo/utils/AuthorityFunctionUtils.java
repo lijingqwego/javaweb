@@ -1,5 +1,8 @@
 package cn.com.demo.utils;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class AuthorityFunctionUtils {
 		
 	public static String appendCode(String[] strArr){
@@ -15,27 +18,36 @@ public class AuthorityFunctionUtils {
 	
 	public static String appendName(String[] strArr){
 		String str="";
-		if(strArr!=null){
-			for(String s:strArr){
-				if(s.equals("1")){
-					str=str+"增加"+",";
-				}
-				if(s.equals("2")){
-					str=str+"删除"+",";
-				}
-				if(s.equals("3")){
-					str=str+"修改"+",";
-				}
-				if(s.equals("4")){
-					str=str+"查看"+",";
-				}
-				if(s.equals("5")){
-					str=str+"授权"+",";
+		
+		/*if(strArr!=null){
+			for(int i=0;i<Function.values().length;i++){
+				for(int j=0;j<strArr.length;j++){
+					if(strArr[j].equals(String.valueOf(i+1))){
+						str=str+Function.values()[i].getValue()+",";
+					}
 				}
 			}
 			str=str.substring(0, str.length()-1);
+		}*/
+		
+		List<String> list = Arrays.asList(strArr);
+		Function[] functions = Function.values();
+		if(strArr!=null){
+			for(int i=0;i<functions.length;i++){
+				if(list.contains(functions[i].getKey())){
+					str=str+functions[i].getValue()+",";
+				}
+			}
 		}
+		str=str.substring(0, str.length()-1);
+		
 		return str;
+	}
+	
+	public static void main(String[] args) {
+		String[] arr={"1","5","2"};
+		String string = appendName(arr);
+		System.out.println(string);
 	}
 	
 }

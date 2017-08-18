@@ -1,5 +1,6 @@
 package cn.com.demo.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -23,13 +24,21 @@ public class AuthorUserService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //		System.out.println("=======================username==========="+username);
 		//根据username获取User
+		try {
+			username=new String(username.getBytes("iso-8859-1"),"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
 		UserCustom userCustom = userMapper.findUserByUsername(username);
 		//取出userid
 		String userid = userCustom.getUserid();
 //		System.out.println("=======================userid================="+userid);
 		//获取用户的权限
 		List<Authority> authorList = userMapper.findAuthorListByUserId(userid);
-//		System.out.println("======================code==============="+authorList.get(0).getCode());
+		for(Authority a:authorList){
+		System.out.println("======================code==============="+a.getCode());
+		}
 		//添加用户权限
 		userCustom.setAuthorityList(authorList);
 		

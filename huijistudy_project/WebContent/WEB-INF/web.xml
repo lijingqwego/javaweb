@@ -11,6 +11,7 @@
   </welcome-file-list>
   
   <!--核心过滤器  -->
+  <!-- 配置springsecurity安全拦截器 -->
   <!-- 配置spring安全的过滤器，因为所有的资源都要经过这个过滤器，所以必须配置在dispatcherservlet之前 -->
   <filter>
   	<filter-name>springSecurityFilterChain</filter-name>

@@ -5,6 +5,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.js"></script>
 <script type="text/javascript">
 $(function(){
+	function loadPage(currPage){
+		var url="${pageContext.request.contextPath }/user/userList.action?currPage="+currPage+"&userid="+$("#userid").val()+"&username="+$("#username").val();
+		window.location.href=url;
+	};
 	/*批量删除*/
 	$("#del_model").click(function() { 
 		if(confirm("确定要删除所选项目？")){
@@ -30,25 +34,11 @@ $(function(){
 });
 </script>
 <script type="text/javascript">
-function first(){
-	var url="${pageContext.request.contextPath }/user/userList.action?currPage=1&userid="+$("#userid").val()+"&username="+$("#username").val();
-	window.location.href=url;
-};
-function previous(){
-	var url="${pageContext.request.contextPath }/user/userList.action?currPage=${currPage-1}&userid="+$("#userid").val()+"&username="+$("#username").val();
-	window.location.href=url;
-};
-function next(){
-	var url="${pageContext.request.contextPath }/user/userList.action?currPage=${currPage+1}&userid="+$("#userid").val()+"&username="+$("#username").val();
-	window.location.href=url;
-};
-function last(){
-	var url="${pageContext.request.contextPath }/user/userList.action?currPage=${totalPage}&userid="+$("#userid").val()+"&username="+$("#username").val();
+function loadPage(currPage){
+	var url="http://localhost:8080"+"${pageContext.request.contextPath }/user/userList.action?currPage="+currPage+"&userid="+$("#userid").val()+"&username="+$("#username").val();
 	window.location.href=url;
 };
 </script>
-<style>
-</style>
 <div id="content">
   <div id="content-header">
     <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Student pages</a> <a href="#" class="current">Info</a> </div>
@@ -68,8 +58,11 @@ function last(){
         </form>
        <!-- begin -->
         <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+            <h5>用户表</h5>
+          </div>
           <div class="widget-content nopadding">
-            <table class="table table-bordered table-striped with-check">
+            <table class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th><input type="checkbox"/></th>
@@ -135,9 +128,9 @@ function last(){
         <p align="center">
 		<c:choose>
 			<c:when test="${currPage!=1 }">
-				<a class="btn btn-info" onclick="javascript:first()">首页</a>
+				<a class="btn btn-info" onclick="javascript:loadPage(1)">首页</a>
 				&nbsp;&nbsp;
-				<a class="btn btn-info" onclick="javascript:previous()" >上一页</a>
+				<a class="btn btn-info" onclick="javascript:loadPage(${currPage-1})" >上一页</a>
 			</c:when>
 			<c:otherwise>
 			<a class="btn btn-info" >首页</a>&nbsp;&nbsp;
@@ -147,9 +140,9 @@ function last(){
 		第 &nbsp;<c:out value="${currPage}"></c:out>&nbsp;页&nbsp;
 		<c:choose>
 			<c:when test="${currPage!=totalPage}">
-				<a class="btn btn-info" onclick="javascript:next()">下一页</a>
+				<a class="btn btn-info" onclick="javascript:loadPage(${currPage+1})">下一页</a>
 				&nbsp;&nbsp;
-				<a class="btn btn-info" onclick="javascript:last()" >尾页</a>
+				<a class="btn btn-info" onclick="javascript:loadPage(${totalPage})" >尾页</a>
 			</c:when>
 			<c:otherwise>
 				<a class="btn btn-info" >下一页</a>&nbsp;&nbsp;

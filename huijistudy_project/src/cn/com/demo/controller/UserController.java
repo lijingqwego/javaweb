@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.demo.po.User;
@@ -15,7 +16,7 @@ public class UserController {
 	@Resource
 	private UserService userService;
 	@RequestMapping("/userList")
-	public ModelAndView userList(int currPage,String userid,String username){
+	public ModelAndView userList(@RequestParam(value="currPage",defaultValue="1")int currPage,String userid,String username){
 		
 		PageBeanVO vo = userService.findUserListByPage(currPage,userid,username);
 		
@@ -39,7 +40,7 @@ public class UserController {
 	@RequestMapping("/delUser")
 	public String delUser(String userid){
 		userService.delUserById(userid);
-		return "redirect:/user/userList.action?currPage=1";
+		return "redirect:/user/userList.action";
 	}
 	
 	/**
@@ -53,7 +54,7 @@ public class UserController {
 		for (int i = 0; i < item.length; i++) { 
 			userService.delUserById(item[i]);
 		} 
-		return "redirect:/user/userList.action?currPage=1";
+		return "redirect:/user/userList.action";
 	}
 	
 	/**
@@ -76,7 +77,7 @@ public class UserController {
 	@RequestMapping("/commAddUser")
 	public String commAddUser(User user){
 		userService.addUser(user);
-		return "redirect:/user/userList.action?currPage=1";
+		return "redirect:/user/userList.action";
 	}
 	
 	/**
@@ -102,6 +103,8 @@ public class UserController {
 	
 	@RequestMapping("/updUser")
 	public String updUser(User user,int currPage){
+		System.out.println("=====currPage==========>"+currPage);
+		System.out.println(user);
 //		Integer userflag = user.getUserflag();
 //		System.out.println("--------------------"+currPage);
 		userService.updUser(user);

@@ -46,4 +46,8 @@
 		<property name="basePackage" value="cn.com.demo.mapper"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
+	
+	<!-- 用户的密码加密或解密 -->
+  <bean id="passwordEncoder"
+   class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
 </beans>

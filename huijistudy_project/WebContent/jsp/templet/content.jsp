@@ -14,7 +14,7 @@
           </div>
           <div class="widget-content">
             <div class="error_ex">
-              <h2>${user.username} 登录成功</h2>
+              <h2>${sessionScope.user.username} 登录成功</h2>
               <a class="btn btn-warning btn-big"  href="#">Back to Home</a> </div>
           </div>
         </div>

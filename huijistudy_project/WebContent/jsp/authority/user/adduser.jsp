@@ -11,7 +11,7 @@
 <div id="content">
 <div id="content-header">
   <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Form elements</a> <a href="#" class="current">Common elements</a> </div>
-  <h1>Common Form Elements</h1>
+  <h1>添加用户信息</h1>
 </div>
 <div class="container-fluid">
   <hr>
@@ -58,8 +58,8 @@
 				<div class="control-group">
 					<label class="control-label">是否是超级用户 :</label>
 					<div class="controls">
-	                  <input type="radio" value="1" name="issys" class="span11" checked="checked"/>是
-	                  <input type="radio" value="0" name="issys" class="span11"/>非
+	                  <input type="radio" value="1" name="issys" class="span11"/>是
+	                  <input type="radio" value="0" name="issys" class="span11" checked="checked"/>非
 					</div>
 				</div>
 				<div class="control-group">

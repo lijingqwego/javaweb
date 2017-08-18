@@ -31,20 +31,8 @@ $(function(){
 });
 </script>
 <script type="text/javascript">
-function first(){
-	var url="${pageContext.request.contextPath }/author/authorList.action?currPage=1&authorityid="+$("#authorityid").val()+"&authorityname="+$("#authorityname").val();
-	window.location.href=url;
-};
-function previous(){
-	var url="${pageContext.request.contextPath }/author/authorList.action?currPage=${currPage-1}&authorityid="+$("#authorityid").val()+"&authorityname="+$("#authorityname").val();
-	window.location.href=url;
-};
-function next(){
-	var url="${pageContext.request.contextPath }/author/authorList.action?currPage=${currPage+1}&authorityid="+$("#authorityid").val()+"&authorityname="+$("#authorityname").val();
-	window.location.href=url;
-};
-function last(){
-	var url="${pageContext.request.contextPath }/author/authorList.action?currPage=${totalPage}&authorityid="+$("#authorityid").val()+"&authorityname="+$("#authorityname").val();
+function loadPage(currPage){
+	var url="${pageContext.request.contextPath }/author/authorList.action?currPage="+currPage+"&authorityid="+$("#authorityid").val()+"&authorityname="+$("#authorityname").val();
 	window.location.href=url;
 };
 </script>
@@ -136,25 +124,25 @@ function last(){
         <p align="center">
 		<c:choose>
 			<c:when test="${currPage!=1 }">
-				<a class="btn btn-info" onclick="javascript:first()">首页</a>
+				<a class="btn btn-info" onclick="javascript:loadPage(1)">首页</a>
 				&nbsp;&nbsp;
-				<a class="btn btn-info" onclick="javascript:previous()" >上一页</a>
+				<a class="btn btn-info" onclick="javascript:loadPage(${currPage-1})" >上一页</a>
 			</c:when>
 			<c:otherwise>
-			<a class="btn btn-info" href="#" >首页</a>&nbsp;&nbsp;
-			<a class="btn btn-info" href="#" >上一页</a>&nbsp;&nbsp;
+			<a class="btn btn-info" >首页</a>&nbsp;&nbsp;
+			<a class="btn btn-info" >上一页</a>&nbsp;&nbsp;
 			</c:otherwise>
 		</c:choose>
 		第 &nbsp;<c:out value="${currPage}"></c:out>&nbsp;页&nbsp;
 		<c:choose>
 			<c:when test="${currPage!=totalPage}">
-				<a class="btn btn-info" onclick="javascript:next()">下一页</a>
+				<a class="btn btn-info" onclick="javascript:loadPage(${currPage+1})">下一页</a>
 				&nbsp;&nbsp;
-				<a class="btn btn-info" onclick="javascript:last()" >尾页</a>
+				<a class="btn btn-info" onclick="javascript:loadPage(${totalPage})" >尾页</a>
 			</c:when>
 			<c:otherwise>
-			<a class="btn btn-info" href="#" >下一页</a>&nbsp;&nbsp;
-			<a class="btn btn-info" href="#" >尾页</a>&nbsp;&nbsp;
+				<a class="btn btn-info" >下一页</a>&nbsp;&nbsp;
+				<a class="btn btn-info" >尾页</a>&nbsp;&nbsp;
 			</c:otherwise>
 		</c:choose>
 		</p>

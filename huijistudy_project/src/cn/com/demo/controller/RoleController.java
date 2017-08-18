@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.demo.po.Role;
@@ -15,7 +16,7 @@ public class RoleController {
 	@Resource
 	private RoleService roleService;
 	@RequestMapping("/roleList")
-	public ModelAndView roleList(int currPage,String roleid,String rolename){
+	public ModelAndView roleList(@RequestParam(value="currPage",defaultValue="1")int currPage,String roleid,String rolename){
 		
 		PageBeanVO pageBean = roleService.findRoleListByPage(currPage, roleid, rolename);
 		
@@ -40,7 +41,7 @@ public class RoleController {
 	@RequestMapping("/delRole")
 	public String delRole(String roleid){
 		roleService.delRoleById(roleid);
-		return "redirect:/role/roleList.action?currPage=1";
+		return "redirect:/role/roleList.action";
 	}
 	
 	@RequestMapping("/findRole")
@@ -85,14 +86,14 @@ public class RoleController {
 		
 		roleService.addRole(role);
 		
-		return "redirect:/role/roleList.action?currPage=1";
+		return "redirect:/role/roleList.action";
 	}
 	@RequestMapping("/delMoreRole")
 	public String delMoreRole(String[] delitems){
 		for(String roleid:delitems){
 			roleService.delRoleById(roleid);
 		}
-		return "redirect:/role/roleList.action?currPage=1";
+		return "redirect:/role/roleList.action";
 	}
 	
 	

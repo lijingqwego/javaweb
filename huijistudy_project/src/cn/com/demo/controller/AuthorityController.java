@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.demo.po.Authority;
@@ -19,7 +20,7 @@ public class AuthorityController {
 	private AuthorityService authorityService;
 	
 	@RequestMapping("/authorList")
-	public ModelAndView authorList(int currPage,String authorityid,String authorityname){
+	public ModelAndView authorList(@RequestParam(value="currPage",defaultValue="1")int currPage,String authorityid,String authorityname){
 		PageBeanVO page = authorityService.findAuthorListByPage(currPage, authorityid, authorityname);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("authorList", page.getList());
@@ -34,7 +35,7 @@ public class AuthorityController {
 	@RequestMapping("/delAuthor")
 	public String delAuthor(String authorityid){
 		authorityService.delAuthorById(authorityid);
-		return "redirect:/author/authorList.action?currPage=1";
+		return "redirect:/author/authorList.action";
 	}
 	
 	@RequestMapping("/findAuthor")
@@ -75,7 +76,7 @@ public class AuthorityController {
 		author.setFunction(fun);
 		author.setFunctionname(funName);
 		authorityService.addAuthor(author);
-		return "redirect:/author/authorList.action?currPage=1";
+		return "redirect:/author/authorList.action";
 	}
 	
 	@RequestMapping("/delMoreAuthor")
@@ -83,7 +84,7 @@ public class AuthorityController {
 		for(String authorityid:delitems){
 			authorityService.delAuthorById(authorityid);
 		}
-		return "redirect:/author/authorList.action?currPage=1";
+		return "redirect:/author/authorList.action";
 	}
 	
 	/**

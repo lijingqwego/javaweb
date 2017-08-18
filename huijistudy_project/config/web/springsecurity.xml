@@ -7,7 +7,12 @@
            http://www.springframework.org/schema/security/spring-security.xsd">
            
            <!-- 1.配置哪些不需要经过spring安全的页面     使用http标签  -->
-           <http pattern="/jsp/login.jsp" security="none"></http>
+           <!-- 配置公共资源，不需要权限 -->
+		    <http pattern="/index.jsp" security="none" />
+		    <http pattern="/jsp/login.jsp" security="none" />
+		    <http pattern="/css/**" security="none"/>
+		    <http pattern="/js/**" security="none"/>
+		    <http pattern="/font-awesome/**" security="none"/>
            
            <!-- 设置 auto-config 自动配置过滤器    --> 
            <http auto-config="true" use-expressions="true">
@@ -20,12 +25,18 @@
            <!-- 系统管理 ROLE_SYSTEM 权限管理 ROLE_AUTHORITY 信息管理   ROLE_MESSAGE   考试管理  ROLE_EXAM -->
            <!-- 定义角色和页面之间的关系，也就是说哪些页面可以访问，如果没有访问权限，提示403 -->
            
+           <intercept-url pattern="/**" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_MESSAGE','ROLE_EXAM')" />
            
            </http>
            
           <!-- 认证管理， 获取用户具有的角色，需要自己编写service来实现，service需要实现UserDetailsService这个接口 -->
           <authentication-manager>
-          	<authentication-provider user-service-ref="authorUserService"></authentication-provider>
+          	<authentication-provider user-service-ref="authorUserService">
+          		<password-encoder ref="passwordEncoder">
+		        <!-- 用户名做为盐值 -->
+                 <!-- <salt-source user-property="username" /> -->
+		    	</password-encoder>
+          	</authentication-provider>
           </authentication-manager>
           
 </beans:beans>

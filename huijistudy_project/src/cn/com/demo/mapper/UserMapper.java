@@ -25,7 +25,7 @@ public interface UserMapper {
     
     List<User> findUserListByPage(PageBeanVO pageBean);
 
-	User loginCheckUser(@Param("username")String username, @Param("password")String password);
+	User findUserByNameAndPass(@Param("username")String username, @Param("password")String password);
 	
 	void updLoginInfo(String username);
 	

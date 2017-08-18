@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import cn.com.demo.mapper.UserMapper;
 import cn.com.demo.mapper.UserRoleMapper;
 import cn.com.demo.po.User;
+import cn.com.demo.utils.MD5Config;
 import cn.com.demo.utils.PageBeanVO;
 
 @Service
@@ -52,7 +53,9 @@ public class UserService {
 	 * @param user-
 	 */
 	public void updUser(User user) {
-		System.out.println("===========user==========="+user);
+		//System.out.println("===========user==========="+user);
+		String md5Password = MD5Config.md5(user.getPassword());
+		user.setPassword(md5Password);
 		userMapper.updUser(user);
 	}
 
@@ -61,6 +64,8 @@ public class UserService {
 	 * @param user
 	 */
 	public void addUser(User user) {
+		String md5Password = MD5Config.md5(user.getPassword());
+		user.setPassword(md5Password);
 		userMapper.addUser(user);
 	}
 	
@@ -91,8 +96,8 @@ public class UserService {
 	 * @param password
 	 * @return
 	 */
-	public User login(String username, String password) {
-		return userMapper.loginCheckUser(username,password);
+	public User loginUser(String username, String password) {
+		return userMapper.findUserByNameAndPass(username, password);
 	}
 	
 	/**

@@ -7,7 +7,7 @@
   </select>
   
   <!-- 获取所有角色的总数 -->
-  <select id="getRoleCount" parameterType="cn.com.demo.utils.PageBeanVO" resultType="Integer">
+  <select id="getRoleCount" parameterType="role" resultType="Integer">
   	select count(*) from p_um_role
   	<where>
   		<if test="roleid != null and roleid != ''">
@@ -20,7 +20,7 @@
   </select>
   
   <!-- 分页条件查询角色 -->
-  <select id="findRoleListByPage" parameterType="cn.com.demo.utils.PageBeanVO" resultType="role">
+  <select id="findRoleListByPage" resultType="role">
   	select t.* from(select rownum rn,r.* from p_um_role r 
 	<where>
 		<if test="roleid != null and roleid != ''">

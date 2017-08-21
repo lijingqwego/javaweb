@@ -1,6 +1,8 @@
 package cn.com.demo.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,7 +12,7 @@ import cn.com.demo.mapper.AuthorityMapper;
 import cn.com.demo.mapper.AuthorityResourceMapper;
 import cn.com.demo.mapper.RoleAuthorityMapper;
 import cn.com.demo.po.Authority;
-import cn.com.demo.utils.PageBeanVO;
+import cn.com.demo.utils.PageBean;
 
 @Service
 public class AuthorityService {
@@ -82,18 +84,16 @@ public class AuthorityService {
 	 * @param authorityname
 	 * @return
 	 */
-	public PageBeanVO findAuthorListByPage(int currPage,String authorityid,String authorityname){
-		PageBeanVO page = new PageBeanVO();
-		page.setCurrPage(currPage);
-		page.setPageSize(3);
-		page.setAuthorityid(authorityid);
-		page.setAuthorityname(authorityname);
-		int count = authorityMapper.getAuthorCount(page);
-		int totalPage=(int) Math.ceil(count*1.0/3);
-		page.setTotalPage(totalPage);
-		List<Authority> list = authorityMapper.findAuthorListByPage(page);
-		page.setList(list);
-		return page;
+	public PageBean findAuthorListByPage(int currPage,int pageSize,Authority authority){
+		int count=authorityMapper.getAuthorCount(authority);
+		PageBean pageBean = new PageBean(currPage,pageSize,count);
+		Map<String,Object> map=new HashMap<>();
+		map.put("currPage", currPage);
+		map.put("pageSize", pageSize);
+		map.put("authority", authority);
+		List<Authority> list = authorityMapper.findAuthorListByPage(map);
+		pageBean.setList(list);
+		return pageBean;
 	}
 
 	public void authorEnable(Authority authority) {

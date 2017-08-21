@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.demo.po.User;
 import cn.com.demo.service.UserService;
-import cn.com.demo.utils.PageBeanVO;
+import cn.com.demo.utils.PageBean;
 @RequestMapping("/user")
 @Controller
 public class UserController {
@@ -17,8 +17,10 @@ public class UserController {
 	private UserService userService;
 	@RequestMapping("/userList")
 	public ModelAndView userList(@RequestParam(value="currPage",defaultValue="1")int currPage,String userid,String username){
-		
-		PageBeanVO vo = userService.findUserListByPage(currPage,userid,username);
+		User user = new User();
+		user.setUserid(userid);
+		user.setUsername(username);
+		PageBean vo = userService.findUserListByPage(currPage,3,user);
 		
 		ModelAndView mv=new ModelAndView();
 		

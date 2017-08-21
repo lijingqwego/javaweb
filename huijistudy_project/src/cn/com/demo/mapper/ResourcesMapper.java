@@ -3,11 +3,8 @@ package cn.com.demo.mapper;
 import java.util.List;
 
 import cn.com.demo.po.Resources;
-import cn.com.demo.utils.PageBeanVO;
 
 public interface ResourcesMapper {
-	
-	List<Resources> findResourceListByPage(PageBeanVO pageBean);
 	
 	void addResource(Resources resource);
 	

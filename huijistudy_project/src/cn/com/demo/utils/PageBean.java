@@ -48,8 +48,20 @@ public class PageBean {
 	public void setList(List<?> list) {
 		this.list = list;
 	}
+	
+	
 	public PageBean() {
 		super();
+	}
+	
+	public PageBean(int currPage,int pageSize,int totalCount){
+		this.currPage=currPage;
+		this.pageSize=pageSize;
+		if(totalCount==0){
+			totalPage=1;
+		}else{
+			this.totalPage=(int) Math.ceil(totalCount*1.0/pageSize);
+		}
 	}
 
 }

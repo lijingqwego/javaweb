@@ -1,9 +1,9 @@
 package cn.com.demo.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.com.demo.po.Role;
-import cn.com.demo.utils.PageBeanVO;
 
 public interface RoleMapper {
 
@@ -19,14 +19,14 @@ public interface RoleMapper {
 	 * 获取所有的角色数量
 	 * @return
 	 */
-	int getRoleCount(PageBeanVO pageBean);
+	int getRoleCount(Role role);
 	
 	/**
 	 * 分页按条件查询角色
 	 * @param pageBean
 	 * @return
 	 */
-	List<Role> findRoleListByPage(PageBeanVO pageBean);
+	List<Role> findRoleListByPage(Map<String, Object> map);
 
 	/**
 	 * 添加角色

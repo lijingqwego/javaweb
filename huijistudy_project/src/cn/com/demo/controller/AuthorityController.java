@@ -9,8 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.demo.po.Authority;
 import cn.com.demo.service.AuthorityService;
-import cn.com.demo.utils.PageBeanVO;
 import cn.com.demo.utils.AuthorityFunctionUtils;
+import cn.com.demo.utils.PageBean;
 
 @RequestMapping("/author")
 @Controller
@@ -21,7 +21,13 @@ public class AuthorityController {
 	
 	@RequestMapping("/authorList")
 	public ModelAndView authorList(@RequestParam(value="currPage",defaultValue="1")int currPage,String authorityid,String authorityname){
-		PageBeanVO page = authorityService.findAuthorListByPage(currPage, authorityid, authorityname);
+		
+		Authority authority=new Authority();
+		authority.setAuthorityid(authorityid);
+		authority.setAuthorityname(authorityname);
+		
+		PageBean page = authorityService.findAuthorListByPage(currPage,3,authority);
+		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("authorList", page.getList());
 		mv.addObject("currPage", currPage);

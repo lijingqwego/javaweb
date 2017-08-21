@@ -1,6 +1,8 @@
 package cn.com.demo.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,7 +12,7 @@ import cn.com.demo.mapper.RoleAuthorityMapper;
 import cn.com.demo.mapper.RoleMapper;
 import cn.com.demo.mapper.UserRoleMapper;
 import cn.com.demo.po.Role;
-import cn.com.demo.utils.PageBeanVO;
+import cn.com.demo.utils.PageBean;
 
 @Service
 public class RoleService {
@@ -69,18 +71,16 @@ public class RoleService {
 	 * @param rolename
 	 * @return
 	 */
-	public PageBeanVO findRoleListByPage(int currPage,String roleid,String rolename){
-		PageBeanVO vo = new PageBeanVO();
-		vo.setPageSize(3);
-		vo.setCurrPage(currPage);
-		vo.setRoleid(roleid);
-		vo.setRolename(rolename);
-		int roleCount = roleMapper.getRoleCount(vo);
-		int totalPage=(int) Math.ceil(roleCount*1.0/3);
-		vo.setTotalPage(totalPage);
-		List<Role> list = roleMapper.findRoleListByPage(vo);
-		vo.setList(list);
-		return vo;
+	public PageBean findRoleListByPage(int currPage,int pageSize,Role role){
+		int count=roleMapper.getRoleCount(role);
+		PageBean pageBean = new PageBean(currPage,pageSize,count);
+		Map<String,Object> map=new HashMap<>();
+		map.put("currPage", currPage);
+		map.put("pageSize", pageSize);
+		map.put("role", role);
+		List<Role> list = roleMapper.findRoleListByPage(map);
+		pageBean.setList(list);
+		return pageBean;
 	}
 
 	/**

@@ -13,7 +13,7 @@
 	</select>
 
 	<!-- 根据条件查询用户表的总数量 -->
-	<select id="getUserCount" parameterType="cn.com.demo.utils.PageBeanVO" resultType="Integer">
+	<select id="getUserCount" parameterType="user" resultType="Integer">
 		select count(*) from p_um_user
 		<where>
 			<if test="userid != null and userid != ''">
@@ -26,7 +26,7 @@
 	</select>
 	
 	<!-- 分页查询 -->
-	<select id="findUserListByPage" parameterType="cn.com.demo.utils.PageBeanVO" resultType="user">
+	<select id="findUserListByPage" resultType="user">
 		select * from (select rownum rn,p_um_user.* from p_um_user
 		<where>
 			<if test="userid != null and userid != ''">

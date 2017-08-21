@@ -1,6 +1,8 @@
 package cn.com.demo.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,7 +12,7 @@ import cn.com.demo.mapper.UserMapper;
 import cn.com.demo.mapper.UserRoleMapper;
 import cn.com.demo.po.User;
 import cn.com.demo.utils.MD5Config;
-import cn.com.demo.utils.PageBeanVO;
+import cn.com.demo.utils.PageBean;
 
 @Service
 public class UserService {
@@ -76,18 +78,16 @@ public class UserService {
 	 * @param username
 	 * @return
 	 */
-	public PageBeanVO findUserListByPage(int currPage,String userid,String username){
-		PageBeanVO vo = new PageBeanVO();
-		vo.setPageSize(3);
-		vo.setCurrPage(currPage);
-		vo.setUsername(username);
-		vo.setUserid(userid);
-		int count = userMapper.getUserCount(vo);
-		int totalPage = (int) Math.ceil(count * 1.0 / 3);
-		vo.setTotalPage(totalPage);
-		List<User> list = userMapper.findUserListByPage(vo);
-		vo.setList(list);
-		return vo;
+	public PageBean findUserListByPage(int currPage,int pageSize,User user){
+		int count=userMapper.getUserCount(user);
+		PageBean pageBean = new PageBean(currPage,pageSize,count);
+		Map<String,Object> map=new HashMap<>();
+		map.put("currPage", currPage);
+		map.put("pageSize", pageSize);
+		map.put("user", user);
+		List<User> list = userMapper.findUserListByPage(map);
+		pageBean.setList(list);
+		return pageBean;
 	}
 	
 	/**

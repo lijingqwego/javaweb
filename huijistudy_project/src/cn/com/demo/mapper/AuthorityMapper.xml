@@ -3,7 +3,7 @@
 <mapper namespace="cn.com.demo.mapper.AuthorityMapper">
 
 	<!-- 统计数量 -->
-	<select id="getAuthorCount" parameterType="cn.com.demo.utils.PageBeanVO" resultType="Integer">
+	<select id="getAuthorCount" parameterType="authority" resultType="Integer">
 		select count(*) from p_um_authority
 		<where>
 			<if test="authorityid != null and authorityid != ''">
@@ -16,7 +16,7 @@
 	</select>
 
 	<!-- 分页查询 -->
-	<select id="findAuthorListByPage" parameterType="cn.com.demo.utils.PageBeanVO" resultType="authority">
+	<select id="findAuthorListByPage" resultType="authority">
 		select t.* from (select rownum rn,a.* from p_um_authority a
 		<where>
 			<if test="authorityid != null and authorityid != ''">

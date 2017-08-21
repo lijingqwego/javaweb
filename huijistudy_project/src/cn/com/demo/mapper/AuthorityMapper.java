@@ -1,9 +1,9 @@
 package cn.com.demo.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.com.demo.po.Authority;
-import cn.com.demo.utils.PageBeanVO;
 
 public interface AuthorityMapper {
     
@@ -19,9 +19,9 @@ public interface AuthorityMapper {
 
 	void addAuthor(Authority author);
 	
-	int getAuthorCount(PageBeanVO pageBean);
+	int getAuthorCount(Authority authority);
 	
-	List<Authority> findAuthorListByPage(PageBeanVO pageBean);
+	List<Authority> findAuthorListByPage(Map<String,Object> map);
 
 	void authorEnable(Authority authority);
 }

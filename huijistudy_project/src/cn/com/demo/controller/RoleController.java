@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.com.demo.po.Role;
 import cn.com.demo.service.RoleService;
-import cn.com.demo.utils.PageBeanVO;
+import cn.com.demo.utils.PageBean;
 @RequestMapping("/role")
 @Controller
 public class RoleController {
@@ -17,8 +17,10 @@ public class RoleController {
 	private RoleService roleService;
 	@RequestMapping("/roleList")
 	public ModelAndView roleList(@RequestParam(value="currPage",defaultValue="1")int currPage,String roleid,String rolename){
-		
-		PageBeanVO pageBean = roleService.findRoleListByPage(currPage, roleid, rolename);
+		Role role=new Role();
+		role.setRoleid(roleid);
+		role.setRolename(rolename);
+		PageBean pageBean = roleService.findRoleListByPage(currPage,3,role);
 		
 		ModelAndView mv=new ModelAndView();
 		

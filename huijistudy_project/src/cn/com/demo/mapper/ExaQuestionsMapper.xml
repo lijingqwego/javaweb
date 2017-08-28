@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.demo.mapper.ExaQuestionsMapper">
+  <!-- 调用存储过程插入题库明细 -->
+	<select id="addQuestionsDetail" parameterType="java.util.Map" statementType="CALLABLE">  
+	    <![CDATA[   
+	        {call pk_exam_test.pro_add_exa_questions_detail(
+	        #{subject_list,mode=IN,jdbcType=CLOB},
+			#{questions_no,mode=IN,jdbcType=VARCHAR},
+			#{state,mode=IN,jdbcType=NUMERIC}
+			)}   
+	    ]]>  
+	    
+    </select>
+    
+    <!-- 查询题库数量 -->
+	<select id="getQuestionsCount" parameterType="exaQuestions" resultType="Integer">
+		select count(*) from t_exa_questions
+		<where>
+			<if test="questions_no != null and questions_no != ''">
+				and questions_no=#{questions_no}
+			</if>
+			<if test="questions_no != null and questions_no != ''">
+				and questions_no like '%${questions_no}%'
+			</if>
+		</where>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findQuestionsList" parameterType="java.util.Map" resultType="exaQuestions">
+		select * from (select rownum rn,t_exa_questions.* from t_exa_questions
+		<where>
+			<if test="exaQuestions.questions_no != null and exaQuestions.questions_no != ''">
+				and questions_no=#{exaQuestions.questions_no}
+			</if>
+			<if test="exaQuestions.questions_no != null and exaQuestions.questions_no != ''">
+				and questions_no like '%${exaQuestions.questions_no}%'
+			</if>
+		</where>
+		) t
+		where t.rn between #{pageSize}*(#{currPage}-1)+1 and #{pageSize}*#{currPage}
+	</select>
+	
+	
+	<!-- 添加一个题库编号 -->
+	<select id="getQuestionsNo" resultType="java.lang.String">
+		select to_char(max(to_number(questions_no))+1) from t_exa_questions
+	</select>
+	
+	<!-- 添加题库 -->
+	<insert id="addQuestions" parameterType="exaQuestions">
+		insert into t_exa_questions
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="questions_no != null and questions_no != ''">
+				questions_no,
+			</if>
+			<if test="subject_no != null and subject_no != ''">
+				subject_no,
+			</if>
+			<if test="questions_name != null and questions_name != ''">
+				questions_name,
+			</if>
+			<if test="questions_desc != null and questions_desc != ''">
+				questions_desc,
+			</if>
+				create_time,
+				update_time
+		</trim>
+		<trim prefix=" values(" suffix=")" suffixOverrides=",">
+			<if test="questions_no != null and questions_no != ''">
+				#{questions_no},
+			</if>
+			<if test="subject_no != null and subject_no != ''">
+				#{subject_no},
+			</if>
+			<if test="questions_name != null and questions_name != ''">
+				#{questions_name},
+			</if>
+			<if test="questions_desc != null and questions_desc != ''">
+				#{questions_desc},
+			</if>
+				sysdate,
+				sysdate
+		</trim>
+	</insert>
+    
+</mapper>

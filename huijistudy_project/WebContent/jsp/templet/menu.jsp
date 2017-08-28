@@ -29,6 +29,13 @@
       	</sec:authorize>
       </ul>
     </li>
+    
+    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>考试管理</span> <span class="label label-important">3</span></a>
+      <ul>
+        <li><a href="${pageContext.request.contextPath }/exam/subjectList.action">科目列表</a></li>
+        <li><a href="${pageContext.request.contextPath }/exam/questionsList.action">题库列表</a></li>
+      </ul>
+    </li>
    
     <li class="submenu"> <a href="#"><i class="icon icon-info-sign"></i> <span>Error</span> <span class="label label-important">4</span></a>
       <ul>

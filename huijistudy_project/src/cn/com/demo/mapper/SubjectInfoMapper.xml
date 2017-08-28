@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.demo.mapper.SubjectInfoMapper">
+	
+  <!-- 添加科目 -->
+  <insert id="addSubjectInfo" parameterType="java.util.List">
+  	insert into t_subject_info
+ 		<foreach collection="list" item="item" index="index" separator="union all" >
+	  		select 
+		  		#{item.subjectNo},
+		  		#{item.subjectCode,jdbcType=NUMERIC},
+		  		#{item.subjectName},
+		  		#{item.classContent,jdbcType=VARCHAR},
+		  		#{item.calssTarget,jdbcType=VARCHAR},
+		  		#{item.classHour,jdbcType=INTEGER},
+		  		#{item.fatherSubject},
+				sysdate,
+		  		sysdate
+		  	from dual
+  	</foreach>
+  </insert>
+  	
+  	<!-- 查询科目数量 -->
+	<select id="getSubjectCount" parameterType="subjectInfo" resultType="Integer">
+		select count(*) from t_subject_info
+		<where>
+			<if test="subject_no != null and subject_no != ''">
+				and subject_no=#{subject_no}
+			</if>
+			<if test="subject_name != null and subject_name != ''">
+				and subject_name like '%${subject_name}%'
+			</if>
+		</where>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findSubjectList" parameterType="java.util.Map" resultType="subjectInfo">
+		select * from (select rownum rn,t_subject_info.* from t_subject_info
+		<where>
+			<if test="subject.subject_no != null and subject.subject_no != ''">
+				and subject_no=#{subject.subject_no}
+			</if>
+			<if test="subject.subject_name != null and subject.subject_name != ''">
+				and subject_name like '%${subject.subject_name}%'
+			</if>
+		</where>
+		) t
+		where t.rn between #{pageSize}*(#{currPage}-1)+1 and #{pageSize}*#{currPage}
+	</select>
+	
+	<!-- 查询科目 -->
+	<select id="findSubjectListAll" resultType="subjectInfo">
+		select subject_no,subject_name from t_subject_info
+	</select>
+	
+	<!-- 添加一个科目编号 -->
+	<select id="getSubjectNo" resultType="java.lang.Long">
+		select max(subject_no)+1 from t_subject_info
+	</select>
+	
+	<!-- 添加科目 -->
+	<insert id="addSubject" parameterType="subjectInfo">
+		insert into t_subject_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="subject_no != null and subject_no != ''">
+				subject_no,
+			</if>
+			<if test="subject_code != null and subject_code != ''">
+				subject_code,
+			</if>
+			<if test="subject_name != null and subject_name != ''">
+				subject_name,
+			</if>
+			<if test="class_content != null and class_content != ''">
+				class_content,
+			</if>
+			<if test="calss_target != null and calss_target != ''">
+				calss_target,
+			</if>
+			<if test="class_hour != null and class_hour != ''">
+				class_hour,
+			</if>
+			<if test="father_subject != null and father_subject != ''">
+				father_subject,
+			</if>
+				create_time,
+				update_time
+		</trim>
+		<trim prefix=" values(" suffix=")" suffixOverrides=",">
+			<if test="subject_no != null and subject_no != ''">
+				#{subject_no},
+			</if>
+			<if test="subject_code != null and subject_code != ''">
+				#{subject_code},
+			</if>
+			<if test="subject_name != null and subject_name != ''">
+				#{subject_name},
+			</if>
+			<if test="class_content != null and class_content != ''">
+				#{class_content},
+			</if>
+			<if test="calss_target != null and calss_target != ''">
+				#{calss_target},
+			</if>
+			<if test="class_hour != null and class_hour != ''">
+				#{class_hour},
+			</if>
+			<if test="father_subject != null and father_subject != ''">
+				#{father_subject},
+			</if>
+				sysdate,
+				sysdate
+		</trim>
+	</insert>
+  	
+  
+</mapper>

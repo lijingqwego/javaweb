@@ -15,8 +15,7 @@ public class AuthorityServiceTest {
 
 	@Test
 	public void test() {
-		AuthorUserService as = factory.getBean(AuthorUserService.class);
-		
+		factory.getBean(PaperService.class).addExamInfoNo("20170904000001", 5);
 	}
 
 }

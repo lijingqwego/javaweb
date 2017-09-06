@@ -46,6 +46,13 @@ public class ExaQuestions {
 	public void setUpdate_time(Date update_time) {
 		this.update_time = update_time;
 	}
+	@Override
+	public String toString() {
+		return "ExaQuestions [questions_no=" + questions_no + ", subject_no=" + subject_no + ", questions_name="
+				+ questions_name + ", questions_desc=" + questions_desc + ", create_time=" + create_time
+				+ ", update_time=" + update_time + "]";
+	}
+	
 	
 	
 }

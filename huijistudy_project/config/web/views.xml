@@ -108,6 +108,30 @@
          <definition name="exam.addQuestions" extends="base.definition">
             <put-attribute name="body" value="/jsp/exam/addQuestions.jsp" />
          </definition>     
+         <!-- 添加试卷模板-->
+         <definition name="exam.makePaperModel" extends="base.definition">
+            <put-attribute name="body" value="/jsp/exam/makePaperModel.jsp" />
+         </definition>     
+         <!-- 试卷模板列表-->
+         <definition name="exam.paperModeList" extends="base.definition">
+            <put-attribute name="body" value="/jsp/exam/papermodeList.jsp" />
+         </definition>     
+         <!-- 试卷列表-->
+         <definition name="exam.paperList" extends="base.definition">
+            <put-attribute name="body" value="/jsp/exam/paperList.jsp" />
+         </definition>     
+         <!-- 修改考试信息-->
+         <definition name="exam.addExamInfo" extends="base.definition">
+            <put-attribute name="body" value="/jsp/exam/addExamInfo.jsp" />
+         </definition>     
+         <!-- 开始考试-->
+         <definition name="exam.startExam" extends="base.definition">
+            <put-attribute name="body" value="/jsp/exam/startExam.jsp" />
+         </definition>     
+         <!-- 考试结果-->
+         <definition name="exam.examResult" extends="base.definition">
+            <put-attribute name="body" value="/jsp/exam/examResult.jsp" />
+         </definition>     
      
     <!-- ui页面案例模板 -->
      <definition name="example.error403" extends="base.definition">

@@ -6,5 +6,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 	<typeAliases>
 		<package name="cn.com.demo.po"/>
+		<package name="cn.com.demo.dto"/>
 	</typeAliases>
+	<!-- 引入分页插件 -->
+ 	 <plugins>
+ 	 	<plugin interceptor="com.github.pagehelper.PageHelper">
+		</plugin>
+	</plugins>
 </configuration>

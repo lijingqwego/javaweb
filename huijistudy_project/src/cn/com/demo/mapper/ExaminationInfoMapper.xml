@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.demo.mapper.ExaminationInfoMapper">
+
+  <resultMap type="extendExaPaper" id="exam_paper_map">
+  	<id column="examination_no" property="examination_no"/>
+		<result column="examination_type" property="examination_type"/>
+		<result column="examination_name" property="examination_name"/>
+		<result column="exam_length" property="exam_length"/>
+		<!-- 试卷和题目   一对多 -->
+		<collection property="extendExaPaperInfos" ofType="extendExaPaperInfo">
+			<result column="examination_id" property="examination_id"/>
+			<result column="question_type" property="question_type"/>
+			<result column="question_xh" property="question_xh"/>
+			<result column="question_name" property="question_name"/>
+			<result column="question_nscore" property="question_nscore"/>
+			<result column="question_num" property="question_num"/>
+			<result column="question_score" property="question_score"/>
+			<result column="total_score" property="total_score"/>
+			<!-- 题目和选项   一对多 -->
+			<collection property="exaPaperAnswers" ofType="exaPaperAnswer">
+				<result column="answer_content" property="answer_content"/>
+				<result column="answer_num" property="answer_num"/>
+				<result column="istrue" property="istrue"/>
+			</collection>
+		</collection>
+  </resultMap>
+  <!-- 查询考试题目 -->
+  <select id="findExamQuestionList" parameterType="java.lang.String" resultMap="exam_paper_map">
+	select * from v_exam_paper_question where examination_no=#{_parameter}
+  </select>
+  
+  <!-- 调用存储过程，提交考试答案，返回考试结果 -->
+  <select id="submitPaperMap" parameterType="java.util.Map" statementType="CALLABLE">
+  	<![CDATA[
+  		{call pk_exam_test.pro_add_exam_info(
+  			#{v_exam_user,mode=IN,jdbcType=VARCHAR},
+  			#{v_exam_info_no,mode=IN,jdbcType=VARCHAR},
+  			#{answer_list,mode=IN,jdbcType=VARCHAR},
+  			#{right_num,mode=OUT,jdbcType=INTEGER},
+  			#{error_num,mode=OUT,jdbcType=INTEGER},
+  			#{total_score,mode=OUT,jdbcType=INTEGER}
+  		)}
+  	]]>
+  </select>
+  
+  <!-- 获取所有未使用过的考试编号 -->
+  <select id="findExamInfoNoList" parameterType="java.lang.String" resultType="examinationInfo">
+  	select examination_info_no from t_examination_info where examination_info_no not in(
+	select examination_info_no from t_examination_list where choose_key is not null group by examination_info_no)
+	and examination_no=#{_parameter}
+  </select>
+  
+ <!-- 考试前，填写考试编号，考试人员，当前时间， 更新部分考试信息 -->
+  <update id="updateExamInfo" parameterType="examinationInfo">
+  	update t_examination_info set examination_user=#{examination_user},start_time=sysdate where examination_info_no=#{examination_info_no}
+  </update>
+  
+  <!-- 根据考试编号查询考试结果 -->
+  <select id="findexamResult" parameterType="java.lang.String" resultType="examDetail">
+  	select  question_no,question_type,choose_key,right_key 
+  	from t_examination_list where examination_info_no=#{_parameter}
+  </select>
+</mapper>

@@ -60,4 +60,18 @@ public class SubjectService {
 	public Long getSubjectNo(){
 		return subjectInfoMapper.getSubjectNo();
 	}
+
+/*
+		#{subject_no,mode=IN,jdbcType=NUMERIC},
+	  	#{exam_type,mode=IN,jdbcType=NUMERIC},
+	  	#{exam_name,mode=IN,jdbcType=VARCHAR},
+	  	#{exam_content,mode=IN,jdbcType=VARCHAR},
+	  	#{exam_length,mode=IN,jdbcType=NUMERIC},
+	  	#{state,mode=IN,jdbcType=NUMERIC},
+	  	#{create_user,mode=IN,jdbcType=VARCHAR},
+	  	#{score_list,mode=IN,jdbcType=VARCHAR}
+*/
+	public void addPaperModel(Map<String,Object> map) {
+		subjectInfoMapper.addPaperModel(map);
+	}
 }

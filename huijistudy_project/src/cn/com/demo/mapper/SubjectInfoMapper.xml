@@ -7,18 +7,32 @@
   	insert into t_subject_info
  		<foreach collection="list" item="item" index="index" separator="union all" >
 	  		select 
-		  		#{item.subjectNo},
-		  		#{item.subjectCode,jdbcType=NUMERIC},
-		  		#{item.subjectName},
-		  		#{item.classContent,jdbcType=VARCHAR},
-		  		#{item.calssTarget,jdbcType=VARCHAR},
-		  		#{item.classHour,jdbcType=INTEGER},
-		  		#{item.fatherSubject},
+		  		#{item.subject_no},
+		  		#{item.subject_code,jdbcType=VARCHAR},
+		  		#{item.subject_name},
+		  		#{item.class_content,jdbcType=VARCHAR},
+		  		#{item.calss_target,jdbcType=VARCHAR},
+		  		#{item.class_hour,jdbcType=INTEGER},
+		  		#{item.father_subject},
 				sysdate,
 		  		sysdate
 		  	from dual
   	</foreach>
   </insert>
+  
+  <!-- 生成试卷模板 -->
+  <select id="addPaperModel" parameterType="java.util.Map" statementType="CALLABLE">
+  	<![CDATA[
+  	{call pk_exam_test.pro_add_exa_paper(
+        #{subject_no,mode=IN,jdbcType=NUMERIC},
+	  	#{exam_name,mode=IN,jdbcType=VARCHAR},
+	  	#{exam_content,mode=IN,jdbcType=VARCHAR},
+	  	#{exam_length,mode=IN,jdbcType=NUMERIC},
+	  	#{create_user,mode=IN,jdbcType=VARCHAR},
+	  	#{score_list,mode=IN,jdbcType=VARCHAR}
+  	)}
+  	]]>
+  </select>
   	
   	<!-- 查询科目数量 -->
 	<select id="getSubjectCount" parameterType="subjectInfo" resultType="Integer">

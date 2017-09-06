@@ -18,4 +18,6 @@ public interface SubjectInfoMapper {
 	int getSubjectCount(SubjectInfo subject);
 	
 	void addSubject(SubjectInfo subject);
+
+	void addPaperModel(Map<String,Object> map);
 }

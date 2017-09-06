@@ -95,6 +95,7 @@ function loadPage(currPage){
                   <td>
                 	<a class="badge badge-info" href="#" >修改</a>
                  	<a class="badge badge-warning" href="#">删除</a>
+                 	<a class="badge badge-info" href="${pageContext.request.contextPath}/exam/makePaperModel.action?subject_no=${subject.subject_no}">生成试卷模板</a>
                   </td>
                 </tr>
                </c:forEach>

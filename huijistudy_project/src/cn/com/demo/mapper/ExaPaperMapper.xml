@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.demo.mapper.ExaPaperMapper">
+  
+  <!-- 分页查询 -->
+  <select id="findPaperModeList" parameterType="java.util.Map" resultType="exaPaper">
+  	select * from v_exam_paper_model
+  	<where>
+  		<if test="examination_no != null and examination_no != ''">
+  			and examination_no=#{examination_no}
+  		</if>
+  		<if test="examination_name != null and examination_name != ''">
+  			and examination_name=#{examination_name}
+  		</if>
+  	</where>
+  </select>
+  
+  <!-- 调用存储过程随机抓题生成试卷 -->
+  <select id="makePaper" parameterType="java.lang.String" statementType="CALLABLE">
+  	<![CDATA[
+  		{call pk_exam_test.pro_add_exa_paper_info(
+  			#{examination_no,mode=IN,jdbcType=VARCHAR}
+  		)}
+  	]]>
+  </select>
+  
+  <!-- 调用存储过程生成考试编号 -->
+  <select id="addExamInfoNo" parameterType="java.util.Map" statementType="CALLABLE">
+  	<![CDATA[
+  		{call pk_exam_test.pro_add_exam_info_no(
+  			#{examination_no,mode=IN,jdbcType=VARCHAR},
+  			#{num,mode=IN,jdbcType=INTEGER}
+  		)}
+  	]]>
+  </select>
+  
+  
+</mapper>

@@ -16,7 +16,7 @@ import cn.com.demo.po.SubjectInfo;
 public class PoiXSSFUtils {
 
 	public static List<SubjectInfo> readXls() throws IOException {
-		InputStream is = new FileInputStream("C:/Users/Administrator/Desktop/项目案例/慧极教学平台管理系统v1.1/慧极教学平台管理系统v1.1/科目数据.xlsx");
+		InputStream is = new FileInputStream("C:/Users/Administrator/Desktop/科目数据.xlsx");
 		XSSFWorkbook workBook = new XSSFWorkbook(is);
 		
 		List<SubjectInfo> list = new ArrayList<SubjectInfo>();
@@ -49,9 +49,9 @@ public class PoiXSSFUtils {
 		return list;
 	}
 	
-	public static String readXls2() throws IOException {
-		InputStream is = new FileInputStream("C:/Users/Administrator/Desktop/题目信息.xlsx");
-		XSSFWorkbook workBook = new XSSFWorkbook(is);
+	public static String readXls2(String questionsfile) throws IOException {
+		FileInputStream in = new FileInputStream(questionsfile);
+		XSSFWorkbook workBook = new XSSFWorkbook(in);
 		
 		StringBuilder builder = new StringBuilder();
 		// 循环工作表Sheet
@@ -81,20 +81,10 @@ public class PoiXSSFUtils {
 						builder.append(getValue(q_no)+"@|@").append(getValue(q_type)+"@|@").append(getValue(q_key)+"@|@")
 						.append(getValue(q_a)+"@|@").append(getValue(q_b)+"@|@").append(getValue(q_c)+"@|@").append(getValue(q_d)+"@||@");
 					}
-					
-					/*getValue(q_no);
-					getValue(q_type);
-					getValue(q_key);
-					
-					getValue(q_a);
-					getValue(q_b);
-					getValue(q_c);
-					getValue(q_d);*/
-					
-					
 				}
 			}
 		}
+		in.close();
 		System.out.println(builder.toString());
 		return builder.toString();
 	}
@@ -114,11 +104,6 @@ public class PoiXSSFUtils {
 	}
 	
 	public static void main(String[] args) {
-		try {
-			readXls2();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
 	}
 }

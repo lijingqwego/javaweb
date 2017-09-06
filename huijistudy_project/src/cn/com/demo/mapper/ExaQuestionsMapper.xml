@@ -5,7 +5,7 @@
 	<select id="addQuestionsDetail" parameterType="java.util.Map" statementType="CALLABLE">  
 	    <![CDATA[   
 	        {call pk_exam_test.pro_add_exa_questions_detail(
-	        #{subject_list,mode=IN,jdbcType=CLOB},
+	        #{question_list,mode=IN,jdbcType=CLOB},
 			#{questions_no,mode=IN,jdbcType=VARCHAR},
 			#{state,mode=IN,jdbcType=NUMERIC}
 			)}   

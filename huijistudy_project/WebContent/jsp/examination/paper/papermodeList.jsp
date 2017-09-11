@@ -6,28 +6,7 @@
 	pageContext.setAttribute("APP_PATH",request.getContextPath()); 
 %>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.js"></script>
-<script type="text/javascript">
-$(function(){
-	/*批量删除*/
-	$("#del_model").click(function() { 
-		if(confirm("确定要删除所选项目？")){
-			var checkedList = new Array(); 
-			$("input[name='subChk']:checked").each(function() { 
-			checkedList.push($(this).val());
-			});
-		}
-		$.ajax({
-			type: "POST", 
-			url: "${APP_PATH}/exam/delMoreSubject.action", 
-			data: {'delitems':checkedList.toString()}, 
-			success: function(result) { 
-				$("[name ='subChk']:checkbox").attr("checked", false); 
-				window.location.reload();
-			} 
-		});
-	});
-});
-</script>
+
 <script type="text/javascript">
 function loadPage(currPage){
 	var url="${pageContext.request.contextPath}/exam/papermodeList.action?pn="+currPage+"&examination_no="+$("#examination_no").val()+"&examination_name="+$("#examination_name").val();
@@ -52,14 +31,10 @@ function loadPage(currPage){
         </form>
        <!-- begin -->
         <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>试卷模板</h5>
-          </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th><input type="checkbox"/></th>
                   <th>试卷编号</th>
                   <th>试卷类型</th>
                   <th>试卷名称</th>
@@ -72,7 +47,6 @@ function loadPage(currPage){
               <tbody>
                <c:forEach items="${pageInfo.list}" var="papermode">
                 <tr class="odd gradeX">
-                  <td><input id="subChk" type="checkbox" name="subChk" value="${papermode.examination_no}" /></td>
                   <td>${papermode.examination_no}</td>
                   <td>${papermode.examination_type==1 ? "单元测试":"综合和测试"}</td>
                   <td>${papermode.examination_name}</td>
@@ -80,8 +54,6 @@ function loadPage(currPage){
                   <td>${papermode.exam_length}</td>
                   <td>${papermode.create_user}</td>
                   <td>
-                	<a class="badge badge-info" href="#" >修改</a>
-                 	<a class="badge badge-warning" href="#">删除</a>
                  	<a class="badge badge-info" href="${pageContext.request.contextPath}/exam/makePaper.action?examination_no=${papermode.examination_no}">生成试卷</a>
                   </td>
                 </tr>

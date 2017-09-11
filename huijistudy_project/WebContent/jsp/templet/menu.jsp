@@ -36,6 +36,7 @@
         <li><a href="${pageContext.request.contextPath }/exam/questionsList.action">题库列表</a></li>
         <li><a href="${pageContext.request.contextPath }/exam/papermodeList.action">试卷模板</a></li>
         <li><a href="${pageContext.request.contextPath }/exam/paperList.action">试卷列表</a></li>
+        <li><a href="${pageContext.request.contextPath }/exam/scoreList.action">成绩列表</a></li>
       </ul>
     </li>
    

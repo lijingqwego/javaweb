@@ -30,6 +30,7 @@ public class PaperController {
 	@Resource
 	private ExamService examService;
 	
+	
 	/**
 	 * ÊÔ¾íÄ£°åÁÐ±í
 	 * @param pn
@@ -77,7 +78,7 @@ public class PaperController {
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("examination_no", examination_no);
 		map.put("examination_name", examination_name);
-		List<ExaPaper> list=paperService.findPapaerModeList(map);
+		List<ExaPaper> list=paperService.findPapaerList(map);
 		PageInfo<ExaPaper> pageInfo = new PageInfo<ExaPaper>(list,3);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("examination_no", examination_no);
@@ -94,10 +95,10 @@ public class PaperController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("addExamInfoNo")
+	@RequestMapping("/addExamInfoNo")
 	public String addExamInfoNo(String examination_no,int num){
 		paperService.addExamInfoNo(examination_no,num);
-		return "success";
+		return ""+num;
 	}
 	
 	/**
@@ -105,7 +106,7 @@ public class PaperController {
 	 * @param examination_no
 	 * @return
 	 */
-	@RequestMapping("findExamInfoNoList")
+	@RequestMapping("/findExamInfoNoList")
 	public ModelAndView findExamInfoNoList(String examination_no){
 		List<ExaminationInfo> list = examService.findExamInfoNoList(examination_no);
 		ModelAndView mv = new ModelAndView();
@@ -122,7 +123,7 @@ public class PaperController {
 	 * @param examination_no
 	 * @return
 	 */
-	@RequestMapping("commExamInfo")
+	@RequestMapping("/commExamInfo")
 	public String commExamInfo(String examination_user,String examination_info_no,String examination_no){
 		System.out.println("=====commExamInfo========examination_info_no=============examination_user============="+examination_info_no+"|"+examination_user);
 		examService.updateExamInfo(examination_user,examination_info_no);

@@ -14,7 +14,7 @@ $(document).ready(function(){
 	alert("登录");*/
 		$.ajax({
 			type:"post",
-			url:"/huijistudy_project/loginCheck.action",
+			url:"/ssm0724/loginCheck.action",
 			//数据格式是json串，商品信息
 			data:user,
 			success:function(data){//返回json结果

@@ -7,6 +7,7 @@ public class ExaPaperAnswer {
 	private String examination_id;
 	private Long question_num;
 	private Long answer_num;
+	private String answer_name;
 	private String answer_content;
 	private Long istrue;
 	private String create_user;
@@ -66,6 +67,13 @@ public class ExaPaperAnswer {
 	}
 	public void setUpdate_time(Date update_time) {
 		this.update_time = update_time;
+	}
+	
+	public String getAnswer_name() {
+		return answer_name;
+	}
+	public void setAnswer_name(String answer_name) {
+		this.answer_name = answer_name;
 	}
 	@Override
 	public String toString() {

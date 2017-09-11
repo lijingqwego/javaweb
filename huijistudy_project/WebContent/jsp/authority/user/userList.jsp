@@ -54,9 +54,6 @@ function loadPage(currPage){
         </form>
        <!-- begin -->
         <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>用户表</h5>
-          </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">
               <thead>
@@ -71,8 +68,8 @@ function loadPage(currPage){
                   <th>是否有效</th>
                   <th>登录次数</th>
                   <th>登录时间</th>
-                  <th>创建时间</th>
-                  <th>修改时间</th>
+                  <!-- <th>创建时间</th>
+                  <th>修改时间</th> -->
                   <th>操作</th>
                 </tr>
               </thead>
@@ -91,12 +88,12 @@ function loadPage(currPage){
                   <td>
                   	<fmt:formatDate value="${user.loginlasttime}" pattern="yyyy-MM-dd HH:mm:ss"/> 
                   </td>
-                  <td>
+                  <%-- <td>
                   	<fmt:formatDate value="${user.create_time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
                   </td>
                   <td>
                   	<fmt:formatDate value="${user.update_time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
-                  </td>
+                  </td> --%>
                   <td>
                   	<c:choose>
                   	<c:when test="${user.enabled==1 }">

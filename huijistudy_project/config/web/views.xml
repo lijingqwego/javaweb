@@ -94,43 +94,51 @@
 <!-- 考试模块 -->   
 		 <!-- 科目列表-->
          <definition name="exam.subjectList" extends="base.definition">
-            <put-attribute name="body" value="/jsp/exam/subjectList.jsp" />
+            <put-attribute name="body" value="/jsp/examination/subject/subjectList.jsp" />
          </definition>  
 		 <!-- 添加科目-->
          <definition name="exam.addSubject" extends="base.definition">
-            <put-attribute name="body" value="/jsp/exam/addSubject.jsp" />
+            <put-attribute name="body" value="/jsp/examination/subject/addSubject.jsp" />
          </definition>  
           <!-- 题库列表-->
          <definition name="exam.questionsList" extends="base.definition">
-            <put-attribute name="body" value="/jsp/exam/questionsList.jsp" />
+            <put-attribute name="body" value="/jsp/examination/questions/questionsList.jsp" />
          </definition>
          <!-- 添加题库-->
          <definition name="exam.addQuestions" extends="base.definition">
-            <put-attribute name="body" value="/jsp/exam/addQuestions.jsp" />
+            <put-attribute name="body" value="/jsp/examination/questions/addQuestions.jsp" />
+         </definition>     
+         <!-- 题目明细-->
+         <definition name="exam.questionList" extends="base.definition">
+            <put-attribute name="body" value="/jsp/examination/questions/questionList.jsp" />
          </definition>     
          <!-- 添加试卷模板-->
          <definition name="exam.makePaperModel" extends="base.definition">
-            <put-attribute name="body" value="/jsp/exam/makePaperModel.jsp" />
+            <put-attribute name="body" value="/jsp/examination/paper/makePaperModel.jsp" />
          </definition>     
          <!-- 试卷模板列表-->
          <definition name="exam.paperModeList" extends="base.definition">
-            <put-attribute name="body" value="/jsp/exam/papermodeList.jsp" />
+            <put-attribute name="body" value="/jsp/examination/paper/papermodeList.jsp" />
          </definition>     
          <!-- 试卷列表-->
          <definition name="exam.paperList" extends="base.definition">
-            <put-attribute name="body" value="/jsp/exam/paperList.jsp" />
+            <put-attribute name="body" value="/jsp/examination/paper/paperList.jsp" />
          </definition>     
          <!-- 修改考试信息-->
          <definition name="exam.addExamInfo" extends="base.definition">
-            <put-attribute name="body" value="/jsp/exam/addExamInfo.jsp" />
+            <put-attribute name="body" value="/jsp/examination/exam/addExamInfo.jsp" />
          </definition>     
          <!-- 开始考试-->
          <definition name="exam.startExam" extends="base.definition">
-            <put-attribute name="body" value="/jsp/exam/startExam.jsp" />
+            <put-attribute name="body" value="/jsp/examination/exam/startExam.jsp" />
          </definition>     
          <!-- 考试结果-->
          <definition name="exam.examResult" extends="base.definition">
-            <put-attribute name="body" value="/jsp/exam/examResult.jsp" />
+            <put-attribute name="body" value="/jsp/examination/exam/examResult.jsp" />
+         </definition>     
+         <!-- 成绩列表-->
+         <definition name="exam.scoreList" extends="base.definition">
+            <put-attribute name="body" value="/jsp/examination/exam/scoreList.jsp" />
          </definition>     
      
     <!-- ui页面案例模板 -->

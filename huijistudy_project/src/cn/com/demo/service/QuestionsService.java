@@ -10,6 +10,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import cn.com.demo.mapper.ExaQuestionsMapper;
+import cn.com.demo.po.ExaPaperAnswer;
+import cn.com.demo.po.ExaQuestion;
 import cn.com.demo.po.ExaQuestions;
 import cn.com.demo.utils.PageBean;
 import cn.com.demo.utils.PoiXSSFUtils;
@@ -47,22 +49,40 @@ public class QuestionsService {
 	public void addQuestions(ExaQuestions exaQuestions){
 		exaQuestionsMapper.addQuestions(exaQuestions);
 	}
-
 	/**
 	 * 导入题目明细
 	 * @param questions_no
 	 * @param questionsfile
 	 */
-	public void uploadQuestions(String questions_no, String questionsfile) {
+	public int uploadQuestions(Map<String,Object> map, String questionsfile) {
 		try {
 			String subList = PoiXSSFUtils.readXls2(questionsfile);
-			Map<String,Object> map=new HashMap<>();
+			if(subList==null){
+				return -1;//读取Excel文件失败
+			}
 			map.put("question_list",subList);
-			map.put("questions_no", questions_no);
-			map.put("state", 1L); 
 			exaQuestionsMapper.addQuestionsDetail(map);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return 1;
+	}
+	
+	/**
+	 * 查看题目信息
+	 * @param question_type 
+	 * @param question_name 
+	 * @return
+	 */
+	public List<ExaQuestion> findQuestionListByNo(String questions_no, String question_name, Long question_type){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("questions_no", questions_no);
+		map.put("question_name", question_name);
+		map.put("question_type", question_type);
+		return exaQuestionsMapper.findQuestionListByNo(map);
+	}
+
+	public List<ExaPaperAnswer> findAnswerListByNo(String question_no) {
+		return exaQuestionsMapper.findAnswerListByNo(question_no);
 	}
 }

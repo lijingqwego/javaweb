@@ -73,5 +73,15 @@ public class ExamService {
 		
 		return examinationInfoMapper.findexamResult(examination_info_no);
 	}
+
+
+	/**
+	 * 查看所有学生考试成绩
+	 * @param map
+	 * @return
+	 */
+	public List<ExaminationInfo> findScoreListAll(Map<String, Object> map) {
+		return examinationInfoMapper.findScoreListAll(map);
+	}
 	
 }

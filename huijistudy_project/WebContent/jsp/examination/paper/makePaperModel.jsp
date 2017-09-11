@@ -19,11 +19,6 @@
   <div class="row-fluid">
     <div class="span6">
 	<div class="widget-box">
-		<div class="widget-title">
-			<span class="icon"> <i class="icon-align-justify"></i>
-			</span>
-			<h5>生成试卷模板</h5>
-		</div>
 		<div class="widget-content nopadding">
 			<form action="${pageContext.request.contextPath }/exam/commMakePaperModel.action" method="post" class="form-horizontal">
 				<div class="control-group">

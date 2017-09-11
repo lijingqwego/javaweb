@@ -61,4 +61,18 @@
   	select  question_no,question_type,choose_key,right_key 
   	from t_examination_list where examination_info_no=#{_parameter}
   </select>
+  
+  <!-- 查看所有学生考试成绩 -->
+  <select id="findScoreListAll" parameterType="java.util.Map" resultType="examinationInfo">
+  	select * from t_examination_info
+  	<where>
+  		<if test="examination_info_no != null and examination_info_no != ''">
+  			and examination_info_no=#{examination_info_no}
+  		</if>
+  			and examination_user is not null
+  		<if test="examination_user != null and examination_user != ''">
+  			and examination_user like '%${examination_user}%'
+  		</if>
+  	</where>
+  </select>
 </mapper>

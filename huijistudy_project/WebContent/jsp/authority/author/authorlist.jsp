@@ -56,9 +56,6 @@ function loadPage(currPage){
         </form>
        <!-- begin -->
         <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>权限表</h5>
-          </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">
               <thead>
@@ -73,8 +70,8 @@ function loadPage(currPage){
                   <th>是否禁用</th>
                   <th>是否是超级权限</th>
                   <th>标志信息</th>
-                  <th>创建时间</th>
-                  <th>修改时间</th>
+                  <!-- <th>创建时间</th>
+                  <th>修改时间</th> -->
                   <th>操作</th>
                 </tr>
               </thead>
@@ -91,12 +88,12 @@ function loadPage(currPage){
                   <td>${author.enabled==1 ? "正常" : "禁用"}</td>
                   <td>${author.issys==1 ? "是" : "非"}</td>
                   <td>${author.flaginfo}</td>
-                  <td>
+                  <%-- <td>
                   	<fmt:formatDate value="${author.create_time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
                   </td>
                   <td>
                   	<fmt:formatDate value="${author.update_time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
-                  </td>
+                  </td> --%>
                   <td>
                   
                   <c:choose>

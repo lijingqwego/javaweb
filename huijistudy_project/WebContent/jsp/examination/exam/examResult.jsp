@@ -13,9 +13,14 @@ $(function(){
 			url:"${pageContext.request.contextPath}/exam/expModel.action",
 			data:{'examination_info_no':$("#exam_info_no").val()},
 			success:function(result){
-				confirm("导入成功！可在"+result+"中找到文件");
+				confirm("导出成功！文件路径为："+result);
 			}
 		});
+	});
+	
+	$("#btn_find").click(function(){
+		var url="${pageContext.request.contextPath }/exam/scoreList.action";
+		window.location.href=url;
 	});
 });
 </script>
@@ -35,7 +40,8 @@ function loadPage(currPage){
    <hr>
     <div class="row-fluid">
       <div class="span12">
-  	<input type="button" id="exp_model" value="导入到本地..." class="btn btn-info" >
+  	<input type="button" id="exp_model" value="导入到本地..." class="btn btn-success" >
+  	<input type="button" id="btn_find" value="查看所有考生成绩" class="btn btn-warning" >
        <!-- begin -->
         <div class="widget-box">
           <div class="widget-content nopadding">
@@ -53,19 +59,7 @@ function loadPage(currPage){
                <c:forEach items="${pageInfo.list }" var="result" varStatus="vs">
                 <tr class="odd gradeX">
                   <td>${vs.count}</td>
-                  <td>
-                  	<c:choose>
-                  		<c:when test="${result.question_type==1}">
-                  		单选题
-                  		</c:when>
-                  		<c:when test="${result.question_type==2}">
-                  		多选题
-                  		</c:when>
-                  		<c:when test="${result.question_type==3}">
-                  		判断题
-                  		</c:when>
-                  	</c:choose>
-                  </td>
+                  <td>${result.question_type}</td>
                   <td>${result.choose_key}</td>
                   <td>${result.right_key}</td>
                   <td>${result.right_key==result.choose_key?"yes":"no"}</td>

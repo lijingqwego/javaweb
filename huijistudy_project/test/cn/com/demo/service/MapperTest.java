@@ -46,6 +46,19 @@ public class MapperTest {
 	
 	@Test
 	public void testQuestionsList(){
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("v_exam_user", "abc");
+		map.put("v_exam_info_no","20170906000001");
+		map.put("answer_list", "20170905000008,2$,20170905000009,2$,|,,@20170905000021@,1,4,,@20170905000019@,1,2|20170905000032,2$,20170905000040,1$,20170905000031,2$,");
+		map.put("right_num", 0);
+		map.put("error_num", 0);
+		map.put("total_score", 0);
+		examinationInfoMapper.submitPaperMap(map);
+		int[] arr=new int[3];
+		arr[0]=(int) map.get("right_num");
+		arr[1]=(int) map.get("error_num");
+		arr[2]=(int) map.get("total_score");
+		System.out.println(arr[0]+"|"+arr[1]+"|"+arr[2]);
 	}
 	
 	@Test

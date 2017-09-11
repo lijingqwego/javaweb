@@ -18,5 +18,7 @@ public interface ExaminationInfoMapper {
 	void updateExamInfo(ExaminationInfo info);
 
 	List<ExamDetail> findexamResult(String examination_info_no);
+
+	List<ExaminationInfo> findScoreListAll(Map<String, Object> map);
     
 }

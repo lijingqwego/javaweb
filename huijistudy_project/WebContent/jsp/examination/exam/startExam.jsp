@@ -25,10 +25,11 @@ $(function(){
 		});
 		/* alert(option1List.toString());
 		alert(option2List.toString());
-		alert(option3List.toString()); */
-		
+		alert(option3List.toString());
+		alert($("#exam_info_no").val());
+		alert($("#exam_user").val()); */
 		$.ajax({
-			type: "POST", 
+			type: "post", 
 			url: "${pageContext.request.contextPath}/exam/submitPaper.action", 
 			data: {
 				'single':option1List.toString()+",",
@@ -38,15 +39,57 @@ $(function(){
 				'examination_user':$("#exam_user").val()
 			},
 			success: function(result) { 
+				//confirm("正确数量："+result[0]+"道\n"+"错误数量："+result[1]+"道\n"+"总分："+result[2]+"分");
 				//alert(result);
 				$("#result").modal();
 				$("#right_num").text("正确数量："+result[0]+"道");
 				$("#error_num").text("错误数量："+result[1]+"道");
 				$("#sum_score").text("总分："+result[2]+"分");
-				
 			} 
 		});
 	});
+	
+	
+	
+	/**************************计时器****************************/
+	var intDiff = parseInt($("#len").val())*60;
+	//alert(initDiff);
+	function timer(intDiff){
+		window.setInterval(function(){
+		var day=0,
+			hour=0,
+			minute=0,
+			second=0;//时间默认值		
+		if(intDiff > 0){
+			day = Math.floor(intDiff / (60 * 60 * 24));
+			hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+			minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+			second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+		}else{
+			$('#divs').html('考试时间到!').css({color:"red"});
+			//当倒计时结束，则自动提交该表单
+			$("#btn_post_paper").click();
+		}
+		if (minute <= 9) minute = '0' + minute;
+
+		if (second <= 9) second = '0' + second;
+		$('#hour_show').html('<s id="h"></s>'+hour+'时');
+
+		$('#minute_show').html('<s></s>'+minute+'分');
+
+		$('#second_show').html('<s></s>'+second+'秒');
+
+		intDiff--;
+
+		}, 1000);
+
+	} 
+	
+	$(function(){
+
+		timer(intDiff);
+
+	});	
 	
 });
 </script>
@@ -71,15 +114,23 @@ function findExamDetail(examination_info_no){
 		</div>
 		<input type="hidden" id="exam_info_no" value="${examination_info_no}">
 		<input type="hidden" id="exam_user" value="${examination_user}">
+		<div id="divs" style="position:fixed;z-index:99999;top: 100px;right: 80px;">
+	            <span style="color: #FF0000" id="countDownTime">考试时间：</span>
+	            <span  id="hour_show"></span>
+	            <span  id="minute_show"></span>
+	            <span  id="second_show"></span>
+         </div>
 		<h2 align="center">${exaPaper.examination_name }</h2>
 		<h5 align="center">（考试时长：${exaPaper.exam_length}分钟,&nbsp;&nbsp;试卷总分：${sumScore}分 ）</h5>
+		<input type="hidden" id="len" value="${exaPaper.exam_length}"/>
 	</div>
 	<div class="container-fluid">
 		<hr>
 		<div class="row-fluid">
 			<div class="span12"></div>
+			
 			<!-- start -->
-			<form id="frm" method="post" onsubmit="return false" class="form-vertical">
+			<div>
 			<c:set var="flag" value="1"></c:set>
 			<c:forEach items="${exaPaper.extendExaPaperInfos}" var="exaPaperInfo" varStatus="vs">
 					<c:if test="${exaPaperInfo.question_type==1 }">
@@ -127,9 +178,8 @@ function findExamDetail(examination_info_no){
 			</c:forEach>
 				<div class="form-actions">
 					<button id="btn_post_paper" class="btn btn-success">交卷</button>
-					<input type="button" class="btn btn-success" onclick = "window.history.back(-1);" value="返回">
 				</div>
-			</form>
+			</div>
 			<!-- end -->
 			<!-- Modal -->  
 			<div id="result" class="modal hide fade in" style="display: none; ">

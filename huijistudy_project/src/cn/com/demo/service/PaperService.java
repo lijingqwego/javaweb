@@ -31,5 +31,9 @@ public class PaperService {
 		map.put("num", num);
 		exaPaperMapper.addExamInfoNo(map);
 	}
+
+	public List<ExaPaper> findPapaerList(Map<String, Object> map) {
+		return exaPaperMapper.findPaperList(map);
+	}
 	
 }

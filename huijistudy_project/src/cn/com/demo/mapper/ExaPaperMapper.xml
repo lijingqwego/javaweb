@@ -15,6 +15,20 @@
   	</where>
   </select>
   
+  <!-- 分页查询 -->
+  <select id="findPaperList" parameterType="java.util.Map" resultType="exaPaper">
+  	select * from v_exam_paper_model
+  	<where>
+  			and state=1
+  		<if test="examination_no != null and examination_no != ''">
+  			and examination_no=#{examination_no}
+  		</if>
+  		<if test="examination_name != null and examination_name != ''">
+  			and examination_name=#{examination_name}
+  		</if>
+  	</where>
+  </select>
+  
   <!-- 调用存储过程随机抓题生成试卷 -->
   <select id="makePaper" parameterType="java.lang.String" statementType="CALLABLE">
   	<![CDATA[
@@ -29,7 +43,7 @@
   	<![CDATA[
   		{call pk_exam_test.pro_add_exam_info_no(
   			#{examination_no,mode=IN,jdbcType=VARCHAR},
-  			#{num,mode=IN,jdbcType=INTEGER}
+  			#{num,mode=INOUT,jdbcType=INTEGER}
   		)}
   	]]>
   </select>

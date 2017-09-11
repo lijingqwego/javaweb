@@ -14,5 +14,7 @@ public interface ExaPaperMapper {
 	void makePaper(@Param("examination_no")String examination_no);
 
 	void addExamInfoNo(Map<String,Object> map);
+
+	List<ExaPaper> findPaperList(Map<String, Object> map);
 	
 }

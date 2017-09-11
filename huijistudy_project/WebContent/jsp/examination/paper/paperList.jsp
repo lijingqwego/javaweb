@@ -9,13 +9,18 @@
 
 <script type="text/javascript">
 $(function(){
-	$("#btn_post").click(function(){
+	
+	$(".badge-warning").click(function(){
+		var num=$(this).parents("tr").find("td:eq(8) input[name='num']").val();
+		var exam_no=$(this).attr("myattr");
+		//alert(ss);
+		//alert($(this).attr("myattr"));
 		$.ajax({
 			type: "POST", 
 			url: "${pageContext.request.contextPath}/exam/addExamInfoNo.action", 
-			data: {'examination_no':$("#exam_no").val(),'num':$("#num").val()}, 
+			data: {'examination_no':exam_no,'num':num}, 
 			success: function(result) {
-				$("#btn_add").removeAttr("data-toggle").attr("class","badge");
+				confirm("已添加"+result+"个考号");
 			} 
 		});
 	});
@@ -45,9 +50,6 @@ function loadPage(currPage){
         </form>
        <!-- begin -->
         <div class="widget-box">
-          <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>试卷列表</h5>
-          </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered table-striped">
               <thead>
@@ -75,9 +77,8 @@ function loadPage(currPage){
                   <td>${papermode.create_user}</td>
                   <td>${papermode.sum_score}</td>
                   <td>
-                	<a class="badge badge-info" href="#" >修改</a>
-                	<input type="hidden" id="exam_no" value="${papermode.examination_no}">
-                 	<a class="badge badge-warning" data-toggle="modal" id="btn_add" data-target="#myModal1">生成考号</a>
+                	<input type="number" min="0" name="num" size="10" style="width:40px;height:12px;vertical-align: middle;">
+                 	<a class="badge badge-warning" id="btn_post" myattr="${papermode.examination_no}">生成考号</a>&nbsp;&nbsp;&nbsp;
                  	<a class="badge badge-info" href="${pageContext.request.contextPath}/exam/findExamInfoNoList.action?examination_no=${papermode.examination_no}" >开始考试</a>
                   </td>
                 </tr>
@@ -126,26 +127,6 @@ function loadPage(currPage){
 	    </div>
 	    <!-- end -->
 	    
-	    <!-- 添加考生号 模态框（Modal） -->
-		<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		    <div class="modal-dialog">
-		        <div class="modal-content">
-		            <div class="modal-header">
-		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                <h4 class="modal-title" id="myModalLabel">添加考生号</h4>
-		            </div>
-		            <div class="modal-body">
-		            	<h5 class="modal-title" id="myModalLabel">考生数量:</h5>
-		            	<input id="num" type="text" name="num" class="span11"  />
-		            </div>
-		            <div class="modal-footer">
-		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-		                <button id="btn_post" type="button" class="btn btn-primary">提交更改</button>
-		            </div>
-		        </div><!-- /.modal-content -->
-		    </div><!-- /.modal -->
-		</div>
-        
       </div>
     </div>
   </div>

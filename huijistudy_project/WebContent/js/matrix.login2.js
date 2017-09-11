@@ -1,11 +1,20 @@
 $(function(){
+   
+	
+	$('#to-login1').click(function(){
+		alert("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+	});
+	
 	$('#to-login').click(function(){	
 	var username=$("input[name='username']").val();
 	var password=$("input[name='password']").val();
 	var user={username:username,password:password};
+		/*alert(username);
+		alert(password);
+	alert("登录");*/
 		$.ajax({
 			type:"post",
-			url:"/huijistudy_project/loginCheckUser.action",
+			url:"/huiji_platform/loginCheckUser.action",
 			//数据格式是json串，商品信息
 			data:user,
 			success:function(data){//返回json结果
@@ -14,10 +23,12 @@ $(function(){
 					$("#loginform").submit(); 
 				}else{
 					//把登录异常信息动态填充到DIV中
-					   $("#message").html("<p id='label2'> 用户名或密码输入错误, 请重新输入...</p> ");
+					   $("#message").html("<p id='label2'> 用户名或者密码错误，请再次输入...</p> ");
 					   $("#message").css({color:"red"});
 				}
+				
 			}
+			
 		});
 	});
     

@@ -54,7 +54,7 @@
   <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>案列页面</span> <span class="label label-important">4</span></a>
       <ul>
          <li><a href="${pageContext.request.contextPath }/example/table.action">Table</a></li>
-        <li><a href="${pageContext.request.contextPath }/example/button_and_icons.action">Buttons & icons</a></li>
+        <li><a href="${pageContext.request.contextPath }/example/button_and_icons.action">Buttons &amp; icons</a></li>
         <li><a href="${pageContext.request.contextPath }/example/form_common.action">Form common</a></li>
         <li><a href="${pageContext.request.contextPath }/example/form_validation.action">Form validation</a></li>
         <li><a href="${pageContext.request.contextPath }/example/form_wizard.action">Form wizard</a></li>

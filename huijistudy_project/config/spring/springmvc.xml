@@ -24,8 +24,17 @@
         <property name="maxUploadSize" value="10485760000"></property>  
         <property name="maxInMemorySize" value="40960"></property> 
    </bean>
+   
+   <!-- spring自定义拦截器 -->
+   <mvc:interceptors>
+	   <mvc:interceptor>
+	  	 <mvc:mapping path="/**"/>
+	  	 <bean class="cn.com.demo.interceptor.CommonInterceptor"/>
+	   </mvc:interceptor>
+   </mvc:interceptors>
 	<!-- 加载注解驱动 -->
 	<mvc:annotation-driven></mvc:annotation-driven>
+	
 	
 	
 </beans>

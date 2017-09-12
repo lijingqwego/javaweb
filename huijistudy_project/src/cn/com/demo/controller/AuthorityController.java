@@ -85,6 +85,11 @@ public class AuthorityController {
 		return "redirect:/author/authorList.action";
 	}
 	
+	/**
+	 * ÅúÁ¿É¾³ý
+	 * @param delitems
+	 * @return
+	 */
 	@RequestMapping("/delMoreAuthor")
 	public String delMoreAuthor(String[] delitems){
 		for(String authorityid:delitems){

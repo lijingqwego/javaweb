@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileSystemView;
 
 import org.apache.log4j.Logger;
@@ -34,6 +33,13 @@ public class ExamController {
 	@Resource
 	private ExamService examService;
 	
+	/**
+	 * 开始考试
+	 * @param examination_no
+	 * @param examination_info_no
+	 * @param examination_user
+	 * @return
+	 */
 	@RequestMapping("/startExam")
 	public ModelAndView startExam(String examination_no,String examination_info_no,String examination_user){
 		System.out.println("=====startExam========examination_info_no=============examination_user============="+examination_info_no+"|"+examination_user);
@@ -52,6 +58,16 @@ public class ExamController {
 		mv.setViewName("exam.startExam");
 		return mv;
 	}
+	
+	/**
+	 * 提交试卷
+	 * @param single
+	 * @param multi
+	 * @param judge
+	 * @param examination_info_no
+	 * @param examination_user
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("/submitPaper")
 	public int[] submitPaper(String single,String multi,String judge,String examination_info_no,String examination_user){
@@ -65,6 +81,12 @@ public class ExamController {
 		return arr;
 	}
 	
+	/**
+	 * 考试结果
+	 * @param pn
+	 * @param examination_info_no
+	 * @return
+	 */
 	@RequestMapping("/examResult")
 	public ModelAndView examResult(@RequestParam(value="pn" ,defaultValue="1")Integer pn,String examination_info_no){
 		PageHelper.startPage(pn, 5);
@@ -77,6 +99,11 @@ public class ExamController {
 		return mv;
 	}
 	
+	/**
+	 * 导出Excel
+	 * @param examination_info_no
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("/expModel")
 	public String expModel(String examination_info_no){

@@ -56,6 +56,10 @@ public class LoginController {
 		return "base.logout";
 	}
 	
+	/**
+	 * 注册页面
+	 * @return
+	 */
 	@RequestMapping(value="/regiestView")
 	public ModelAndView regiestView(){
 		ModelAndView mv = new ModelAndView();
@@ -85,12 +89,16 @@ public class LoginController {
 				result="用户名不可用";
 			}
 		}
+		//将结果以map的形式发送到ajax
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("result", result);
 		return map;
 			
 	}
 	
+	/**
+	 * 注册用户
+	 */
 	@ResponseBody
 	@RequestMapping("/registUser")
 	public String registUser(User user){

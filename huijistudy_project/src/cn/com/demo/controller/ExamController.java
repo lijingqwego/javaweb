@@ -85,13 +85,13 @@ public class ExamController {
         String[] headers = { "编号", "题目类型", "选择答案", "正确答案","是否答对"};  
         FileSystemView fsv = FileSystemView.getFileSystemView();
 		File desktop=fsv.getHomeDirectory();    //这便是读取桌面路径的方法了
-		System.out.println("========desktop.getAbsolutePath()========="+desktop.getAbsolutePath());
+//		System.out.println("========desktop.getAbsolutePath()========="+desktop.getAbsolutePath());
         String fileName = desktop.getAbsolutePath()+"\\"+examination_info_no+".xls";  
-        System.out.println("=================fileName==========="+fileName);
+//        System.out.println("=================fileName==========="+fileName);
         try {  
             ex.exportExcel("考试结果"+examination_info_no, headers, list, fileName, "new");  
-            JOptionPane.showMessageDialog(null, "导出成功!");  
-            System.out.println("excel导出成功！");  
+//            JOptionPane.showMessageDialog(null, "导出成功!");  
+//            System.out.println("excel导出成功！");  
         } catch (Exception e) {  
             e.printStackTrace();  
         } 

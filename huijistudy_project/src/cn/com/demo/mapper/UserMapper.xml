@@ -138,4 +138,49 @@
 		update p_um_user set enabled=#{enabled} where userid=#{userid}
 	</update>
 	
+	<select id="findUserByLoginid2" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from p_um_user where loginid=#{_parameter}
+	</select>
+	
+	<!-- 注册用户 -->
+	<insert id="registUser" parameterType="user">
+		<selectKey keyColumn="userid" keyProperty="userid" order="BEFORE" resultType="java.lang.String">
+			select decode(to_char(sysdate,'yyyymmdd'),
+			substr(max(userid),0,8),
+			max(userid)+1,
+			to_char(sysdate,'yyyymmdd')||lpad(1,6,0)
+			) from p_um_user
+		</selectKey>
+		insert into p_um_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userid != null and userid != ''">
+				userid,
+			</if>
+			<if test="loginid != null and loginid != ''">
+				loginid,
+			</if>
+			<if test="username != null and username != ''">
+				username,
+			</if>
+			<if test="password != null and password != ''">
+				password,
+			</if>
+			create_time
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="userid != null and userid != ''">
+				#{userid,jdbcType=VARCHAR},
+			</if>
+			<if test="loginid != null and loginid != ''">
+				#{loginid,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null and username != ''">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null and password != ''">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			sysdate
+		</trim>
+	</insert>
 </mapper>

@@ -14,6 +14,8 @@ public interface UserMapper {
     String getUserId();
 
     int addUser(User user);
+    
+    void registUser(User user);
 
     User findUserById(String userid);
 
@@ -30,5 +32,7 @@ public interface UserMapper {
 	List<Authority> findAuthorListByUserId(String userid);
 
 	void userEnable(User user);
+
+	int findUserByLoginid2(String loginid);
 
 }

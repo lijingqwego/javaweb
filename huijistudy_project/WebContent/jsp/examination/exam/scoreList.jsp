@@ -15,7 +15,10 @@ function loadPage(currPage){
 </script>
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Student pages</a> <a href="#" class="current">Info</a> </div>
+    <div id="breadcrumb"> 
+    <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> 
+    <a href="#">Student pages</a>
+    <a href="#" class="current">Info</a> </div>
     <h1>成绩列表</h1>
   </div>
   <div class="container-fluid"> 
@@ -26,8 +29,10 @@ function loadPage(currPage){
 	         <input type="hidden" name="currPage" value="1">
 	         <input type="text" class="input-medium" id="examination_info_no" name="examination_info_no" placeholder="考试编号" value="${examination_info_no}">	
 	         <input type="text" class="input-medium" id="examination_user" name="examination_user" placeholder="考生姓名" value="${examination_user}">
-         	 <button type="submit" class="btn">搜索</button>
+         	 <button type="submit" class="btn">搜索</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	         <a class="btn btn-info" href="${pageContext.request.contextPath }/exam/paperList.action">去考试</a>
         </form>
+        
        <!-- begin -->
         <div class="widget-box">
           <div class="widget-content nopadding">
@@ -84,7 +89,6 @@ function loadPage(currPage){
 						<span><a class="btn btn" onclick="javascript:loadPage(${page_Num})">${page_Num}</a></span>
 						&nbsp;
 					</c:otherwise>
-					
 				</c:choose>
 			</c:forEach>
 			<c:choose>

@@ -68,9 +68,7 @@ public class ExamService {
 		examinationInfoMapper.updateExamInfo(info);
 	}
 
-
 	public List<ExamDetail> findexamResult(String examination_info_no) {
-		
 		return examinationInfoMapper.findexamResult(examination_info_no);
 	}
 

@@ -90,6 +90,9 @@
           <!-- 退出登录-->
 	    <definition name="base.logout" template="/jsp/login.jsp">
 	     </definition>
+          <!-- 注册-->
+	    <definition name="base.regist" template="/jsp/regist.jsp">
+	     </definition>
 	     
 <!-- 考试模块 -->   
 		 <!-- 科目列表-->

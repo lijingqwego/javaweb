@@ -10,6 +10,7 @@
            <!-- 配置公共资源，不需要权限 -->
 		    <http pattern="/index.jsp" security="none" />
 		    <http pattern="/jsp/login.jsp" security="none" />
+		    <http pattern="/jsp/regist.jsp" security="none" />
 		    <http pattern="/css/**" security="none"/>
 		    <http pattern="/js/**" security="none"/>
 		    <http pattern="/font-awesome/**" security="none"/>

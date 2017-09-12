@@ -34,8 +34,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-actions" align="center">
-                    <input type="submit" class="btn btn-success" value="    登录    ">
+                <div class="form-actions">
+                <div align="center">
+                    <a href="${pageContext.request.contextPath }/regiestView.action" class="btn btn-success">注册账号</a>
+                    <input type="submit" class="btn btn-success" value="登录">
+                    </div>
                 </div>
             </form>
         </div>

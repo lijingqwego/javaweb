@@ -16,7 +16,7 @@ $(function(){
 	
 	$(".badge").click(function(){
 		var question_no=$(this).attr("myattr");
-		alert(question_no);
+// 		alert(question_no);
 		$.ajax({
 			type:"get",
 			url:"${pageContext.request.contextPath}/exam/answerList.action?question_no="+question_no,

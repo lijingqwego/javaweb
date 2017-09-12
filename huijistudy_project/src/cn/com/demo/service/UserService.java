@@ -72,6 +72,18 @@ public class UserService {
 	}
 	
 	/**
+	 * 注册用户
+	 * @param user
+	 */
+	public void registUser(User user) {
+		System.out.println(user);
+		String md5Password = MD5Config.md5_SystemWideSaltSource(user.getPassword(),user.getLoginid());
+		user.setPassword(md5Password);
+		userMapper.registUser(user);
+	}
+	
+	
+	/**
 	 * 分页和搜索查询用户列表
 	 * @param currPage
 	 * @param userid
@@ -104,6 +116,16 @@ public class UserService {
 	 */
 	public void userEnable(User user) {
 		userMapper.userEnable(user);
+	}
+
+	/**
+	 * 查询用户名是否存在
+	 * @param username
+	 * @return
+	 */
+	public int findUserByLoginid(String loginid) {
+		System.out.println("=========loginid============"+loginid);
+		return userMapper.findUserByLoginid2(loginid);
 	}
 		
 }

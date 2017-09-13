@@ -128,7 +128,7 @@ public class PaperController {
 	public String commExamInfo(String examination_user,String examination_info_no,String examination_no){
 		System.out.println("=====commExamInfo========examination_info_no=============examination_user============="+examination_info_no+"|"+examination_user);
 		examService.updateExamInfo(examination_user,examination_info_no);
-		return "redirect:/exam/startExam.action?examination_no="+examination_no+"&examination_info_no="+examination_info_no+"&examination_user="+examination_user;
+		return "redirect:/exam/startExam.action?examination_no="+examination_no+"&examination_info_no="+examination_info_no;
 	}
 	
 }

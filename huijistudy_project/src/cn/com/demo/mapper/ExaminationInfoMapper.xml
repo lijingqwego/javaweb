@@ -34,7 +34,6 @@
   <select id="submitPaperMap" parameterType="java.util.Map" statementType="CALLABLE">
   	<![CDATA[
   		{call pk_exam_test.pro_add_exam_info(
-  			#{v_exam_user,mode=IN,jdbcType=VARCHAR},
   			#{v_exam_info_no,mode=IN,jdbcType=VARCHAR},
   			#{answer_list,mode=IN,jdbcType=VARCHAR},
   			#{right_num,mode=OUT,jdbcType=INTEGER},

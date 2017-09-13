@@ -26,8 +26,7 @@ $(function(){
 		/* alert(option1List.toString());
 		alert(option2List.toString());
 		alert(option3List.toString());
-		alert($("#exam_info_no").val());
-		alert($("#exam_user").val()); */
+		alert($("#exam_info_no").val()); */
 		$.ajax({
 			type: "post", 
 			url: "${pageContext.request.contextPath}/exam/submitPaper.action", 
@@ -35,8 +34,7 @@ $(function(){
 				'single':option1List.toString()+",",
 				'multi':","+option2List.toString(),
 				'judge':option3List.toString()+",",
-				'examination_info_no':$("#exam_info_no").val(),
-				'examination_user':$("#exam_user").val()
+				'examination_info_no':$("#exam_info_no").val()
 			},
 			success: function(result) { 
 				//confirm("正确数量："+result[0]+"道\n"+"错误数量："+result[1]+"道\n"+"总分："+result[2]+"分");
@@ -113,7 +111,6 @@ function findExamDetail(examination_info_no){
 				href="#" class="current">Info</a>
 		</div>
 		<input type="hidden" id="exam_info_no" value="${examination_info_no}">
-		<input type="hidden" id="exam_user" value="${examination_user}">
 		<div id="divs" style="position:fixed;z-index:99999;top: 100px;right: 80px;">
 	            <span style="color: #FF0000" id="countDownTime">考试时间：</span>
 	            <span  id="hour_show"></span>

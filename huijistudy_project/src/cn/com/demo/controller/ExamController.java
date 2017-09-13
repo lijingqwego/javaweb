@@ -41,8 +41,9 @@ public class ExamController {
 	 * @return
 	 */
 	@RequestMapping("/startExam")
-	public ModelAndView startExam(String examination_no,String examination_info_no,String examination_user){
-		System.out.println("=====startExam========examination_info_no=============examination_user============="+examination_info_no+"|"+examination_user);
+	public ModelAndView startExam(String examination_no,String examination_info_no){
+		
+		System.out.println("=====startExam========examination_info_no============="+examination_info_no);
 		//获取考试题题目信息
 		ExtendExaPaper exaPaper=examService.findExamQuestionList(examination_no);
 		int sumScore=0;
@@ -54,7 +55,6 @@ public class ExamController {
 		mv.addObject("sumScore", sumScore);
 		mv.addObject("exaPaper", exaPaper);
 		mv.addObject("examination_info_no",examination_info_no);
-		mv.addObject("examination_user",examination_user);
 		mv.setViewName("exam.startExam");
 		return mv;
 	}
@@ -70,10 +70,10 @@ public class ExamController {
 	 */
 	@ResponseBody
 	@RequestMapping("/submitPaper")
-	public int[] submitPaper(String single,String multi,String judge,String examination_info_no,String examination_user){
+	public int[] submitPaper(String single,String multi,String judge,String examination_info_no){
 		System.out.println("======================================="+single+"|"+multi+"|"+judge);
 		String arrAnswerStr=single+"|"+multi+"|"+judge;
-		int[] arr=examService.submitPaper(arrAnswerStr,examination_info_no,examination_user);
+		int[] arr=examService.submitPaper(arrAnswerStr,examination_info_no);
 		System.out.println(arrAnswerStr);
 		logger.info(arr[0]);
 		logger.info(arr[1]);

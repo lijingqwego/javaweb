@@ -27,7 +27,6 @@ function loadPage(currPage){
 	         <input type="text" class="input-medium" id="examination_no" name="examination_no" placeholder="试卷编号" value="${examination_no}">	
 	         <input type="text" class="input-medium" id="examination_name" name="examination_name" placeholder="试卷名称" value="${examination_name}">
          	 <button type="submit" class="btn">搜索</button>&nbsp;&nbsp;&nbsp;&nbsp;
-	          <input type="button" value="删除" id="del_model"class="btn btn-warning">
         </form>
        <!-- begin -->
         <div class="widget-box">

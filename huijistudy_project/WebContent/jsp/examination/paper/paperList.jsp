@@ -89,10 +89,10 @@ function loadPage(currPage){
 										<td>${papermode.create_user}</td>
 										<td>${papermode.sum_score}</td>
 										<td>
-											<sec:authorize access="hasAnyRole('ROLE_MESSAGE') "> 
+											<sec:authorize access="hasAnyRole('ROLE_EXAM') "> 
 											<a class="badge badge-warning" data-toggle="modal" data-target="#myModal" myattr="${papermode.examination_no}">生成考号</a>&nbsp;&nbsp;&nbsp;
 											</sec:authorize>
-											<sec:authorize access="hasAnyRole('ROLE_EXAM') "> 
+											<sec:authorize access="hasAnyRole('ROLE_TEST') "> 
 											<a class="badge badge-info" href="${pageContext.request.contextPath}/exam/findExamInfoNoList.action?examination_no=${papermode.examination_no}">开始考试</a>
 											</sec:authorize>
 										</td>

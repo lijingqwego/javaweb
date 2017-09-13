@@ -23,10 +23,27 @@
            <!-- 设置有没有权限访问的页面，也就是403页面 -->
            <access-denied-handler error-page="/jsp/error403.jsp" />
            
-           <!-- 系统管理 ROLE_SYSTEM 权限管理 ROLE_AUTHORITY 信息管理   ROLE_MESSAGE   考试管理  ROLE_EXAM -->
+           <!-- 系统管理 ROLE_SYSTEM 权限管理 ROLE_AUTHORITY 考试管理   ROLE_EXAM   考试  ROLE_TEST -->
            <!-- 定义角色和页面之间的关系，也就是说哪些页面可以访问，如果没有访问权限，提示403 -->
            
-           <intercept-url pattern="/**" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_MESSAGE','ROLE_EXAM')" />
+           <!-- 管理员具有的访问权限 -->
+           <intercept-url pattern="/user/*" access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY')" />
+           <intercept-url pattern="/role/*" access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY')" />
+           <intercept-url pattern="/author/*" access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY')" />
+           <intercept-url pattern="/resource/*" access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY')" />
+           
+           <!-- 学生具有的访问权限 -->
+           <intercept-url pattern="/exam/paperList.action" access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_EXAM','ROLE_TEST')" />
+           <intercept-url pattern="/exam/findExamInfoNoList.action" access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_TEST')" />
+           <intercept-url pattern="/exam/commExamInfo.action" access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_TEST')" />
+           <intercept-url pattern="/exam/startExam.action" access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_TEST')" />
+           <intercept-url pattern="/exam/submitPaper.action" access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_TEST')" />
+           <intercept-url pattern="/exam/examResult.action" access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_TEST')" />
+           <intercept-url pattern="/exam/expModel.action" access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_TEST')" />
+           <intercept-url pattern="/exam/scoreList.action" access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_EXAM','ROLE_TEST')" />
+           
+           <!-- 老师具有的访问权限 -->
+           <intercept-url pattern="/exam/*" access="hasAnyRole('ROLE_SYSTEM','ROLE_AUTHORITY','ROLE_EXAM')" />
            
            </http>
            

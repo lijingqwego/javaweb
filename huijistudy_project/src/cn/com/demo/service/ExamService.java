@@ -31,9 +31,8 @@ public class ExamService {
 	 * @param create_user
 	 * @return
 	 */
-	public int[] submitPaper(String arrAnswerStr, String exam_info_no,String create_user) {
+	public int[] submitPaper(String arrAnswerStr, String exam_info_no) {
 		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("v_exam_user", create_user);
 		map.put("v_exam_info_no",exam_info_no);
 		map.put("answer_list", arrAnswerStr);
 		map.put("right_num", 0);

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import cn.com.demo.mapper.ExaPaperMapper;
 import cn.com.demo.mapper.ExaQuestionsMapper;
 import cn.com.demo.mapper.ExaminationInfoMapper;
 import cn.com.demo.mapper.SubjectInfoMapper;
@@ -26,6 +27,8 @@ public class MapperTest {
 	SubjectInfoMapper subjectInfoMapper;
 	@Autowired
 	ExaQuestionsMapper exaQuestionsMapper;
+	@Autowired
+	ExaPaperMapper exaPaperMapper;
 	
 	@Autowired
 	ExaminationInfoMapper examinationInfoMapper;
@@ -101,12 +104,12 @@ public class MapperTest {
 	
 	@Test
 	public void testfindExamQuestionList(){
-		/*ExaPaper list = examinationInfoMapper.findExamQuestionList("20170831000001");
-		int sum=0;
-		for (ExaPaperInfo epi : list.getExaPaperInfos()) {
-			sum+=epi.getQuestion_nscore();
-		}
-		System.out.println(sum);*/
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("examination_no", "20170913000001");
+		map.put("num", 5);
+		exaPaperMapper.addExamInfoNo(map);
+		int count=(int) map.get("num");
+		System.out.println("===========count==========="+count);
 	
 	}
 	

@@ -23,7 +23,7 @@ import cn.com.demo.dto.ExtendExaPaperInfo;
 import cn.com.demo.po.ExamDetail;
 import cn.com.demo.po.ExaminationInfo;
 import cn.com.demo.service.ExamService;
-import cn.com.demo.utils.ExportExcelTwoSheet;
+import cn.com.demo.utils.ExportExcelTools;
 
 @RequestMapping("/exam")
 @Controller
@@ -108,7 +108,7 @@ public class ExamController {
 	@RequestMapping("/expModel")
 	public String expModel(String examination_info_no){
 		List<ExamDetail> list=examService.findexamResult(examination_info_no);
-        ExportExcelTwoSheet<ExamDetail> ex = new ExportExcelTwoSheet<ExamDetail>(); 
+        ExportExcelTools<ExamDetail> ex = new ExportExcelTools<ExamDetail>(); 
         String[] headers = { "编号", "题目类型", "选择答案", "正确答案","是否答对"};  
         FileSystemView fsv = FileSystemView.getFileSystemView();
 		File desktop=fsv.getHomeDirectory();    //这便是读取桌面路径的方法了

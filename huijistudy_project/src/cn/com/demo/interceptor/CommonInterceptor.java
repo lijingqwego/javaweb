@@ -8,6 +8,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class CommonInterceptor extends HandlerInterceptorAdapter {
 
+	
 	/**
 	 * true:²»À¹½Ø
 	 * false:À¹½Ø

@@ -25,11 +25,12 @@ public class PaperService {
 		exaPaperMapper.makePaper(examination_no);
 	}
 
-	public void addExamInfoNo(String examination_no, int num) {
+	public int addExamInfoNo(String examination_no, int num) {
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("examination_no", examination_no);
 		map.put("num", num);
 		exaPaperMapper.addExamInfoNo(map);
+		return (int) map.get("num");
 	}
 
 	public List<ExaPaper> findPapaerList(Map<String, Object> map) {

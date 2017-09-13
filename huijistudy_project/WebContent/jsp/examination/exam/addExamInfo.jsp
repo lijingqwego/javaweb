@@ -9,7 +9,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.7.2.js"></script>
 <script type="text/javascript">
 function post(){
-	alert("adfadsfadsfas");
+	//alert("adfadsfadsfas");
 	var select_no=$("select[name='examination_info_no']").val();
 	var user=$("input[name='examination_user']").val();
 	if(user==null || user==''){

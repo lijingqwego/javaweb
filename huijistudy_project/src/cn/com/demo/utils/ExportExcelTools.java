@@ -33,7 +33,7 @@ import org.apache.poi.hssf.util.HSSFColor;
 
 import cn.com.demo.po.Student;
 
-public class ExportExcelTwoSheet<T> {
+public class ExportExcelTools<T> {
 
 	public void exportExcel(String title, String[] headers, Collection<T> dataset, String fileName, String type) {
 		try {
@@ -219,7 +219,7 @@ public class ExportExcelTwoSheet<T> {
 	 */
 	public static void main(String[] args) {
 		// 测试学生  
-        ExportExcelTwoSheet<Student> ex = new ExportExcelTwoSheet<Student>();  
+        ExportExcelTools<Student> ex = new ExportExcelTools<Student>();  
         String[] headers = { "学号", "姓名", "年龄", "性别", "出生日期" };  
         List<Student> list = new ArrayList<Student>();  
         list.add(new Student("10000001", "张三", 20, '男', new Date()));  

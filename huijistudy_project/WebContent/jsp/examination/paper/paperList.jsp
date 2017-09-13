@@ -21,7 +21,7 @@ $(function(){
 		$.ajax({
 			type: "POST", 
 			url: "${pageContext.request.contextPath}/exam/addExamInfoNo.action", 
-			data: {'examination_no':$("input[name='examination_no']").val(),'num':$("input[name='num']").val()}, 
+			data: {'examination_no':$("input[name='exam_no']").val(),'num':$("input[name='num']").val()}, 
 			success: function(result) {
 				confirm("已添加"+result+"个考号");
 			} 

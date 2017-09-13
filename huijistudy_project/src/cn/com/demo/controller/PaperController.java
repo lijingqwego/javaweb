@@ -97,8 +97,9 @@ public class PaperController {
 	@ResponseBody
 	@RequestMapping("/addExamInfoNo")
 	public String addExamInfoNo(String examination_no,int num){
-		paperService.addExamInfoNo(examination_no,num);
-		return ""+num;
+		System.out.println("++++++++++++examination_no="+examination_no+"++++++++num="+num);
+		int count=paperService.addExamInfoNo(examination_no,num);
+		return ""+count;
 	}
 	
 	/**
